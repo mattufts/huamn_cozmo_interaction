@@ -40,6 +40,21 @@ def get_command():
     else:
         print("Could not extract values from speech.")
         return 0, 0, 0
+def get_command_from_keyboard():
+    action = input("Enter your command: ")
+    if action == 1:
+        angle = 0
+        distance = 50
+        speed = 50
+    elif action == 2:
+        angle = 90
+        distance = 0
+        speed = 0
+    elif action == 3:
+        angle = -90
+        distance = 0
+        speed = 0
+    return angle, distance, speed, action
 # if __name__ == "__main__":
 #     text = recognize_speech()
 #     if text:

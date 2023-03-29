@@ -62,8 +62,7 @@ done = False
 #     if front != "nothing": # if encount sth, get a new command
 #         action =  cozmo.get_command()
 while not done:
-    angle, distance, speed_ = get_voice_command.get_command()
-    if speed_ != 0:
-        speed = speed_
-    print(angle, distance, speed)
+    angle, distance, speed_, action = get_voice_command.get_command_from_keyboard()
+    state, reward, hit_wall, front, done, _ =env.step(action)
     cozmo.run_program(cozmo_program)
+    print(state, reward, hit_wall, front, done)
