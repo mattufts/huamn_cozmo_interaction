@@ -9,9 +9,8 @@ from cozmo.util import degrees, distance_mm, speed_mmps
 angle = 0
 distance = 100
 speed = 50
+expression = None
 
-def cozmo_program(robot: cozmo.robot.Robot):
-    print("Connected to Cozmo!")
 
 async def turn_angle(robot: cozmo.robot.Robot, angle: float):
     await robot.turn_in_place(degrees(angle)).wait_for_completed()
@@ -28,6 +27,10 @@ async def cozmo_program(robot: cozmo.robot.Robot):
     distance_to_move = distance  # Set the distance you want to move (in millimeters)
     speed_to_move = speed  # Set the speed you want to move (in millimeters per second)
     await move_forward(robot, distance_to_move, speed_to_move)
+
+async def cozmo_expression(robot: cozmo.robot.Robot):
+    # change the expression based on what is front
+    pass
 # async def cozmo_program(robot: cozmo.robot.Robot):
 #     global angle, distance, speed
 
@@ -53,16 +56,10 @@ env = maze_env.MazeEnv()
 #cozmo = cozmo_bot.Cozmo() # initilization
 state = env.reset()
 done = False
-# angle, distance, speed = get_voice_command.get_command()
-# print(angle, distance, speed)
-#cozmo.run_program(cozmo_program)# cozmo turn 90 degree and move forward 100mm with speed 100mm/s
-# action = cozmo.get_command()
-# while not done:
-#     state, reward, wall, front, done, _ = env.step(action)
-#     if front != "nothing": # if encount sth, get a new command
-#         action =  cozmo.get_command()
+
 while not done:
     angle, distance, speed_, action = get_voice_command.get_command_from_keyboard()
     state, reward, hit_wall, front, done, _ =env.step(action)
     cozmo.run_program(cozmo_program)
+    cozmo.run_program(cozmo_expression)
     print(state, reward, hit_wall, front, done)

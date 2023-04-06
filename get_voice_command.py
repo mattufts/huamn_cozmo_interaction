@@ -42,15 +42,15 @@ def get_command():
         return 0, 0, 0
 def get_command_from_keyboard():
     action = input("Enter your command: ")
-    if action == 1:
+    if action == 2:
         angle = 0
         distance = 50
         speed = 50
-    elif action == 2:
+    elif action == 0:
         angle = 90
         distance = 0
         speed = 0
-    elif action == 3:
+    elif action == 1:
         angle = -90
         distance = 0
         speed = 0
