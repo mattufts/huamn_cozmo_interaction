@@ -1,0 +1,39 @@
+Notes:
+
+New Guiding Research:
+"Animation principles are necessary for human-robot interaction not only a technique to make robots appear more likable and friendly, but also as a heuristic cognitive short cut for quick and natural communication.  Through the use of fluidly changing eye-expressions using animation, instead of static slide shows, not only will Cozmo appear more lifelike and sociable, but we expect that transition will help humans understand the robot's internal directives clearly
+
+Hypothesis 1: We expect that humans will appreciate slideshow-style displayed symbolic imagery for communication rather than slideshow-style displayed eye symbols.  We envision this will be easier for humans to decipher and understand than slideshow-displayed facial expressions.
+	Hypothesis 1a: this will result in 1) faster  human response time  2) more accurate response time
+
+Hypothesis 2: The use of timed animation (smooth expressions that fade or morph from one eye expression into the next) will be easier for the humans to understand than either slideshow facial expressions or symbols.
+	Hypothesis 2a: Humans may perceive the robot as being more "lifelike" and more "competent" or "displaying a higher state of agency". 
+
+
+What we need for the first:
+
+	• Grid tiles for Cozmo
+		○ Area should be assembled by blocks and grids
+	• Continued facial expressions for Cozmo and markers 
+	
+Two scenarios
+	- Robot has room mapped internally, knows which rooms to get to, but can't predict for dynamic or changing obstacles (example: navigate from burning building)
+		○ Can signal and indicate to the human which direction to take, relies on the human for dynamic obstacle information
+		○ Only a couple of specific paths
+		○ No Rewards, one exit
+		○ Human provided unknown information to the robot
+      -Human can decide whether area is able to pass through (ie a door can be operated forcefully and the robot can cross over it) or follow the ability for the robot to tell it a different path
+      -We might want to include a reward based function for the human allowing the robot to pass through
+	- Robot does not have room mapped, only a small local view, and relies on humans for more direct guidance (example: mining exploration)
+		○ Robot has no internal map
+		○ We are including rewards (things that is optimal for human to find) and punishments (battery life, health status, robot needs to cross)
+		○ Does the human optimize for the safetty and benefit of the robot?  Or do they only try and seek out the extrinsic rewards?
+    
+Constants in each study
+		○ Communication is bi-directional
+		○ Robot will defer to the commands of the human in each time
+		○ Robot will be able to give signal feedback in each case instance
+		○ Human will perceive interaction between the environment and robot 
+
+Collect Citations on how humans understand eye expressions on robots
+Presence of the animation- comfortableness level and how it affects accuracy 
