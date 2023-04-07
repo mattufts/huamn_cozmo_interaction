@@ -12,6 +12,7 @@ speed = 50
 expression = None
 
 
+
 async def turn_angle(robot: cozmo.robot.Robot, angle: float):
     await robot.turn_in_place(degrees(angle)).wait_for_completed()
 
@@ -59,6 +60,7 @@ done = False
 
 while not done:
     angle, distance, speed_, action = get_voice_command.get_command_from_keyboard()
+    print(action, type(action))
     state, reward, hit_wall, front, done, _ =env.step(action)
     cozmo.run_program(cozmo_program)
     cozmo.run_program(cozmo_expression)

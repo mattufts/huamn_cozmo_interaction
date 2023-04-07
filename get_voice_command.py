@@ -42,6 +42,10 @@ def get_command():
         return 0, 0, 0
 def get_command_from_keyboard():
     action = input("Enter your command: ")
+    action = float(action)
+    angle = 0
+    distance = 0
+    speed = 0
     if action == 2:
         angle = 0
         distance = 50
