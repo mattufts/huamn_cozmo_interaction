@@ -1,30 +1,44 @@
-import maze_env
-import get_voice_command
 import cozmo
 import asyncio
+import maze_env
 from cozmo.util import degrees, distance_mm, speed_mmps
-from cozmo.anim import Triggers
+from PIL import Image
 
-# Set global variables
+# Define the maze environment
+env = maze_env.MazeEnv()
+
+# Define the robot's movement parameters
 angle = 0
 distance = 100
 speed = 50
 
-def cozmo_program(robot: cozmo.robot.Robot):
-    print("Connected to Cozmo!")
+# Define the robot's OLED face images
+face_images = {
+    "happy": Image.open("happy.png"),
+    "sad": Image.open("sad.png"),
+    "neutral": Image.open("neutral.png")
+}
 
+# Define the robot's blinking animation
+async def blink(robot: cozmo.robot.Robot):
+    robot.set_all_backpack_lights(cozmo.lights.blue_light.flash())
+    await asyncio.sleep(0.2)
+    robot.set_all_backpack_lights(cozmo.lights.blue_light)
+    await asyncio.sleep(0.2)
+    robot.set_all_backpack_lights(cozmo.lights.off)
+
+# Define the robot's movement functions
 async def turn_angle(robot: cozmo.robot.Robot, angle: float):
     await robot.turn_in_place(degrees(angle)).wait_for_completed()
 
 async def move_forward(robot: cozmo.robot.Robot, distance: float, speed: float):
     await robot.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()
 
-async def blink_eyes(robot: cozmo.robot.Robot):
-    await robot.set_all_backpack_lights(cozmo.lights.blue_light.flash())
-    await robot.play_anim_trigger(Triggers.BlockReact).wait_for_completed()
-    await robot.set_all_backpack_lights(cozmo.lights.off_light)
-
+# Define the robot's program
 async def cozmo_program(robot: cozmo.robot.Robot):
+    # Display the neutral face image
+    robot.display_oled_face_image(face_images["neutral"], 5000)
+
     # Turn Cozmo by a specific angle (in degrees)
     angle_to_turn = angle  # Set the angle you want to turn (in degrees)
     await turn_angle(robot, angle_to_turn)
@@ -32,24 +46,42 @@ async def cozmo_program(robot: cozmo.robot.Robot):
     # Move Cozmo forward by a specific distance (in millimeters)
     distance_to_move = distance  # Set the distance you want to move (in millimeters)
     speed_to_move = speed  # Set the speed you want to move (in millimeters per second)
-    
-    for i in range(int(distance_to_move/10)):
-        await move_forward(robot, 10, speed_to_move)
-        await blink_eyes(robot)
+    await move_forward(robot, distance_to_move, speed_to_move)
 
-# Initialize environment and robot
-env = maze_env.MazeEnv()
-state = env.reset()
-done = False
+    # Blink while Cozmo is moving
+    await blink(robot)
 
-# Run the program
-while not done:
-    # Get command from keyboard
-    angle, distance, speed_, action = get_voice_command.get_command_from_keyboard()
+    # Display the happy face image
+    robot.display_oled_face_image(face_images["happy"], 5000)
 
-    # Move the robot according to the command
-    state, reward, hit_wall, front, done, _ = env.step(action)
-    cozmo.run_program(cozmo_program)
+# Run the maze program
+async def run_maze():
+    with cozmo.robot.Robot() as robot:
+        # Reset the maze environment
+        state = env.reset()
+        done = False
 
-    # Print environment information
-    print(state, reward, hit_wall, front, done)
+        while not done:
+            # Get the robot's movement parameters and action from user input
+            angle, distance, speed_, action = get_voice_command.get_command_from_keyboard()
+
+            # Step the environment based on the action
+            state, reward, hit_wall, front, done, _ = env.step(action)
+
+            # Run the Cozmo program
+            await cozmo_program(robot)
+
+            # Display the sad face image if Cozmo hits a wall
+            if hit_wall:
+                robot.display_oled_face_image(face_images["sad"], 5000)
+            else:
+                robot.display_oled_face_image(face_images["neutral"], 5000)
+
+            # Print the state of the environment
+            print(state, reward, hit_wall, front, done)
+
+# Run the maze program
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(run_maze())
+
