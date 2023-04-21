@@ -35,7 +35,7 @@ class MazeEnv:
         gen_maze()
         self.maze = np.array(maze)  # 2D array representing the maze
         self.height, self.width = self.maze.shape
-        self.start_pos = np.array([0, 0])  # starting position
+        self.start_pos = np.array([1, 1])  # starting position
         self.goal_pos = np.array([self.height - 1, self.width - 1])  # goal position
         self.current_pos = self.start_pos  # current position
         self.current_dir = np.array([0, 1])  # current direction (facing right)
@@ -58,21 +58,31 @@ class MazeEnv:
             return "wall"
         
     def step(self, action):
-        # action is an integer: 0 = adjust up, 1 = adjust down, 2 = adjust left, 3 = adjust right, 4 = go forward
+        # action is an integer: 0 = turn left, 1 = turn right, 2 = go forward
         reward = 0
         self.battery -= 10 # reduce battery level
         hit_wall = False
-        if action == 0:  # adjust up
-            self.current_dir = np.array([-1, 0])
-        elif action == 1:  # adjust down
-            self.current_dir = np.array([1, 0])
-        elif action == 2:  # adjust left
-            self.current_dir = np.array([0, -1])
-        elif action == 3:  # adjust right
-            self.current_dir = np.array([0, 1])
-        elif action == 4:  # go forward
+        if action == 0:  # turn left
+            if (self.current_dir == np.array([0, 1])).all():
+                self.current_dir = np.array([-1, 0])
+            elif (self.current_dir == np.array([-1, 0])).all():
+                self.current_dir = np.array([0, -1])
+            elif (self.current_dir == np.array([0, -1])).all():
+                self.current_dir = np.array([1, 0])
+            else:  # current_dir == np.array([1, 0])
+                self.current_dir = np.array([0, 1])
+        elif action == 1:  # turn right
+            if (self.current_dir == np.array([0, 1])).all():
+                self.current_dir = np.array([1, 0])
+            elif (self.current_dir == np.array([1, 0])).all():
+                self.current_dir = np.array([0, -1])
+            elif (self.current_dir == np.array([0, -1])).all():
+                self.current_dir = np.array([-1, 0])
+            else:  # current_dir == np.array([-1, 0])
+                self.current_dir = np.array([0, 1])
+        elif action == 2:  # go forward
             new_pos = self.current_pos + self.current_dir
-            if (new_pos >= [0, 0]).all() and (new_pos < [self.height, self.width]).all():  # within bounds
+            if (new_pos >= [1, 1]).all() and (new_pos < [self.height-1, self.width-1]).all():  # within bounds
                 if self.maze[tuple(new_pos)] == 0:  # not a wall
                     self.current_pos = new_pos
                     if (self.current_pos == self.goal_pos).all():  # reached goal
