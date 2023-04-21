@@ -14,9 +14,9 @@ speed = 50
 
 # Define the robot's OLED face images
 face_images = {
-    "happy": Image.open("happy.png"),
-    "sad": Image.open("sad.png"),
-    "neutral": Image.open("neutral.png")
+    "happy": Image.open("Alert_icon.png"),
+    "sad": Image.open("check_mark.png"),
+    "neutral": Image.open("finish_flag.png")
 }
 
 # Define the robot's blinking animation
