@@ -3,19 +3,19 @@ import numpy as np
 import random
 maze =[]
 # Define the maze dimensions
-def gen_maze():
-    global maze
-    width = 10
-    height = 10
+def gen_maze(): # generate a random maze
+    global maze # make maze global so it can be used in other functions
+    width = 10 # width of the maze
+    height = 10 # height of the maze
 
     # Define the maze as a 2D array of zeros
-    maze = [[0 for y in range(height)] for x in range(width)]
+    maze = [[0 for y in range(height)] for x in range(width)] # 2D array of zeros
 
     # Add walls to the maze
-    for x in range(width):
+    for x in range(width): # Add walls to the left and right sides of maze 
         maze[x][0] = 1
         maze[x][height-1] = 1
-    for y in range(height):
+    for y in range(height): # Add walls to the top and bottom sides of maze
         maze[0][y] = 1
         maze[width-1][y] = 1
 
