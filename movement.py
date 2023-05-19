@@ -14,18 +14,9 @@ angle = 0
 distance = 100
 speed = 50
 
-<<<<<<< Updated upstream
-# Define the robot's OLED face images
-face_images = {
-    "happy": Image.open("Alert_icon.png"), #
-    "sad": Image.open("check_mark.png"),
-    "neutral": Image.open("finish_flag.png")
-}
-=======
 def move_forward():
     # Use Cozmo SDK to make the robot move forward
     pass
->>>>>>> Stashed changes
 
 def turn_left():
     # Use Cozmo SDK to make the robot turn left
