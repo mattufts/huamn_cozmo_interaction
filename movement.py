@@ -16,15 +16,18 @@ speed = 50
 
 def move_forward():
     # Use Cozmo SDK to make the robot move forward
-    pass
+    robot.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()
+
 
 def turn_left():
     # Use Cozmo SDK to make the robot turn left
-    pass
+    angle = -90
+    turn_in_place(angle, in_parallel=False, num_retries=0, speed=None, accel=None, angle_tolerance=None, is_absolute=False.wait_for_completed())
 
 def turn_right():
     # Use Cozmo SDK to make the robot turn right
-    pass
+    angle = 90
+    turn_in_place(angle, in_parallel=False, num_retries=0, speed=None, accel=None, angle_tolerance=None, is_absolute=False.wait_for_completed())
 
 env = maze_env.MazeEnv()
 #cozmo = cozmo_bot.Cozmo() # initialization
