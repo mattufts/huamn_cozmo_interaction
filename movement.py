@@ -1,6 +1,8 @@
 import cozmo
+import get_voice_command
 import asyncio
 import maze_env
+import maze
 from cozmo.util import degrees, distance_mm, speed_mmps
 from PIL import Image
 
@@ -12,75 +14,60 @@ angle = 0
 distance = 100
 speed = 50
 
+<<<<<<< Updated upstream
 # Define the robot's OLED face images
 face_images = {
     "happy": Image.open("Alert_icon.png"), #
     "sad": Image.open("check_mark.png"),
     "neutral": Image.open("finish_flag.png")
 }
+=======
+def move_forward():
+    # Use Cozmo SDK to make the robot move forward
+    pass
+>>>>>>> Stashed changes
 
-# Define the robot's blinking animation
-async def blink(robot: cozmo.robot.Robot):
-    robot.set_all_backpack_lights(cozmo.lights.blue_light.flash())
-    await asyncio.sleep(0.2)
-    robot.set_all_backpack_lights(cozmo.lights.blue_light)
-    await asyncio.sleep(0.2)
-    robot.set_all_backpack_lights(cozmo.lights.off)
+def turn_left():
+    # Use Cozmo SDK to make the robot turn left
+    pass
 
-# Define the robot's movement functions
-async def turn_angle(robot: cozmo.robot.Robot, angle: float):
-    await robot.turn_in_place(degrees(angle)).wait_for_completed()
+def turn_right():
+    # Use Cozmo SDK to make the robot turn right
+    pass
 
-async def move_forward(robot: cozmo.robot.Robot, distance: float, speed: float):
-    await robot.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()
+env = maze_env.MazeEnv()
+#cozmo = cozmo_bot.Cozmo() # initialization
+state = env.reset()
+done = False
 
-# Define the robot's program
-async def cozmo_program(robot: cozmo.robot.Robot):
-    # Display the neutral face image
-    robot.display_oled_face_image(face_images["neutral"], 5000)
+while not done:
+    angle, distance, speed, action = get_voice_command.get_command_from_keyboard()
+    print(action, type(action))
+    state, reward, hit_wall, front, done, _ = env.step(action)
 
-    # Turn Cozmo by a specific angle (in degrees)
-    angle_to_turn = angle  # Set the angle you want to turn (in degrees)
-    await turn_angle(robot, angle_to_turn)
+    if hit_wall:
+        # If hit wall, show temptation
+        cozmo_controller.angle = 0
+        cozmo_controller.distance = 10
+        cozmo_controller.speed = 10
+        cozmo.run_program(cozmo_controller.act)
+        cozmo_controller.distance = -10
+        cozmo.run_program(cozmo_controller.act)
+        cozmo_controller.front = "hit"
+        cozmo.run_program(cozmo_controller.cozmo_show_img)
+    else:
+        # Check if current location in the maze is a '0' or '1'
+        current_position = env.get_current_position()
+        if env.maze[current_position[0]][current_position[1]] == '0':
+            # Move forward if current position is '0'
+            move_forward()
+        elif env.maze[current_position[0]][current_position[1]] == '1':
+            # Stop abruptly if current position is '1'
+            # Use Cozmo SDK to stop the robot
+            pass
 
-    # Move Cozmo forward by a specific distance (in millimeters)
-    distance_to_move = distance  # Set the distance you want to move (in millimeters)
-    speed_to_move = speed  # Set the speed you want to move (in millimeters per second)
-    await move_forward(robot, distance_to_move, speed_to_move)
+    cozmo_controller.front = front
+    cozmo.run_program(cozmo_controller.cozmo_show_animation)
 
-    # Blink while Cozmo is moving
-    await blink(robot)
-
-    # Display the happy face image
-    robot.display_oled_face_image(face_images["happy"], 5000)
-
-# Run the maze program
-async def run_maze():
-    with cozmo.robot.Robot() as robot:
-        # Reset the maze environment
-        state = env.reset()
-        done = False
-
-        while not done:
-            # Get the robot's movement parameters and action from user input
-            angle, distance, speed_, action = get_voice_command.get_command_from_keyboard()
-
-            # Step the environment based on the action
-            state, reward, hit_wall, front, done, _ = env.step(action)
-
-            # Run the Cozmo program
-            await cozmo_program(robot)
-
-            # Display the sad face image if Cozmo hits a wall
-            if hit_wall:
-                robot.display_oled_face_image(face_images["sad"], 5000)
-            else:
-                robot.display_oled_face_image(face_images["neutral"], 5000)
-
-            # Print the state of the environment
-            print(state, reward, hit_wall, front, done)
-
-# Run the maze program
-if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(run_maze())
+    print(state, reward, hit_wall, front, done)
+    print(env.maze)
