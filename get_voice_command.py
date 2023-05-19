@@ -83,11 +83,11 @@ def get_command():
 
 def get_command_from_keyboard():
     action = input("Enter your command: ")
-    if action == "l" or "left":
+    if action == "l" or action =="left":
         action = 0
-    if action == "r" or "right":
+    if action == "r" or action== "right":
         action = 1
-    if action == "f" or "forward":
+    if action == "f" or action == "forward":
         action = 2
     action = float(action)
     angle = 0
@@ -95,7 +95,7 @@ def get_command_from_keyboard():
     speed = 0
     if action == 2:
         angle = 0
-        distance = 50
+        distance = 70.5
         speed = 50
     elif action == 0:
         angle = 90
@@ -105,6 +105,7 @@ def get_command_from_keyboard():
         angle = -90
         distance = 0
         speed = 0
+    print (angle, distance, speed, action)
     return angle, distance, speed, action
 # if __name__ == "__main__":
 #     text = recognize_speech()
