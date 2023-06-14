@@ -1,4 +1,5 @@
 #This code utilizes maze environment.py and cozmo_controller.py to test the maze environment
+
 #This shows the functionality together, but the code can be broken up into
 #different sections in order to test the screen
 import maze_env
