@@ -57,6 +57,10 @@ class MazeEnv:
             return "nothing"
         if self.maze[tuple(new_pos)] == 1: 
             return "wall"
+        if self.maze[tuple(left_pos)] == 0 and (self.current_pos != self.start_pos).all():
+            return "left"
+        if self.maze[tuple(right_pos)] == 0 and (self.current_pos != self.start_pos).all():
+            return "right"
         
     def step(self, action):
         # action is an integer: 0 = turn left, 1 = turn right, 2 = go forward

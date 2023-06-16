@@ -14,7 +14,7 @@ def set_ads(angle, distance, speed):
 
 
 env = maze_env.MazeEnv()
-cozmo = cozmo_bot.cozmo() # initilization
+#cozmo = cozmo_bot.cozmo() # initilization
 state = env.reset()
 done = False
 
