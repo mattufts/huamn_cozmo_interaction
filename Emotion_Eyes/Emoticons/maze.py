@@ -4,8 +4,8 @@
 #different sections in order to test the screen
 import maze_env
 import get_voice_command
-import cozmo_controller
-import cozmo
+import cozmo_controller_emoticons as cozmo_controller
+import cozmo as Cozmo
 
 def set_ads(angle, distance, speed):  
     cozmo_controller.angle = angle

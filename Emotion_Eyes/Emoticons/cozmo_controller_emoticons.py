@@ -46,7 +46,12 @@ async def cozmo_show_img(robot: cozmo.robot.Robot):
     if front == "goal":
         img = "Emotion_Eyes/Emoticons/happy-01.png"
     if front == "hit":
-        img = "/home/jstaley/hang_yu/huamn_cozmo_interaction/Icon Images/injured.png"
+        img = "Emotion_Eyes/Emoticons/injured.png"
+    if front == "left":
+        img: "Emotion_Eyes/Emoticons/glancing_left-01.png"
+    if front == "right":
+        img: "Emotion_Eyes/Emoticons/glancing_right-01.png"
+    
     
     if img is not None:
         image = Image.open(img)
