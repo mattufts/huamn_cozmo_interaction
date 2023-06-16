@@ -7,14 +7,14 @@ import get_voice_command
 import cozmo_controller
 import cozmo
 
-def set_ads(angle, distance, speed):
+def set_ads(angle, distance, speed):  
     cozmo_controller.angle = angle
     cozmo_controller.distance = distance
     cozmo_controller.speed = speed
 
 
 env = maze_env.MazeEnv()
-#cozmo = cozmo_bot.Cozmo() # initilization
+cozmo = cozmo_bot.Cozmo() # initilization
 state = env.reset()
 done = False
 
