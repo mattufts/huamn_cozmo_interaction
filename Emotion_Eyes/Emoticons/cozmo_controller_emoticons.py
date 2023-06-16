@@ -48,9 +48,9 @@ async def cozmo_show_img(robot: cozmo.robot.Robot):
     if front == "hit":
         img = "Emotion_Eyes/Emoticons/injured.png"
     if front == "left":
-        img: "Emotion_Eyes/Emoticons/glancing_left-01.png"
+        img = "Emotion_Eyes/Emoticons/glancing_left-01.png"
     if front == "right":
-        img: "Emotion_Eyes/Emoticons/glancing_right-01.png"
+        img = "Emotion_Eyes/Emoticons/glancing_right-01.png"
     
     
     if img is not None:

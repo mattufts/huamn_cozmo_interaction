@@ -5,7 +5,7 @@
 import maze_env
 import get_voice_command
 import cozmo_controller_emoticons as cozmo_controller
-import cozmo as Cozmo
+import cozmo as cozmo
 
 def set_ads(angle, distance, speed):  
     cozmo_controller.angle = angle
@@ -14,7 +14,7 @@ def set_ads(angle, distance, speed):
 
 
 env = maze_env.MazeEnv()
-cozmo = cozmo_bot.Cozmo() # initilization
+cozmo = cozmo_bot.cozmo() # initilization
 state = env.reset()
 done = False
 
