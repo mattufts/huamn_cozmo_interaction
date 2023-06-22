@@ -38,21 +38,29 @@ async def act(robot: cozmo.robot.Robot):
 
 async def cozmo_show_img(robot: cozmo.robot.Robot):
     # change the expression based on what is front
+    default_image ='Emotion_Eyes/Emoticons/neutral.png'
+    
     img = None
     if front == "wall":   
         img = "Emotion_Eyes/Emoticons/Angry_Stop-01.png" 
     if front == "nothing":
-        img = "Emotion_Eyes/Emoticons/neutral.png"
+        img = "Emotion_Eyes/Emoticons/neutral.png"  
     if front == "goal":
         img = "Emotion_Eyes/Emoticons/happy-01.png"
     if front == "hit":
-        img = "Emotion_Eyes/Emoticons/injured.png"
+        img = "Emotion_Eyes/Emoticons/sudden_hit-01.png"
     if front == "left":
         img = "Emotion_Eyes/Emoticons/glancing_left-01.png"
     if front == "right":
         img = "Emotion_Eyes/Emoticons/glancing_right-01.png"
-    
-    
+     # Use the default image if no other image is determined
+    if img is None:
+        img = default_image
+        image = Image.open(img)
+        resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
+        face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image)
+        robot.display_oled_face_image(face_image, duration)
+
     if img is not None:
         image = Image.open(img)
         resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
