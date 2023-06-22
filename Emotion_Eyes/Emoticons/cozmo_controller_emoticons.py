@@ -30,6 +30,8 @@ async def act(robot: cozmo.robot.Robot):
     # Turn Cozmo by a specific angle (in degrees)
     angle_to_turn = angle  # Set the angle you want to turn (in degrees)
     await turn_angle(robot, angle_to_turn)
+    #Call cozmo_show_img function to display the image
+    await cozmo_show_img(robot)
     # Move Cozmo forward by a specific distance (in millimeters)
     distance_to_move = distance  # Set the distance you want to move (in millimeters)
     speed_to_move = speed  # Set the speed you want to move (in millimeters per second)
@@ -38,21 +40,27 @@ async def act(robot: cozmo.robot.Robot):
 
 async def cozmo_show_img(robot: cozmo.robot.Robot):
     # change the expression based on what is front
-    default_image ='Emotion_Eyes/Emoticons/neutral.png'
+    default_image ='neutral.png'
     
     img = None
     if front == "wall":   
-        img = "Emotion_Eyes/Emoticons/Angry_Stop-01.png" 
+        img = "Angry_Stop-01.png"
+        cozmo.run_program(act)
     if front == "nothing":
-        img = "Emotion_Eyes/Emoticons/neutral.png"  
+        img = "neutral.png"  
+        cozmo.run_program(act)
     if front == "goal":
-        img = "Emotion_Eyes/Emoticons/happy-01.png"
+        img = "happy-01.png"
+        cozmo.run_program(act)
     if front == "hit":
-        img = "Emotion_Eyes/Emoticons/sudden_hit-01.png"
+        img = "sudden_hit-01.png"
+        cozmo.run_program(act)
     if front == "left":
-        img = "Emotion_Eyes/Emoticons/glancing_left-01.png"
+        img = "glancing_left-01.png"
+        cozmo.run_program(act)
     if front == "right":
-        img = "Emotion_Eyes/Emoticons/glancing_right-01.png"
+        img = "glancing_right-01.png"
+        cozmo.run_program(act)
      # Use the default image if no other image is determined
     if img is None:
         img = default_image
