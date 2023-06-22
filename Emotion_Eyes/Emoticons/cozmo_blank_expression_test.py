@@ -25,7 +25,7 @@ async def cozmo_show_img(robot: cozmo.robot.Robot):
         face_image.append (face_image)
     
     num_loops = 10
-    duration_s = 4.0
+    duration_s = 1000
     # Load the image and resize it
     print("Press CTRL-C to quit (or wait %s seconds to complete)" % int(num_loops*duration_s) )
     

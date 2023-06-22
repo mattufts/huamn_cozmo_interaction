@@ -49,7 +49,8 @@ async def act(robot: cozmo.robot.Robot):
 async def cozmo_show_img(robot: cozmo.robot.Robot):
     #set the default image to neutral
     default_image ="neutral.png" 
-    # change the expression based on what is front    
+
+# change the expression based on what is front    
     img = None
     if front == "wall":   
         img = "Angry_Stop-01.png"
@@ -69,7 +70,8 @@ async def cozmo_show_img(robot: cozmo.robot.Robot):
     if front == "right":
         img = "glancing_right-01.png"
         cozmo.run_program(act)
-     # Use the default image if no other image is determined
+
+# Use the default image if no other image is determined
     if img is None: 
         img = default_image
         image = Image.open(img)
