@@ -9,10 +9,17 @@
 #3.  Displaying images on cozmo's face based on the environment
 #4. Displaying animations on cozmo's face based on the environment
 
+import sys
 import cozmo
 import asyncio
+import time
 from cozmo.util import degrees, distance_mm, speed_mmps
-from PIL import Image
+
+try: 
+    from PIL import Image
+except ImportError:
+    sys.exit("Cannot import from PIL: Do `pip3 install --user Pillow` to install")
+
 angle = 0
 distance = 80
 speed = 50
@@ -38,9 +45,10 @@ async def act(robot: cozmo.robot.Robot):
     print("Turning Angle: ", angle_to_turn)
     await move_forward(robot, distance_to_move, speed_to_move)
 
+#This function displays an animation on cozmo's face based on the environment
 async def cozmo_show_img(robot: cozmo.robot.Robot):
     # change the expression based on what is front
-    default_image ='neutral.png'
+    default_image ="neutral.png"
     
     img = None
     if front == "wall":   
@@ -62,7 +70,7 @@ async def cozmo_show_img(robot: cozmo.robot.Robot):
         img = "glancing_right-01.png"
         cozmo.run_program(act)
      # Use the default image if no other image is determined
-    if img is None:
+    if img is None: 
         img = default_image
         image = Image.open(img)
         resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
@@ -74,6 +82,7 @@ async def cozmo_show_img(robot: cozmo.robot.Robot):
         resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
         face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image)
         robot.display_oled_face_image(face_image, duration)
+        
 async def cozmo_show_animation(robot: cozmo.robot.Robot):
     img = []
     if front == "wall":
