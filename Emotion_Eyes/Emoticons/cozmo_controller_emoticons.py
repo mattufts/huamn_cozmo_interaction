@@ -38,7 +38,7 @@ async def act(robot: cozmo.robot.Robot):
     angle_to_turn = angle  # Set the angle you want to turn (in degrees)
     await turn_angle(robot, angle_to_turn)
     #Call cozmo_show_img function to display the image
-    await cozmo_show_img(robot)
+    await cozmo_show_img(robot) #call the function to display the image
     # Move Cozmo forward by a specific distance (in millimeters)
     distance_to_move = distance  # Set the distance you want to move (in millimeters)
     speed_to_move = speed  # Set the speed you want to move (in millimeters per second)
@@ -47,9 +47,9 @@ async def act(robot: cozmo.robot.Robot):
 
 #This function displays an animation on cozmo's face based on the environment
 async def cozmo_show_img(robot: cozmo.robot.Robot):
-    # change the expression based on what is front
-    default_image ="neutral.png"
-    
+    #set the default image to neutral
+    default_image ="neutral.png" 
+    # change the expression based on what is front    
     img = None
     if front == "wall":   
         img = "Angry_Stop-01.png"
@@ -98,4 +98,3 @@ async def cozmo_show_animation(robot: cozmo.robot.Robot):
             face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image)
             robot.display_oled_face_image(face_image, duration/2)
             await asyncio.sleep(0.2)
-
