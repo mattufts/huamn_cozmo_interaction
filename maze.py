@@ -1,6 +1,6 @@
 import maze_env
 import get_voice_command
-import cozmo_controller
+import cozmo_controller_emoticon as cozmo_controller
 import cozmo
 
 def set_ads(angle, distance, speed):
