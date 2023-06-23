@@ -31,7 +31,7 @@ async def turn_angle(robot: cozmo.robot.Robot, angle: float):
     await robot.turn_in_place(degrees(angle)).wait_for_completed()
 
 async def move_forward(robot: cozmo.robot.Robot, distance: float, speed: float):
-    await robot.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()
+    await robot.drive_straight(distance_mm(distance), speed_mmps(speed), should_play_anim=False, in_parallel=True).wait_for_completed()
     
 async def act(robot: cozmo.robot.Robot): 
     # Turn Cozmo by a specific angle (in degrees)
@@ -54,35 +54,35 @@ async def cozmo_show_img(robot: cozmo.robot.Robot):
     img = None
     if front == "wall":   
         img = "Angry_Stop-01.png"
-        cozmo.run_program(act)
+        cozmo.run_program(act).wait_for_completed()
     if front == "nothing":
         img = "neutral.png"  
-        cozmo.run_program(act)
+        cozmo.run_program(act).wait_for_completed()
     if front == "goal":
         img = "happy-01.png"
-        cozmo.run_program(act)
+        cozmo.run_program(act).wait_for_completed()
     if front == "hit":
         img = "sudden_hit-01.png"
-        cozmo.run_program(act)
+        cozmo.run_program(act).wait_for_completed()
     if front == "left":
         img = "glancing_left-01.png"
-        cozmo.run_program(act)
+        cozmo.run_program(act).wait_for_completed()
     if front == "right":
         img = "glancing_right-01.png"
-        cozmo.run_program(act)
+        cozmo.run_program(act).wait_for_completed()
 
 # Use the default image if no other image is determined
     if img is None: 
         img = default_image
         image = Image.open(img)
         resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
-        face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image)
+        face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
         robot.display_oled_face_image(face_image, duration)
 
     if img is not None:
         image = Image.open(img)
         resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
-        face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image)
+        face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
         robot.display_oled_face_image(face_image, duration)
         
 async def cozmo_show_animation(robot: cozmo.robot.Robot):
@@ -97,6 +97,6 @@ async def cozmo_show_animation(robot: cozmo.robot.Robot):
         for i in range(0, len(img)):
             image = Image.open(img[i])
             resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
-            face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image)
+            face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
             robot.display_oled_face_image(face_image, duration/2)
             await asyncio.sleep(0.2)
