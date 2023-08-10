@@ -86,25 +86,25 @@ if __name__ == '__main__':
     asyncio.run(main())
 
     
-    # if img is not None:
-    #     image = Image.open(img)
-    #     resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
-    #     face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
-    #     robot.display_oled_face_image(face_image, duration)
+    if img is not None:
+        image = Image.open(img)
+        resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
+        face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
+        robot.display_oled_face_image(face_image, duration)
   
       
-# async def cozmo_show_animation(robot: cozmo.robot.Robot):
-#     img = []
-#     if front == "wall":
-#         path = "/home/jstaley/hang_yu/huamn_cozmo_interaction/Emotion_Eyes/Blinking/eyes_blink"
-#         for i in range(1, 7):
-#             img.append(path + str(i) + ".png")
-#     if front == "nothing":
-#         pass
-#     if len(img) > 0:
-#         for i in range(0, len(img)):
-#             image = Image.open(img[i])
-#             resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
-#             face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
-#             robot.display_oled_face_image(face_image, duration/2)
-#             await asyncio.sleep(0.2)
+async def cozmo_show_animation(robot: cozmo.robot.Robot):
+    img = []
+    if front == "wall":
+        path = "/home/jstaley/hang_yu/huamn_cozmo_interaction/Emotion_Eyes/Blinking/eyes_blink"
+        for i in range(1, 7):
+            img.append(path + str(i) + ".png")
+    if front == "nothing":
+        pass
+    if len(img) > 0:
+        for i in range(0, len(img)):
+            image = Image.open(img[i])
+            resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
+            face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
+            robot.display_oled_face_image(face_image, duration/2)
+            await asyncio.sleep(0.2)
