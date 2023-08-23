@@ -55,22 +55,27 @@ async def move_forward(robot: cozmo.robot.Robot, distance: float, speed: float):
 
 async def cozmo_show_img(robot: cozmo.robot.Robot):
     # Set the default image to neutral
-    default_image = "neutral.png"
-
+    default_image = "blank.png"
     # Change the expression based on what is in front
     img = None
     if front == "wall":
-        img = "Angry_Stop-01.png"
+        #img = "Angry_Stop-01.png"
+        img = 'blank.png'
     elif front == "nothing":
-        img = "neutral.png"
+        #img = "neutral.png"
+        img = 'blank.png'
     elif front == "goal":
-        img = "happy-01.png"
+        #img = "happy-01.png"
+        img = 'blank.png'
     elif front == "hit":
-        img = "sudden_hit-01.png"
+        #img = "sudden_hit-01.png"
+        img = 'blank.png'
     elif front == "left":
-        img = "glancing_left-01.png"
+        #img = "glancing_left-01.png"
+        img = 'blank.png'
     elif front == "right":
-        img = "glancing_right-01.png"
+        #img = "glancing_right-01.png"
+        img = 'blank.png'
 
     # Use the default image if no other image is determined
     if img is None:

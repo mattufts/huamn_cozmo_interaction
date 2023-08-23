@@ -1,6 +1,11 @@
 import re
 import speech_recognition as sr
 
+#MATT: this is the script that takes in the text commands.  Try changing it so that 
+#each time that it accepts a command, it also updates the face on the cozmo controller side
+#You will need to import cozmo_controller and cozmo_show_img, which is where all of the images get defined
+
+
 def recognize_speech():
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
@@ -47,6 +52,7 @@ def extract_values(text):
     if angle_text == "left":
         angle = 90
         action  = 0
+        
     elif angle_text == "right":
         angle = -90
         action  = 1
