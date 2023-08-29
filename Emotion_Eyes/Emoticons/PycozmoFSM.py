@@ -1,56 +1,58 @@
-Initialize global variables (angle, distance, speed, front, duration, default_image)
+#This script needs to incorporate the 
 
-Define function act(robot):
-    angle_to_turn = angle
-    turn_angle(robot, angle_to_turn)
-    distance_to_move = distance
-    speed_to_move = speed
-    Print "Turning Angle:", angle_to_turn
-    move_forward(robot, distance_to_move, speed_to_move)
-    show_image(robot, default_image)
+# Initialize global variables (angle, distance, speed, front, duration, default_image)
 
-Define function explore_state(robot):
-    Print "Exploring..."
-    angle_to_turn = angle
-    turn_angle(robot, angle_to_turn)
-    distance_to_move = distance
-    speed_to_move = speed
-    Print "Turning Angle:", angle_to_turn
-    move_forward(robot, distance_to_move, speed_to_move)
-    Return interact_state
+# Define function act(robot):
+#     angle_to_turn = angle
+#     turn_angle(robot, angle_to_turn)
+#     distance_to_move = distance
+#     speed_to_move = speed
+#     Print "Turning Angle:", angle_to_turn
+#     move_forward(robot, distance_to_move, speed_to_move)
+#     show_image(robot, default_image)
 
-Define function interact_state(robot):
-    Print "Interacting..."
-    Wait for 3 seconds
-    Return explore_state
+# Define function explore_state(robot):
+#     Print "Exploring..."
+#     angle_to_turn = angle
+#     turn_angle(robot, angle_to_turn)
+#     distance_to_move = distance
+#     speed_to_move = speed
+#     Print "Turning Angle:", angle_to_turn
+#     move_forward(robot, distance_to_move, speed_to_move)
+#     Return interact_state
 
-Define function turn_angle(robot, angle):
-    Turn the robot in place by angle degrees
-    Wait for the turn to complete
+# Define function interact_state(robot):
+#     Print "Interacting..."
+#     Wait for 3 seconds
+#     Return explore_state
 
-Define function move_forward(robot, distance, speed):
-    Drive the robot straight by distance millimeters at speed millimeters per second
-    Wait for the movement to complete
+# Define function turn_angle(robot, angle):
+#     Turn the robot in place by angle degrees
+#     Wait for the turn to complete
 
-Define function show_image(robot, image_path):
-    Load the image from image_path
-    Resize the image to fit the OLED display
-    Convert the image to screen data
-    Display the image on the robot's face for a duration
+# Define function move_forward(robot, distance, speed):
+#     Drive the robot straight by distance millimeters at speed millimeters per second
+#     Wait for the movement to complete
 
-Define function run_fsm(robot):
-    Set current_state to explore_state
-    Show default_image on the robot's face
-    Repeat forever:
-        Call current_state(robot) and set current_state to the returned value
+# Define function show_image(robot, image_path):
+#     Load the image from image_path
+#     Resize the image to fit the OLED display
+#     Convert the image to screen data
+#     Display the image on the robot's face for a duration
 
-Define function main():
-    Connect to the Cozmo robot
-    Get the robot object from the connection
-    Call run_fsm(robot)
+# Define function run_fsm(robot):
+#     Set current_state to explore_state
+#     Show default_image on the robot's face
+#     Repeat forever:
+#         Call current_state(robot) and set current_state to the returned value
 
-If the script is executed directly:
-    Call main()
+# Define function main():
+#     Connect to the Cozmo robot
+#     Get the robot object from the connection
+#     Call run_fsm(robot)
+
+# If the script is executed directly:
+#     Call main()
 
 
 import pycozmo
