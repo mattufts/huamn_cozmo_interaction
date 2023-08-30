@@ -54,77 +54,86 @@
 # If the script is executed directly:
 #     Call main()
 
-
+import sys
+import os
 import pycozmo
 import time
-from PIL import Image
-from pycozmo import util    
+from pycozmo import util   
 from pycozmo.util import Angle, Distance, Speed, Pose, Angle, Vector3, Pose, Quaternion
+from pycozmo import protocol_encoder
+from pycozmo.protocol_encoder import TurnInPlace
+
+try:
+    from PIL import Image
+except ImportError:
+    sys.exit("Cannot import from PIL: Do `pip3 install --user Pillow` to install")
 
 # Define global variables
-angle = 0
-distance = 80
-speed = 50
+Angle = 0
+Distance = 80
+Speed = 50
 front = None
 duration = 2000
 default_image = "blank.png"
+cli = pycozmo.Client()
 
 # FSM state functions
-def act(robot: pycozmo.robot):
-    angle_to_turn = angle
+def act(robot: pycozmo.client):
+    angle_to_turn = Angle
     turn_angle(robot, angle_to_turn)
-    distance_to_move = distance
-    speed_to_move = speed
+    distance_to_move = Distance
+    speed_to_move = Speed
     print("Turning Angle: ", angle_to_turn)
     move_forward(robot, distance_to_move, speed_to_move)
     show_image(robot, default_image)
     
-def explore_state(robot: pycozmo.robot):
+def explore_state(robot: pycozmo.client):
     print("Exploring...")
-    angle_to_turn = angle
-    turn_angle(robot, angle_to_turn)
-    distance_to_move = distance
-    speed_to_move = speed
+    angle_to_turn = Angle
+    turn_angle(angle_to_turn)
+    distance_to_move = Distance
+    speed_to_move = Speed
     print("Turning Angle: ", angle_to_turn)
     move_forward(robot, distance_to_move, speed_to_move)
     return interact_state
 
-def interact_state(robot: pycozmo.robot):
-    print("Interacting...")
-    time.sleep(3)
+def interact_state(robot: pycozmo.client):
+    #print("Interacting...")
+    #time.sleep(3)
     return explore_state
 
 # Helper functions
-def turn_angle(robot: pycozmo.robot, angle: float):
-    robot.turn_in_place(degrees=angle).wait_for_completed()
+def turn_angle(Angle: float):
+    protocol_encoder.TurnInPlace(Angle)
 
-def move_forward(robot: pycozmo.robot, distance: float, speed: float):
-    robot.drive_straight(distance_mm=distance, speed_mmps=speed, should_play_anim=False).wait_for_completed()
+def move_forward(robot: pycozmo.client, Distance: float, Speed: float):
+    #cli.drive_wheels (lwheel_speed=50.0, rwheel_speed=50.0, duration=2.0)
+    robot.drive_straight(distance_mm=Distance, speed_mmps=Speed, should_play_anim=False).wait_for_completed()
 
-def show_image(robot: pycozmo.robot, image_path: str):
-    image = Image.open(image_path)
-    resized_image = image.resize(pycozmo.oled_face.dimensions(), Image.BICUBIC)
-    face_image = pycozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
-    robot.display_oled_face_image(face_image, duration)
+def show_image(robot: pycozmo.client, image_path: str):
+    #image = Image.open()
+    target_size = (128, 32)
+    image = Image.open(os.path.join(os.path.dirname(__file__), "assets", image_path))
+    resized_image = image.resize(target_size, Image.ANTIALIAS)
+    image =  resized_image.convert('1')
+    cli.display_image(image)
 
 # Define the FSM execution function
-def run_fsm(robot: pycozmo.robot):
+def run_fsm(robot: pycozmo.client):
     current_state = explore_state
     show_image(robot, default_image)
     while True:
         current_state = current_state(robot)
 
 # Define the main function
+# The main function should connect to cozmo immediately and start the FSM
 def main():
-    # # Connect to the Cozmo robot
     with pycozmo.connect() as cli:
-        robot = cli.robot
-        cli = pycozmo.Client()
-        cli.start()
+        # # Connect to the Cozmo robot
+        #cli.start()
         cli.connect()
+        run_fsm(pycozmo.robot) 
         cli.wait_for_robot()
-        run_fsm(robot) 
-    
     #cli.disconnect()
     #cli.stop()
 

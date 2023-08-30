@@ -5,15 +5,15 @@
 import maze_env
 import get_voice_command
 #import cozmo_controller_emoticons as cozmo_controller
-import AsyncFSM as cozmo_controller
+import PycozmoFSM as cozmo_controller
 import asyncio
-import cozmo as cozmo
+import pycozmo as cozmo
 
 
-def set_ads(angle, distance, speed):  
-    cozmo_controller.angle = angle
-    cozmo_controller.distance = distance
-    cozmo_controller.speed = speed
+def set_ads(Angle, Distance, Speed):  
+    cozmo_controller.Angle = angle
+    cozmo_controller.Distance = distance
+    cozmo_controller.Speed = speed
 
 
 env = maze_env.MazeEnv()
