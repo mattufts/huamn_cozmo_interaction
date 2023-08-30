@@ -58,6 +58,8 @@
 import pycozmo
 import time
 from PIL import Image
+from pycozmo import util    
+from pycozmo.util import Angle, Distance, Speed, Pose, Angle, Vector3, Pose, Quaternion
 
 # Define global variables
 angle = 0
@@ -68,7 +70,7 @@ duration = 2000
 default_image = "blank.png"
 
 # FSM state functions
-def act(robot: pycozmo.robot.Robot):
+def act(robot: pycozmo.robot):
     angle_to_turn = angle
     turn_angle(robot, angle_to_turn)
     distance_to_move = distance
@@ -77,7 +79,7 @@ def act(robot: pycozmo.robot.Robot):
     move_forward(robot, distance_to_move, speed_to_move)
     show_image(robot, default_image)
     
-def explore_state(robot: pycozmo.robot.Robot):
+def explore_state(robot: pycozmo.robot):
     print("Exploring...")
     angle_to_turn = angle
     turn_angle(robot, angle_to_turn)
@@ -87,26 +89,26 @@ def explore_state(robot: pycozmo.robot.Robot):
     move_forward(robot, distance_to_move, speed_to_move)
     return interact_state
 
-def interact_state(robot: pycozmo.robot.Robot):
+def interact_state(robot: pycozmo.robot):
     print("Interacting...")
     time.sleep(3)
     return explore_state
 
 # Helper functions
-def turn_angle(robot: pycozmo.robot.Robot, angle: float):
+def turn_angle(robot: pycozmo.robot, angle: float):
     robot.turn_in_place(degrees=angle).wait_for_completed()
 
-def move_forward(robot: pycozmo.robot.Robot, distance: float, speed: float):
+def move_forward(robot: pycozmo.robot, distance: float, speed: float):
     robot.drive_straight(distance_mm=distance, speed_mmps=speed, should_play_anim=False).wait_for_completed()
 
-def show_image(robot: pycozmo.robot.Robot, image_path: str):
+def show_image(robot: pycozmo.robot, image_path: str):
     image = Image.open(image_path)
     resized_image = image.resize(pycozmo.oled_face.dimensions(), Image.BICUBIC)
     face_image = pycozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
     robot.display_oled_face_image(face_image, duration)
 
 # Define the FSM execution function
-def run_fsm(robot: pycozmo.robot.Robot):
+def run_fsm(robot: pycozmo.robot):
     current_state = explore_state
     show_image(robot, default_image)
     while True:
@@ -114,9 +116,17 @@ def run_fsm(robot: pycozmo.robot.Robot):
 
 # Define the main function
 def main():
+    # # Connect to the Cozmo robot
     with pycozmo.connect() as cli:
         robot = cli.robot
-        run_fsm(robot)
+        cli = pycozmo.Client()
+        cli.start()
+        cli.connect()
+        cli.wait_for_robot()
+        run_fsm(robot) 
+    
+    #cli.disconnect()
+    #cli.stop()
 
 if __name__ == '__main__':
     main()
