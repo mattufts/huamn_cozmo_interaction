@@ -53,8 +53,9 @@ def turn_angle(Angle: float):
     protocol_encoder.TurnInPlace(Angle)
 
 def move_forward(robot: pycozmo.client, Distance: float, Speed: float):
-    #cli.drive_wheels (lwheel_speed=50.0, rwheel_speed=50.0, duration=2.0)
-    robot.drive_straight(distance_mm=Distance, speed_mmps=Speed, should_play_anim=False).wait_for_completed()
+    cli.drive_wheels (lwheel_speed=50.0, rwheel_speed=50.0, duration=2.0)
+    print ("Driving Straight")
+    #robot.drive_straight(distance_mm=Distance, speed_mmps=Speed, should_play_anim=False).wait_for_completed()
 
 def show_image(robot: pycozmo.client, image_path: str):
     #image = Image.open()

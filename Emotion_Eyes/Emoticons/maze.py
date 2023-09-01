@@ -8,6 +8,7 @@ import get_voice_command
 import PycozmoFSM as cozmo_controller
 import asyncio
 import pycozmo as cozmo
+#import pycozmo as cozmo
 
 
 def set_ads(Angle, Distance, Speed):  
