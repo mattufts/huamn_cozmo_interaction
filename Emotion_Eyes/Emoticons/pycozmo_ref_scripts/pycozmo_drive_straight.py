@@ -1,3 +1,6 @@
+#This script is based off of the 'go_to_pose.py' script 
+#along with the 'path.py' script
+
 from threading import Event
 
 import pycozmo
@@ -51,7 +54,7 @@ with pycozmo.connect() as cli:
         #from_x and from_y are the starting coordinates
         from_x=0.0, from_y=0.0,
         #to_x and to_y are the ending coordinates
-        to_x=20.0, to_y=0.0,
+        to_x=200.0, to_y=0.0,
         #speed_mmps is the speed of the robot in millimeters per second
         speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
     #send the packet
