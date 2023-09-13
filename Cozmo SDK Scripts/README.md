@@ -1,0 +1,1 @@
+These scripts are included as reference for reworking the cozmo sdk scripts into a pycozmo compatible script
