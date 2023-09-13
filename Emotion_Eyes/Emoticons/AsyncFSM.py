@@ -70,7 +70,7 @@ async def run_fsm(robot: cozmo.robot.Robot):
 # Define the main function
 async def main():
     # Create a Cozmo robot object
-    robot = await cozmo.robot.Robot.wait_for_robot()
+    robot = await cozmo.robot.Robot.wait_for(robot)
     # Call the run_fsm function
     await run_fsm(robot)
 if __name__ == '__main__':
