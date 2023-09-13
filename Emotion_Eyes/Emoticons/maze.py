@@ -5,11 +5,9 @@
 import maze_env
 import get_voice_command
 #import cozmo_controller_emoticons as cozmo_controller
-import PycozmoFSM as cozmo_controller
-import asyncio
-import pycozmo as cozmo
-#import pycozmo as cozmo
 
+import AsyncFSM as cozmo_controller
+import cozmo as cozmo
 
 def set_ads(Angle, Distance, Speed):  
     cozmo_controller.Angle = angle
@@ -23,7 +21,6 @@ state = env.reset()
 done = False
 
 while not done: # start loop 
-    asyncio.run(cozmo_controller.main())
     angle, distance, speed, action = get_voice_command.get_command_from_keyboard()
     print(action, type(action))
     state, reward, hit_wall, front, done, _ =env.step(action) 

@@ -53,18 +53,23 @@ async def cozmo_show_img(robot: cozmo.robot.Robot):
     # Change the expression based on what is in front
     img = None
     if front == "wall":
-        img = "Angry_Stop-01.png"
+        #img = "Angry_Stop-01.png"
+        img = 'blank.png'
     elif front == "nothing":
-        img = "neutral.png"
+        #img = "neutral.png"
+        img = 'blank.png'
     elif front == "goal":
-        img = "happy-01.png"
+        #img = "happy-01.png"
+        img = 'blank.png'
     elif front == "hit":
-        img = "sudden_hit-01.png"
+       #img = "sudden_hit-01.png"
+        img = 'blank.png'
     elif front == "left":
-        img = "glancing_left-01.png"
+        #img = "glancing_left-01.png"
+        img = 'blank.png'
     elif front == "right":
-        img = "glancing_right-01.png"
-
+        #img = "glancing_right-01.png"
+        img = 'blank.png'
     # Use the default image if no other image is determined
     if img is None:
         img = default_image
@@ -93,18 +98,18 @@ if __name__ == '__main__':
         robot.display_oled_face_image(face_image, duration)
   
       
-async def cozmo_show_animation(robot: cozmo.robot.Robot):
-    img = []
-    if front == "wall":
-        path = "/home/jstaley/hang_yu/huamn_cozmo_interaction/Emotion_Eyes/Blinking/eyes_blink"
-        for i in range(1, 7):
-            img.append(path + str(i) + ".png")
-    if front == "nothing":
-        pass
-    if len(img) > 0:
-        for i in range(0, len(img)):
-            image = Image.open(img[i])
-            resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
-            face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
-            robot.display_oled_face_image(face_image, duration/2)
-            await asyncio.sleep(0.2)
+# async def cozmo_show_animation(robot: cozmo.robot.Robot):
+#     img = []
+#     if front == "wall":
+#         path = "/home/jstaley/hang_yu/huamn_cozmo_interaction/Emotion_Eyes/Blinking/eyes_blink"
+#         for i in range(1, 7):
+#             img.append(path + str(i) + ".png")
+#     if front == "nothing":
+#         pass
+#     if len(img) > 0:
+#         for i in range(0, len(img)):
+#             image = Image.open(img[i])
+#             resized_image = image.resize(cozmo.oled_face.dimensions(), Image.BICUBIC)
+#             face_image = cozmo.oled_face.convert_image_to_screen_data(resized_image, invert_image=True)
+#             robot.display_oled_face_image(face_image, duration/2)
+#             await asyncio.sleep(0.2)
