@@ -80,10 +80,10 @@ def main():
         cli.start()
         cli.connect()
         # # Connect to the Cozmo robot
-        #turn off "alive" animations for cozmo
-        cli.anim_controller.enable_animations(False)
         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians)/2.0
-        
+           #turn off "alive" animations for cozmo
+        cli.anim_controller.enable_animations(False)
+        #cli.anim_controller.cancel_anim()
         pyc.set_head_angle(head_angle)
         run_fsm(pycozmo.robot) 
         pyc.wait_for_robot()
