@@ -83,7 +83,7 @@ def show_image(robot: pycozmo.client, image_path: str):
         img = 'blank.png'
    
     target_size = (128, 32)
-    image = Image.open(os.path.join(os.path.dirname(__file__), img))
+    image = Image.open(os.path.join(os.path.dirname(__file__), img)) # Open the image file
     resized_image = image.resize(target_size, Image.ANTIALIAS)
     image = resized_image.convert('1') 
     
