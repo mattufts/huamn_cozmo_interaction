@@ -20,7 +20,7 @@ with pycozmo.connect() as cli:
 
     # Load image
     #target_size = (128, 32)
-    image = Image.open(os.path.join(os.path.dirname(__file__), "..", "pycozmo.png"))
+    image = Image.open(os.path.join(os.path.dirname(__file__), "pycozmo.png"))
     #resized_image = image.resize(target_size, Image.ANTIALIAS)
     image =  image.convert('1') 
     
