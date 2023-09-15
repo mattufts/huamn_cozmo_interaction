@@ -81,16 +81,16 @@ def show_image(robot: pycozmo.client, image_path: str):
     elif front == "right":
         #img = "glancing_right-01.png"
         img = 'blank.png'
+        
+    # image = Image.open(os.path.join(os.path.dirname(__file__), img)) # Open the image file
+    # target_size = (128, 32)
+    # im_resized =  im.resize(target_size)
    
-    target_size = (128, 32)
-    image = Image.open(os.path.join(os.path.dirname(__file__), img)) # Open the image file
-    resized_image = image.resize(target_size, Image.ANTIALIAS)
-    image = resized_image.convert('1') 
+    # resized_image = image.resize(target_size, Image.ANTIALIAS)
+    # image = resized_image.convert('1') 
     
-    cli.display_image(image, 4.0)
- 
-    
-    cli.display_image(image)
+    # cli.display_image(image, 4.0)
+
 
 
 # Define the FSM execution function
