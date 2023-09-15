@@ -1,6 +1,5 @@
 #This script needs to incorporate the pycozmo library
 #and is a rework of the AsyncFSM.py script 
-
 import sys
 import os
 import pycozmo
@@ -18,11 +17,10 @@ except ImportError:
 Angle = 0
 Distance = 80
 Speed = 50
-front = None
+front = None 
 duration = 2000
 default_image = "blank.png"
 
-cli = pycozmo.Client()
 
 # FSM state functions
 def act(robot: pycozmo.client):
@@ -82,14 +80,14 @@ def show_image(robot: pycozmo.client, image_path: str):
         #img = "glancing_right-01.png"
         img = 'blank.png'
         
-    # image = Image.open(os.path.join(os.path.dirname(__file__), img)) # Open the image file
-    # target_size = (128, 32)
-    # im_resized =  im.resize(target_size)
-   
-    # resized_image = image.resize(target_size, Image.ANTIALIAS)
-    # image = resized_image.convert('1') 
+    image = Image.open(os.path.join(os.path.dirname(__file__), img)) # Open the image file
+    target_size = (128, 32)
+    im_resized =  im.resize(target_size)
+
+    resized_image = image.resize(target_size, Image.ANTIALIAS)
+    image = resized_image.convert('1') 
     
-    # cli.display_image(image, 4.0)
+    cli.display_image(image, 4.0)
 
 
 
@@ -106,22 +104,19 @@ def run_fsm(robot: pycozmo.client):
             print("Unknown state:", current_state)
             break
 
-# Define the main function
-# The main function should connect to cozmo immediately and start the FSM
-def main():
-    with pycozmo.connect() as pyc:
-        cli.start()
-        cli.connect()
+with pycozmo.connect() as cli:
+    # The main function should connect to cozmo immediately and start the FSM
+    def main():
         # # Connect to the Cozmo robot
         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians)/2.0
-           #turn off "alive" animations for cozmo
+            #turn off "alive" animations for cozmo
         #cli.anim_controller.enable_animations(False)
         #cli.anim_controller.cancel_anim()
-        pyc.set_head_angle(head_angle)
+        cli.set_head_angle(head_angle)
         run_fsm(pycozmo.robot) 
-        pyc.wait_for_robot()
-    pyc.disconnect()
-    pyc.stop()
+        cli.wait_for_robot()
+        cli.disconnect()
+        cli.stop()
 
 if __name__ == '__main__':
     main()
