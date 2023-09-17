@@ -24,16 +24,21 @@ duration = 2000
 
 # FSM state functions
 def act(robot: pycozmo.client):
+    
     angle_to_turn = Angle
     turn_angle(robot, angle_to_turn)
+    
+    show_image(robot)
+    
     distance_to_move = Distance
     speed_to_move = Speed
     print("Turning Angle: ", angle_to_turn)
     move_forward(robot, distance_to_move, speed_to_move)
-    show_image(robot, default_image)
+    
     
 def explore_state(robot: pycozmo.client):
     print("Exploring...")
+    
     angle_to_turn = Angle
     turn_angle(angle_to_turn)
     distance_to_move = Distance
@@ -44,7 +49,7 @@ def explore_state(robot: pycozmo.client):
 
 def interact_state(robot: pycozmo.client):
     print("Interacting...")
-    robot.display_image(default_image)
+    show_image(robot)
     time.sleep(3)
     return "explore"
 
@@ -56,10 +61,9 @@ def move_forward(robot: pycozmo.Client, Distance: float, Speed: float):
     robot.drive_wheels(lwheel_speed=50.0, rwheel_speed=50.0, duration=2.0)
     print ("Driving Straight")
     
-def show_image(cli, image_path: str):
+def show_image(cli, image_path):
     # Set the default image to neutral
     target_size = (128, 32)
-    cli.anim_controller.enable_animations(False)
     default_image = "pycozmo.png"
     # Change the expression based on what is in front
     img = None
@@ -90,12 +94,14 @@ def show_image(cli, image_path: str):
     image_open = Image.open(image_path)
     image_resized = image_open.resize(target_size)
     img = image_resized.convert('1') 
-    
+
     start_time = time.time()
+    cli.anim_controller.enable_animations(True)
     while (True):
         if time.time() - start_time > 10.0:
             break
-        robot.display_image(img, 4.0)
+        cli.display_image(img)
+        
 
 
 
@@ -105,7 +111,7 @@ def run_fsm(robot: pycozmo.client):
     #show_image(robot, default_image)
     while True:
         if current_state == "explore":
-            current_state == explore_state(robot)
+            current_state = explore_state(robot)
         elif current_state == "interact": 
             current_state = interact_state(robot)
         else:
@@ -121,9 +127,8 @@ def main():
         #turn off "alive" animations for cozmo
         time.sleep(1)
         
-        image_path = os.path.join(os.path.dirname(__file__), "assets", "pycozmo.png")
-        display_duration = 10.0
-        show_image(cli, image_path, display_duration) 
+        image_path = os.path.join(os.path.dirname(__file__), "emoticons", "pycozmo.png")
+        show_image(cli, image_path) 
         
         cli.wait_for_robot()
         cli.disconnect()
