@@ -58,9 +58,9 @@ cli.wait_for_robot()
 #doing this will turn the animations off as the robot moves
 cli.anim_controller.enable_animations(False)
 
-#cli.anim_controller.cancel_anim()
-# pycozmo.anim_controller.enable_animations()
+
+cli.anim_controller.enable_animations()
 # pycozmo.anim_controller.stop()
-cli.drive_wheels(lwheel_speed=50.0, rwheel_speed=50.0, duration=2.0)
+cli.drive_wheels(lwheel_speed=50.0, rwheel_speed=50.0, duration=6.0)
 cli.disconnect()
 cli.stop()
