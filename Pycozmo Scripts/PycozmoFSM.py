@@ -64,27 +64,27 @@ def move_forward(robot: pycozmo.Client, Distance: float, Speed: float):
 def show_image(cli, image_path):
     # Set the default image to neutral
     target_size = (128, 32)
-    default_image = "pycozmo.png"
+    default_image = "blank.png"
     # Change the expression based on what is in front
     img = None
     if front == "wall":
-        #img = "Angry_Stop-01.png"
-        img = "pycozmo.png"
+        img = "Angry_Stop-01.png"
+        #img = "pycozmo.png"
     elif front == "nothing":
-        #img = "neutral.png"
-        img = "pycozmo.png"
+        img = "neutral.png"
+        #img = "pycozmo.png"
     elif front == "goal":
         #img = "happy-01.png"
         img = "pycozmo.png"
     elif front == "hit":
-        #img = "sudden_hit-01.png"
-        img = "pycozmo.png"
+        img = "sudden_hit-01.png"
+        #img = "pycozmo.png"
     elif front == "left":
-        #img = "glancing_left-01.png"
-        img = "pycozmo.png"
+        img = "glancing_left-01.png"
+        #img = "pycozmo.png"
     elif front == "right":
-        #img = "glancing_right-01.png"
-        img = "pycozmo.png"
+        img = "glancing_right-01.png"
+        #img = "pycozmo.png"
     
     # Use the default image if no other image is determined
     if img is None:
@@ -127,7 +127,7 @@ def main():
         #turn off "alive" animations for cozmo
         time.sleep(1)
         
-        image_path = os.path.join(os.path.dirname(__file__), "emoticons", "pycozmo.png")
+        image_path = os.path.join(os.path.dirname(__file__), "emoticons", "neutral.png")
         show_image(cli, image_path) 
         
         cli.wait_for_robot()
