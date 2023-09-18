@@ -23,12 +23,12 @@ duration = 2000
 
 
 # FSM state functions
-def act(robot: pycozmo.client):
+def act(robot: pycozmo.client, image_path):
     
     angle_to_turn = Angle
-    turn_angle(robot, angle_to_turn)
+    turn_angle(robot, angle_to_turn, image_path)
     
-    show_image(robot)
+    show_image(robot, image_path)
     
     distance_to_move = Distance
     speed_to_move = Speed
@@ -38,18 +38,18 @@ def act(robot: pycozmo.client):
     
 def explore_state(robot: pycozmo.client):
     print("Exploring...")
-    
     angle_to_turn = Angle
     turn_angle(angle_to_turn)
+    show_image(robot)
     distance_to_move = Distance
     speed_to_move = Speed
     print("Turning Angle: ", angle_to_turn)
     move_forward(robot, distance_to_move, speed_to_move)
     return "interact"
 
-def interact_state(robot: pycozmo.client):
+def interact_state(robot: pycozmo.client, image_path):
     print("Interacting...")
-    show_image(robot)
+    show_image(robot, image_path)
     time.sleep(3)
     return "explore"
 
@@ -106,7 +106,7 @@ def show_image(cli, image_path):
 
 
 # Define the FSM execution function
-def run_fsm(robot: pycozmo.client):
+def run_fsm(robot: pycozmo.client, image_path):
     current_state = "explore"
     #show_image(robot, default_image)
     while True:
@@ -128,7 +128,7 @@ def main():
         time.sleep(1)
         
         image_path = os.path.join(os.path.dirname(__file__), "emoticons", "neutral.png")
-        show_image(cli, image_path) 
+        run_fsm(cli, image_path)
         
         cli.wait_for_robot()
         cli.disconnect()
