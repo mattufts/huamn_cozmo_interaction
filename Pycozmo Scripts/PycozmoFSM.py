@@ -36,11 +36,11 @@ def act(robot: pycozmo.client, image_path):
     move_forward(robot, distance_to_move, speed_to_move)
     
     
-def explore_state(robot: pycozmo.client):
+def explore_state(robot: pycozmo.client, image_path):
     print("Exploring...")
     angle_to_turn = Angle
     turn_angle(angle_to_turn)
-    show_image(robot)
+    show_image(robot, image_path)
     distance_to_move = Distance
     speed_to_move = Speed
     print("Turning Angle: ", angle_to_turn)
@@ -97,7 +97,7 @@ def show_image(cli, image_path):
 
     start_time = time.time()
     cli.anim_controller.enable_animations(True)
-    while (True):
+    while True:
         if time.time() - start_time > 10.0:
             break
         cli.display_image(img)
@@ -111,9 +111,9 @@ def run_fsm(robot: pycozmo.client, image_path):
     #show_image(robot, default_image)
     while True:
         if current_state == "explore":
-            current_state = explore_state(robot)
+            current_state = explore_state(robot, image_path)
         elif current_state == "interact": 
-            current_state = interact_state(robot)
+            current_state = interact_state(robot, image_path)
         else:
             print("Unknown state:", current_state)
             break
