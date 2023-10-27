@@ -8,12 +8,12 @@
 from threading import Event
 
 import pycozmo
+import time
 
-
-SPEED_MMPS  =  80.0
-ACCEL_MMPS2 =  20.0
-DECEL_MMPS2 =  20.0
-distance    =  254.0 
+SPEED_MMPS  =  40.0
+ACCEL_MMPS2 =  5.0
+DECEL_MMPS2 =  5.0
+distance    =  200.0
 
 e = Event()
 
@@ -23,12 +23,7 @@ def on_path_following_event(cli, pkt: pycozmo.protocol_encoder.PathFollowingEven
     if pkt.event_type != pycozmo.protocol_encoder.PathEventType.PATH_STARTED: 
         #if the event type does not match the current path type
         e.set() #set the current event type
-        # Accumulate distances
-        total_distance_x += pkt.delta_x_mm
-        total_distance_y += pkt.delta_y_mm
-
-        print(f"Total Distance (x, y): ({total_distance_x} mm, {total_distance_y} mm)")
-
+   
 
 def on_robot_pathing_change(cli, state: bool):
     if state:
@@ -51,22 +46,26 @@ with pycozmo.connect() as cli:
             from_x=distance, from_y=0.0,
             to_x=distance, to_y=distance,
             speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
+        time.sleep(2)
         cli.conn.send(pkt)
         pkt = pycozmo.protocol_encoder.AppendPathSegLine(
             from_x=distance, from_y=distance,
             to_x=0.0, to_y=distance,
             speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
+        time.sleep(2)
         cli.conn.send(pkt)
         pkt = pycozmo.protocol_encoder.AppendPathSegLine(
             from_x=0.0, from_y=distance,
             to_x=0.0, to_y=0.0,
             speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
+        time.sleep(2)
         cli.conn.send(pkt)
         pkt = pycozmo.protocol_encoder.AppendPathSegPointTurn(
             x=0.0, y=0.0,
             angle_rad=pycozmo.util.Angle(degrees=0.0).radians,
             angle_tolerance_rad=0.01,
             speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
+        time.sleep(2)
         cli.conn.send(pkt)
 
         pkt = pycozmo.protocol_encoder.ExecutePath(event_id=1)
