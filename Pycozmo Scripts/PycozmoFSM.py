@@ -137,5 +137,16 @@ def main():
 if __name__ == '__main__':
     main()
     
+#resolving cozmo's face
+#instead of making a square maze, can we make a curved like maze so that the robot has branching?
+#Can the robot approximately follow a curved image
+#Can we have an option that allows us to only look at the robot?
+
+#Next step is to design the maze
+#IRB Training and Consent Form
+#Design the maze
+#dynamic multi choice environment 
+    #make sure that pycozmo maze can still work with separate agents and functionalize everything
     
-    
+#Robot can have two choices 
+#Real world investigation for the maze and
