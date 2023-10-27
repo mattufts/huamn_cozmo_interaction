@@ -10,9 +10,10 @@ from threading import Event
 import pycozmo
 
 
-SPEED_MMPS = 100.0
-ACCEL_MMPS2 = 20.0
-DECEL_MMPS2 = 20.0
+SPEED_MMPS  =  80.0
+ACCEL_MMPS2 =  20.0
+DECEL_MMPS2 =  20.0
+distance    =  254.0 
 
 e = Event()
 
@@ -43,21 +44,21 @@ with pycozmo.connect() as cli:
     while True:
         pkt = pycozmo.protocol_encoder.AppendPathSegLine(
             from_x=0.0, from_y=0.0,
-            to_x=150.0, to_y=0.0,
+            to_x=distance, to_y=0.0,
             speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
         cli.conn.send(pkt)
         pkt = pycozmo.protocol_encoder.AppendPathSegLine(
-            from_x=254.0, from_y=0.0,
-            to_x=254.0, to_y=254.0,
+            from_x=distance, from_y=0.0,
+            to_x=distance, to_y=distance,
             speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
         cli.conn.send(pkt)
         pkt = pycozmo.protocol_encoder.AppendPathSegLine(
-            from_x=254.0, from_y=254.0,
-            to_x=0.0, to_y=254.0,
+            from_x=distance, from_y=distance,
+            to_x=0.0, to_y=distance,
             speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
         cli.conn.send(pkt)
         pkt = pycozmo.protocol_encoder.AppendPathSegLine(
-            from_x=0.0, from_y=254.0,
+            from_x=0.0, from_y=distance,
             to_x=0.0, to_y=0.0,
             speed_mmps=SPEED_MMPS, accel_mmps2=ACCEL_MMPS2, decel_mmps2=DECEL_MMPS2)
         cli.conn.send(pkt)
