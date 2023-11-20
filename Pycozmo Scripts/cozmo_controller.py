@@ -1,3 +1,8 @@
+
+#This is a copy of older script that was designed for Cozmo SDK
+#It is copied here as reference but serves no purpose
+
+#It has since been adapted into PycozmoFSM_controller
 import cozmo
 import asyncio
 from cozmo.util import degrees, distance_mm, speed_mmps

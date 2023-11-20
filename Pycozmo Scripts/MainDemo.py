@@ -4,11 +4,11 @@
 #different sections in order to test the screen
 
 #The five scripts that this imports are:
-#maze_env.py
-#get_voice_command.py
-#PycozmoFSM.py
-#cozmo_controller.py
-#pycozmo
+    #maze_env.py
+    #get_voice_command.py
+    #PycozmoFSM.py
+    #cozmo_controller.py
+    #pycozmo
 
 import maze_env
 import get_voice_command
