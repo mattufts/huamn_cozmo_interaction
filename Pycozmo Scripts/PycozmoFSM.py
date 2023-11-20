@@ -1,5 +1,8 @@
-#This script needs to incorporate the pycozmo library
-#and is a rework of the AsyncFSM.py script 
+#This is the new Cozmo Controller script that will be used for the maze
+#It defines the robot's actions and robots expressions
+#It also defines the FSM states and the FSM execution function
+#This script is imported by the mazeFSM.py script
+ 
 import sys
 import os
 import pycozmo
