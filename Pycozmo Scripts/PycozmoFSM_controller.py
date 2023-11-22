@@ -28,7 +28,6 @@ duration = 2000
 
 # FSM state functions
 def act(robot: pycozmo.client, image_path):
-    
     angle_to_turn = Angle
     turn_angle(robot, angle_to_turn, image_path)
     
@@ -68,23 +67,23 @@ def move_forward(robot: pycozmo.Client, Distance: float, Speed: float):
 def show_image(cli, image_path):
     # Set the default image to neutral
     target_size = (128, 32)
-    default_image = "blank.png"
+    default_image = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/blank.png"
     # Change the expression based on what is in front
     img = None
     if front == "wall":
-        img = "Angry_Stop-01.png"
+        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/Angry_Stop-01.png"
         #img = "pycozmo.png"
     elif front == "nothing":
-        img = "neutral.png"
+        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
         #img = "pycozmo.png"
     elif front == "goal":
         #img = "happy-01.png"
-        img = "pycozmo.png"
+        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/pycozmo.png"
     elif front == "hit":
-        img = "sudden_hit-01.png"
+        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/sudden_hit-01.png"
         #img = "pycozmo.png"
     elif front == "left":
-        img = "glancing_left-01.png"
+        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/glancing_left-01.png"
         #img = "pycozmo.png"
     elif front == "right":
         img = "glancing_right-01.png"
@@ -94,7 +93,7 @@ def show_image(cli, image_path):
     if img is None:
         img = default_image
     
-    #image = Image.open(os.path.join(os.path.dirname(__file__), img)) # Open the image file
+    #image = Image.open(os.path.join(os.        path.dirname(__file__), img)) # Open the image file
     image_open = Image.open(image_path)
     image_resized = image_open.resize(target_size)
     img = image_resized.convert('1') 
@@ -105,9 +104,12 @@ def show_image(cli, image_path):
         if time.time() - start_time > 10.0:
             break
         cli.display_image(img)
+
+def update_state_and_image (cli, new_state):
+    global front
+    front = new_state
+    show_image(cli, new_state)
         
-
-
 
 # Define the FSM execution function
 def run_fsm(robot: pycozmo.client, image_path):
