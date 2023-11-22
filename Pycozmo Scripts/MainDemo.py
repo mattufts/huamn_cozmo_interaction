@@ -27,18 +27,18 @@ done = False
 
 #Defining the Keyboard Actions for Cozmo
 def get_keyboard_command():
-    command = input("Enter command (f = forward, l = left, r = right, q = quit): ")
-    if command == 'f':
+    command = input("Enter command (F = forward, L = left, R = right, Q = quit): ")
+    if command == 'F':
         return 'forward'
-    elif command == 'l':
+    elif command == 'L':
         return 'left'
-    elif command == 'r':
+    elif command == 'R':
         return 'right'
-    elif command == 'q':
+    elif command == 'Q':
         return 'quit'
     else:
         return 'invalid'
-    
+
 #Keyboard Controls For Cozmo   
 def run_with_cozmo(cli):
     env = maze_env.MazeEnv()
@@ -52,13 +52,28 @@ def run_with_cozmo(cli):
         elif command == 'invalid':
             print("Invalid command. Try again.")
             continue
+         # Set the angle, distance, and speed based on the command
+        if command == 'left':
+            set_ads(90, 0, 0)  # Example: turn 90 degrees left
+            front = 'left'
+        elif command == 'right':
+            set_ads(-90, 0, 0) # Example: turn 90 degrees right
+            front = 'right'
+        elif command == 'forward':
+            set_ads(0, 80, 50)  # Example: move forward 80 units at speed 50
+            front = 'forward'
+        else: 
+            continue
+        cozmo_controller.update_state_and_image(cli, front) 
 
-        # Map keyboard commands to actions expected by the FSM controller and maze environment
-        action = 0 if command == 'left' else 1 if command == 'right' else 2 if command == 'forward' else None
-        if action is not None:
-            state, reward, hit_wall, front, done, _ = env.step(action)
-            #update cozmo's state in the FSM controller and handle image changes
-            cozmo_controller.update_state_and_image(cli, front) 
+def main():
+    with pycozmo.connect() as cli:
+        cli.wait_for_robot()
+        run_with_cozmo(cli)
+
+if __name__ == '__main__':
+    main()
+
 #VoiceCommandScript
 # def run_with_cozmo(cli):
 #     global state, done
@@ -80,10 +95,10 @@ def run_with_cozmo(cli):
 #         print(state, reward, hit_wall, front, done)
 #         print(env.maze)
 
-def main():
-    with pycozmo.connect() as cli:
-        cli.wait_for_robot()
-        run_with_cozmo(cli)
+# def main():
+#     with pycozmo.connect() as cli:
+#         cli.wait_for_robot()
+#         run_with_cozmo(cli)
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

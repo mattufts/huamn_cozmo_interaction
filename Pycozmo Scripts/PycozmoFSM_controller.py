@@ -8,7 +8,6 @@ import sys
 import os
 import pycozmo
 import time 
-
 from pycozmo.util import Angle, Distance, Speed, Pose, Angle
 from pycozmo import protocol_encoder
 
@@ -25,79 +24,86 @@ Speed = 50
 front = None 
 duration = 2000
 
+#Define image library that maps states to image file names
+state_to_image = {  
+    "wall": "sudden_hit-01.png",
+    "nothing": "neutral.png",
+    "goal": "happy-01.png",
+    "hit": "sudden_hit-01.png",
+    "left": "glancing_left-01.png",
+    "right": "glancing_right-01.png"
+}
 
 # FSM state functions
 def act(robot: pycozmo.client, image_path):
+    global Angle, Distance, Speed
     angle_to_turn = Angle
-    turn_angle(robot, angle_to_turn, image_path)
+    turn_angle(robot, angle_to_turn)
     
     show_image(robot, image_path)
     
     distance_to_move = Distance
     speed_to_move = Speed
+
     print("Turning Angle: ", angle_to_turn)
     move_forward(robot, distance_to_move, speed_to_move)
     
-    
+# Original Explore State Script    
+# def explore_state(robot: pycozmo.client, image_path):
+#     print("Exploring...")
+#     angle_to_turn = Angle
+#     turn_angle(angle_to_turn)
+#     show_image(robot, image_path)
+#     distance_to_move = Distance
+#     speed_to_move = Speed
+#     print("Turning Angle: ", angle_to_turn)
+#     move_forward(robot, distance_to_move, speed_to_move)
+#     return "interact"
+
 def explore_state(robot: pycozmo.client, image_path):
-    print("Exploring...")
-    angle_to_turn = Angle
-    turn_angle(angle_to_turn)
-    show_image(robot, image_path)
-    distance_to_move = Distance
-    speed_to_move = Speed
-    print("Turning Angle: ", angle_to_turn)
-    move_forward(robot, distance_to_move, speed_to_move)
+    print("Exploring....")
+    act(robot, image_path)
     return "interact"
 
+# Original Interact State Script
+# def interact_state(robot: pycozmo.client, image_path):
+#     print("Interacting...")
+#     show_image(robot, image_path)
+#     time.sleep(3)
+#     return "explore"
+
 def interact_state(robot: pycozmo.client, image_path):
-    print("Interacting...")
-    show_image(robot, image_path)
-    time.sleep(3)
+    print ("Interacting....")
+    act(robot, image_path)
     return "explore"
 
 # Helper functions
-def turn_angle(Angle: float):
-    protocol_encoder.TurnInPlace(Angle)
+def turn_angle(robot: pycozmo.Client, angle: float):
+    if angle!=0:
+        robot.turn_in_place(angle).wait_for_completed()
+        print ("turning")
 
-def move_forward(robot: pycozmo.Client, Distance: float, Speed: float):
-    robot.drive_wheels(lwheel_speed=50.0, rwheel_speed=50.0, duration=5.0)
-    print ("Driving Straight")
-    
+def move_forward(robot: pycozmo.Client, distance: float, speed: float):
+    if distance !=0: 
+        #robot.drive_wheels(lwheel_speed=50.0, rwheel_speed=50.0, duration=5.0)
+        robot.drive_straight(distance_mm=distance, speed_mmps=speed).wait_for_completed()
+        print ("Driving Straight")
+
 def show_image(cli, image_path):
-    # Set the default image to neutral
+    # Set the target size for the image
     target_size = (128, 32)
-    default_image = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/blank.png"
-    # Change the expression based on what is in front
-    img = None
-    if front == "wall":
-        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/Angry_Stop-01.png"
-        #img = "pycozmo.png"
-    elif front == "nothing":
-        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
-        #img = "pycozmo.png"
-    elif front == "goal":
-        #img = "happy-01.png"
-        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/pycozmo.png"
-    elif front == "hit":
-        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/sudden_hit-01.png"
-        #img = "pycozmo.png"
-    elif front == "left":
-        img = "huamn_cozmo_interaction/Pycozmo Scripts/emoticons/glancing_left-01.png"
-        #img = "pycozmo.png"
-    elif front == "right":
-        img = "glancing_right-01.png"
-        #img = "pycozmo.png"
-    
-    # Use the default image if no other image is determined
-    if img is None:
-        img = default_image
-    
-    #image = Image.open(os.path.join(os.        path.dirname(__file__), img)) # Open the image file
+
+    # Check if the specified image path exists
+    if not os.path.exists(image_path):
+        print("Image file not found: {image_path}")
+        return
+
+    # Open, resize, and convert the image
     image_open = Image.open(image_path)
     image_resized = image_open.resize(target_size)
-    img = image_resized.convert('1') 
+    img = image_resized.convert('1')
 
+    # Display the image on Cozmo's screen
     start_time = time.time()
     cli.anim_controller.enable_animations(True)
     while True:
@@ -106,9 +112,12 @@ def show_image(cli, image_path):
         cli.display_image(img)
 
 def update_state_and_image (cli, new_state):
+    base_path = "/home/madhu/huamn_cozmo_interaction/Pycozmo Scripts/emoticons"
+    image_file = state_to_image.get(new_state,"neutral.png")
+    image_path = os.path.join(base_path, image_file)
     global front
     front = new_state
-    show_image(cli, new_state)
+    show_image(cli,image_path)
         
 
 # Define the FSM execution function
