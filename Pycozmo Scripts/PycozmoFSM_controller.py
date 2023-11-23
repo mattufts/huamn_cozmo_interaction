@@ -84,9 +84,9 @@ def turn_angle(robot: pycozmo.Client, angle: float):
         print ("turning")
 
 def move_forward(robot: pycozmo.Client, distance: float, speed: float):
-    if distance !=0: 
-        #robot.drive_wheels(lwheel_speed=50.0, rwheel_speed=50.0, duration=5.0)
-        robot.drive_straight(distance_mm=distance, speed_mmps=speed).wait_for_completed()
+    if speed > 0:
+        duration = distance / speed
+        robot.drive_wheels(lwheel_speed=speed, rwheel_speed=speed, duration=duration)
         print ("Driving Straight")
 
 def show_image(cli, image_path):
@@ -112,7 +112,7 @@ def show_image(cli, image_path):
         cli.display_image(img)
 
 def update_state_and_image (cli, new_state):
-    base_path = "/home/madhu/huamn_cozmo_interaction/Pycozmo Scripts/emoticons"
+    base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/emoticons"
     image_file = state_to_image.get(new_state,"neutral.png")
     image_path = os.path.join(base_path, image_file)
     global front
@@ -142,7 +142,7 @@ def main():
         #turn off "alive" animations for cozmo
         time.sleep(1)
         
-        image_path = os.path.join(os.path.dirname(__file__), "emoticons", "neutral.png")
+        image_path = os.path.join(os.path.dirname(__file__), "emoticons", "happy-01.png")
         run_fsm(cli, image_path)
         
         cli.wait_for_robot()

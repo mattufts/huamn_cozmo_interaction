@@ -2,6 +2,7 @@
 #DO NOT CHANGE THIS SCRIPT
 #This creates a maze environment that can be used to test the Pycozmo Controller
 
+
 import numpy as np
 import numpy as np
 import random
