@@ -44,7 +44,7 @@ def run_with_cozmo(cli):
     env = maze_env.MazeEnv()
     state = env.reset()
     done = False
-
+    print('Program is running')
     while not done:
         command = get_keyboard_command()
         if command == 'quit':
@@ -55,12 +55,15 @@ def run_with_cozmo(cli):
          # Set the angle, distance, and speed based on the command
         if command == 'left':
             set_ads(90, 0, 0)  # Example: turn 90 degrees left
+            cozmo_controller.turn_angle(cli, 90)
             front = 'left'
         elif command == 'right':
-            set_ads(-90, 0, 0) # Example: turn 90 degrees right
+            set_ads(-90, 0, 0)# Example: turn 90 degrees right
+            cozmo_controller.turn_angle(cli, -90)
             front = 'right'
         elif command == 'forward':
-            set_ads(0, 80, 50)  # Example: move forward 80 units at speed 50
+            set_ads(0, 80, 50)
+            cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
             front = 'forward'
         else: 
             continue
@@ -68,6 +71,8 @@ def run_with_cozmo(cli):
 
 def main():
     with pycozmo.connect() as cli:
+        head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians)/2.0
+        cli.set_head_angle(head_angle)
         cli.wait_for_robot()
         run_with_cozmo(cli)
 

@@ -79,9 +79,14 @@ def interact_state(robot: pycozmo.client, image_path):
 
 # Helper functions
 def turn_angle(robot: pycozmo.Client, angle: float):
-    if angle!=0:
-        robot.turn_in_place(angle).wait_for_completed()
-        print ("turning")
+    # You'll need to determine the appropriate wheel speeds and duration
+    # based on the desired angle and Cozmo's turning characteristics
+    speed = 30  # Example speed value
+    duration = abs(angle) / speed  # Example calculation for duration
+    if angle > 0:
+        robot.drive_wheels(lwheel_speed=speed, rwheel_speed=-speed, duration=duration)
+    elif angle < 0:
+        robot.drive_wheels(lwheel_speed=-speed, rwheel_speed=speed, duration=duration)
 
 def move_forward(robot: pycozmo.Client, distance: float, speed: float):
     if speed > 0:
@@ -118,7 +123,7 @@ def update_state_and_image (cli, new_state):
     global front
     front = new_state
     show_image(cli,image_path)
-        
+    print ("updated state")
 
 # Define the FSM execution function
 def run_fsm(robot: pycozmo.client, image_path):
