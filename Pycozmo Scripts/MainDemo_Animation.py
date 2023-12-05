@@ -13,6 +13,7 @@
 import maze_env
 #import get_voice_command
 import PycozmoFSM_controller as cozmo_controller
+from Call_Animation import display_images   #newly added 
 import pycozmo
 import os
 
@@ -24,6 +25,25 @@ def set_ads(angle, distance, speed):
 env = maze_env.MazeEnv()
 state = env.reset()
 done = False
+
+def handle_interaction (cli, interaction_type):
+    #Map interaction types to animation folders
+    animation_paths = {
+    "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
+    "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
+    "angry": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Angry",
+    "surprised": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Surprised",
+    "neutral": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking",
+    "left": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left",
+    "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
+    "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
+    }
+    base_path = animation_paths.get(interaction_type)
+    if base_path:
+        display_images (cli, base_path)
+    else:
+        print(f"No animation for interaction type: {interaction_type}")
+    
 
 #Defining the Keyboard Actions for Cozmo
 def get_keyboard_command():
@@ -39,43 +59,39 @@ def get_keyboard_command():
     else:
         return 'invalid'
 
-def show_neutral_image(cli):
-    neutral_image_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
-    cozmo_controller.show_image(cli, neutral_image_path)
-
 #Keyboard Controls For Cozmo   
 def run_with_cozmo(cli):
     env = maze_env.MazeEnv()
     state = env.reset()
     done = False
+    blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     print('Program is running')
+    
     while not done:
         command = get_keyboard_command()
-        # if command == 'quit':
-        #     break
-        # elif command == 'invalid':
-        #     print("Invalid command. Try again.")
-        #     continue
-        #  # Set the angle, distance, and speed based on the command
-        # if command == 'left':
-        #     set_ads(90, 0, 0)  # Example: turn 90 degrees left
-        #     cozmo_controller.turn_angle(cli, 90)
-        #     front = 'left'
-        # elif command == 'right':
-        #     set_ads(-90, 0, 0)# Example: turn 90 degrees right
-        #     cozmo_controller.turn_angle(cli, -90)
-        #     front = 'right'
-        # elif command == 'forward':
-        #     set_ads(0, 80, 50)
-        #     cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
-        #     front = 'forward'
-        if command in {'left', 'right', 'forward'}:
-            cozmo_controller.update_state_and_image(cli, command)
+        if command == 'quit':
+            break
+        elif command == 'invalid':
+            print("Invalid command. Try again.")
+            continue
+         # Set the angle, distance, and speed based on the command
+        if command == 'left':
+            set_ads(90, 0, 0)  # Example: turn 90 degrees left
+            cozmo_controller.turn_angle(cli, 90)
+            front = 'left'
+        elif command == 'right':
+            set_ads(-90, 0, 0)# Example: turn 90 degrees right
+            cozmo_controller.turn_angle(cli, -90)
+            front = 'right'
+        elif command == 'forward':
+            set_ads(0, 80, 50)
+            cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
+            front = 'forward'
         else: 
             #default to blinking
-            show_neutral_image(cli)
+            display_images(cli, blinking_path)
             continue
-        #cozmo_controller.update_state_and_image(cli, front) 
+        handle_interaction(cli, front) 
 
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
