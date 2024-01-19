@@ -11,6 +11,7 @@
     #pycozmo
 
 import maze_env
+import threading
 #import get_voice_command
 import PycozmoFSM_controller as cozmo_controller
 from Call_Animation import display_images   #newly added 
@@ -26,8 +27,18 @@ env = maze_env.MazeEnv()
 state = env.reset()
 done = False
 
-def handle_interaction (cli, interaction_type):
+
+
+def continuous_blinking(cli):
+    blinking_path = "/path/to/Blinking"
+    while True:  # Loop to continuously display blinking animation
+        display_images(cli, blinking_path)
+        # You might need a mechanism to break out of this loop when an event occurs
+
+
+def handle_interaction (cli, interaction_type):   
     #Map interaction types to animation folders
+    global ise_event_active
     animation_paths = {
     "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
     "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
@@ -38,11 +49,15 @@ def handle_interaction (cli, interaction_type):
     "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
     }
-    base_path = animation_paths.get(interaction_type)
-    if base_path:
-        display_images (cli, base_path)
+    if interaction_type == 'forward':
+        pass
     else:
-        print(f"No animation for interaction type: {interaction_type}")
+        base_path = animation_paths.get(interaction_type)
+        if base_path:
+            display_images (cli, base_path, repeat_duration=4)
+        else:
+            print(f"No animation for interaction type: {interaction_type}")
+        is_event_active = False #reest the flag once the animation has finished
     
 
 #Defining the Keyboard Actions for Cozmo
@@ -61,6 +76,10 @@ def get_keyboard_command():
 
 #Keyboard Controls For Cozmo   
 def run_with_cozmo(cli):
+    #run the blinking animation
+    blinking_thread = threading.Thread(target=continuous_blinking, args=(cli,))
+    blinking_thread.start()
+    
     env = maze_env.MazeEnv()
     state = env.reset()
     done = False
@@ -92,6 +111,8 @@ def run_with_cozmo(cli):
             display_images(cli, blinking_path)
             continue
         handle_interaction(cli, front) 
+        if is_event_active:
+            
 
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
