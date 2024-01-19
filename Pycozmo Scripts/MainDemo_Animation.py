@@ -30,7 +30,7 @@ done = False
 
 
 def continuous_blinking(cli):
-    blinking_path = "/path/to/Blinking"
+    blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     while True:  # Loop to continuously display blinking animation
         display_images(cli, blinking_path)
         # You might need a mechanism to break out of this loop when an event occurs
@@ -79,7 +79,6 @@ def run_with_cozmo(cli):
     #run the blinking animation
     blinking_thread = threading.Thread(target=continuous_blinking, args=(cli,))
     blinking_thread.start()
-    
     env = maze_env.MazeEnv()
     state = env.reset()
     done = False
@@ -111,8 +110,6 @@ def run_with_cozmo(cli):
             display_images(cli, blinking_path)
             continue
         handle_interaction(cli, front) 
-        if is_event_active:
-            
 
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
