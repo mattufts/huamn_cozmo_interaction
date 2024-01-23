@@ -40,7 +40,9 @@ def get_keyboard_command():
         return 'invalid'
 
 def show_neutral_image(cli):
-    neutral_image_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
+    #neutral_image_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
+    #for raspberry
+    neutral_image_path = "/home/matt_e/Documents/Github_Projects/HumanCozmoInteraction/huamn_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
     cozmo_controller.show_image(cli, neutral_image_path)
 
 #Keyboard Controls For Cozmo   
@@ -80,7 +82,7 @@ def run_with_cozmo(cli):
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians)/2.0
-        cli.set_head_angle(head_angle)
+        cli.set_head_angle(head_angle) 
         cli.wait_for_robot()
         run_with_cozmo(cli)
 
