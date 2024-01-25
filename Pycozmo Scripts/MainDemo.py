@@ -7,7 +7,7 @@
     #maze_env.py
     #get_voice_command.py
     #PycozmoFSM.py
-    #cozmo_controller.py
+    #Pycozmo_controller.py
     #pycozmo
 
 import maze_env
@@ -53,31 +53,31 @@ def run_with_cozmo(cli):
     print('Program is running')
     while not done:
         command = get_keyboard_command()
-        # if command == 'quit':
-        #     break
-        # elif command == 'invalid':
-        #     print("Invalid command. Try again.")
-        #     continue
-        #  # Set the angle, distance, and speed based on the command
-        # if command == 'left':
-        #     set_ads(90, 0, 0)  # Example: turn 90 degrees left
-        #     cozmo_controller.turn_angle(cli, 90)
-        #     front = 'left'
-        # elif command == 'right':
-        #     set_ads(-90, 0, 0)# Example: turn 90 degrees right
-        #     cozmo_controller.turn_angle(cli, -90)
-        #     front = 'right'
-        # elif command == 'forward':
-        #     set_ads(0, 80, 50)
-        #     cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
-        #     front = 'forward'
+        if command == 'quit':
+            break
+        elif command == 'invalid':
+            print("Invalid command. Try again.")
+            continue
+         # Set the angle, distance, and speed based on the command
+        if command == 'left':
+            set_ads(90, 0, 0)  # Example: turn 90 degrees left
+            cozmo_controller.turn_angle(cli, 90)
+            front = 'left'
+        elif command == 'right':
+            set_ads(-90, 0, 0)# Example: turn 90 degrees right
+            cozmo_controller.turn_angle(cli, -90)
+            front = 'right'
+        elif command == 'forward':
+            set_ads(0, 80, 50)
+            cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
+            front = 'forward'
         if command in {'left', 'right', 'forward'}:
             cozmo_controller.update_state_and_image(cli, command)
         else: 
             #default to blinking
             show_neutral_image(cli)
             continue
-        #cozmo_controller.update_state_and_image(cli, front) 
+        cozmo_controller.update_state_and_image(cli, front) 
 
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
@@ -88,6 +88,69 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+#==Pycozmo with Async Script==
+# import asyncio
+# import os
+# import maze_env
+# import PycozmoFSM_controller as cozmo_controller
+# import pycozmo
+
+# def set_ads(angle, distance, speed):  
+#     cozmo_controller.Angle = angle
+#     cozmo_controller.Distance = distance
+#     cozmo_controller.Speed = speed
+
+# env = maze_env.MazeEnv()
+# state = env.reset()
+# done = False
+
+# async def get_keyboard_command():
+#     loop = asyncio.get_running_loop()
+#     return await loop.run_in_executor(None, input, "Enter command (F = forward, L = left, R = right, Q = quit): ")
+
+# async def run_with_cozmo(cli):
+#     env = maze_env.MazeEnv()
+#     state = env.reset()
+#     done = False
+#     print('Program is running')
+
+#     while not done:
+#         command = await get_keyboard_command()  # Asynchronous input
+#         if command == 'quit':
+#             break
+#         elif command == 'invalid':
+#             print("Invalid command. Try again.")
+#             continue
+
+#         # Asynchronous execution of commands
+#         if command == 'left':
+#             set_ads(90, 0, 0)
+#             await cozmo_controller.turn_angle(cli, 90)
+#         elif command == 'right':
+#             set_ads(-90, 0, 0)
+#             await cozmo_controller.turn_angle(cli, -90)
+#         elif command == 'forward':
+#             set_ads(0, 80, 50)
+#             await cozmo_controller.move_forward(cli, 80, 50)
+
+#         # Update state and image
+#         if command in {'left', 'right', 'forward'}:
+#             await cozmo_controller.update_state_and_image(cli, command)
+#         else:
+#             # Default to blinking or neutral image
+#             await cozmo_controller.show_neutral_image(cli)
+
+# def main():
+#     with pycozmo.connect(enable_procedural_face=False) as cli:
+#         cli.set_head_angle((pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0)
+#         loop = asyncio.get_event_loop() 
+#         loop.run_until_complete(run_with_cozmo(cli))
+
+# if __name__ == '__main__':
+#     asyncio.run(main())
+
+
 
 #VoiceCommandScript
 # def run_with_cozmo(cli):
