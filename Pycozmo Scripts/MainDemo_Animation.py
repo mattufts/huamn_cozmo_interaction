@@ -12,7 +12,7 @@
 import maze_env
 import threading
 #import get_voice_command
-import PycozmoFSM_controller as cozmo_controller
+import PycozmoFSM_Animation as cozmo_controller
 from Call_Animation import display_images   #newly added 
 import pycozmo
 import os
@@ -37,7 +37,7 @@ def continuous_blinking(cli):
 
 def handle_interaction (cli, interaction_type):   
     #Map interaction types to animation folders
-    global ise_event_active
+    global is_event_active
     animation_paths = {
     "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
     "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
@@ -121,30 +121,4 @@ if __name__ == '__main__':
     main()
 
 #VoiceCommandScript
-# def run_with_cozmo(cli):
-#     global state, done
-#     while not done: # start loop 
-#         angle, distance, speed, action = get_voice_command.get_command_from_keyboard()
-#         print(action, type(action))
-#         state, reward, hit_wall, front, done, _ = env.step(action) 
-#         if hit_wall:
-#             set_ads(0, 10, 10) #angle distance and speed
-#             cozmo_controller.act(cli)
-#             set_ads(0, -10, 10)
-#             cozmo_controller.act(cli)
-#             cozmo_controller.front = "hit"
-#         else:    
-
-#             set_ads(angle, distance, speed)
-#             cozmo_controller.act(cli)
-#         cozmo_controller.front = front
-#         print(state, reward, hit_wall, front, done)
-#         print(env.maze)
-
-# def main():
-#     with pycozmo.connect() as cli:
-#         cli.wait_for_robot()
-#         run_with_cozmo(cli)
-
-# if __name__ == '__main__':
-#     main()
+#Removed temporarily 1/27/2024

@@ -1,3 +1,4 @@
+#Run animation once
 # import time
 # import os
 # from PIL import Image, ImageOps
@@ -53,6 +54,7 @@
 # if __name__ == '__main__':
 #     main()
 
+#Run Animation Repeatedly
 import time
 import os
 from PIL import Image, ImageOps
@@ -65,11 +67,16 @@ def display_images(cli, base_path, fps=30, repeat_duration=3):
     # List and count PNG files in the directory
     image_files = [f for f in os.listdir(base_path) if f.endswith('.png')]
     num_images = len(image_files)
-
+    
+    #calculate total loops needed based on repeat_duration
+    total_frames = repeat_duration * fps
+    total_loops = int(total_frames / len(image_files))
+    
     # Display each image in sequence
-    for file_name in sorted(image_files):
-        image_path = os.path.join(base_path, file_name)
-        display_resized_image(cli, image_path, frame_duration)
+    for _ in range (total_loops):
+        for file_name in sorted(image_files):
+            image_path = os.path.join(base_path, file_name)
+            display_resized_image(cli, image_path, frame_duration)
 
     # Repeat the last two images for an extra duration
     extra_time = 4.0
@@ -102,7 +109,8 @@ def main():
         time.sleep(2)
         anim_controller = AnimationController(cli)
         anim_controller.enable_animations(False)
-        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # Update with the path to your images
+        #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # Update with the path to your images
+        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # For use with iMac Pro
         display_images(cli, base_path, fps=30, repeat_duration=3)
 
 if __name__ == '__main__':
