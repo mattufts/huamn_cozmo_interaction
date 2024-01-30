@@ -29,20 +29,15 @@ env = maze_env.MazeEnv()
 state = env.reset()
 done = False
 
-
-
 def continuous_blinking(cli):
     blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
-    blinking_thread.start()
-    while True:  # Loop to continuously display blinking animation
+    while True:
         if animation_event.is_set():
-            #wait until the event is cleared to resume blinking
             animation_event.wait()
         display_images(cli, blinking_path)
 
 
-def handle_interaction (cli, interaction_type):   
-    #set the event to pause blinking
+def handle_interaction(cli, interaction_type):   
     animation_event.set()
     animation_paths = {
     "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
@@ -54,6 +49,7 @@ def handle_interaction (cli, interaction_type):
     "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
     }
+    animation_event.clear()
     base_path = animation_paths.get(interaction_type)
     if base_path:
         display_images(cli, base_path, repeat_duration = 4)
@@ -75,15 +71,13 @@ def get_keyboard_command():
         return 'invalid'
     
 def convert_command_to_action(command):
-    if command ==  'F':
-        return 2  # Assuming 2 represents forward in your maze environment
+    if command == 'F':
+        return 2  #  2 is the action for moving forward in MazeEnv
     elif command == 'L':
-        return 0  # Assuming 0 represents a left turn
+        return 0  # 0 is the action for turning left
     elif command == 'R':
-        return 1  # Assuming 1 represents a right turn
-    # Add more conditions if needed
+        return 1  #  1 is the action for turning right
     return None
-
 
 # Run Cozmo with updated behaviors
 def run_with_cozmo(cli):
@@ -95,15 +89,17 @@ def run_with_cozmo(cli):
 
     while not done:
         command = get_keyboard_command()
+        # Convert command to action for the maze environment
+        action = convert_command_to_action(command)
+         # Check if action is valid before proceeding
+        if action is not None:
+            state, reward, hit_wall, front, done, _ = env.step(action)
         if command == 'quit':
             break
         elif command == 'invalid':
             print("Invalid command. Try again.")
             continue
-        
-        # Convert command to action for the maze environment
-        action = convert_command_to_action(command)
-        
+ 
         # Update Cozmo's state in the maze
         state, reward, hit_wall, front, done, _ = env.step(action)
 
@@ -157,17 +153,19 @@ def is_cell_open(pos):
     # Check if the cell at pos is within bounds and open
     x, y = pos
     return 0 <= x < env.width and 0 <= y < env.height and env.maze[x][y] == 0
-
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0
         cli.set_head_angle(head_angle)
         cli.wait_for_robot()
-        run_with_cozmo(cli)
 
+        # Start the blinking thread
+        blinking_thread = threading.Thread(target=continuous_blinking, args=(cli,), daemon=True)
+        blinking_thread.start()
+
+        run_with_cozmo(cli)
 
 if __name__ == '__main__':
     main()
-
 #VoiceCommandScript
 #Removed temporarily 1/27/2024
