@@ -15,7 +15,7 @@ import threading
 import PycozmoFSM_Animation as cozmo_controller
 from PycozmoFSM_Animation import display_images   #newly added 
 import pycozmo
-import time
+import os
 
 #initialize threading event
 animation_event = threading.Event()
@@ -33,6 +33,7 @@ done = False
 
 def continuous_blinking(cli):
     blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
+    blinking_thread.start()
     while True:  # Loop to continuously display blinking animation
         if animation_event.is_set():
             #wait until the event is cleared to resume blinking
@@ -72,18 +73,26 @@ def get_keyboard_command():
         return 'quit'
     else:
         return 'invalid'
+    
+def convert_command_to_action(command):
+    if command ==  'F':
+        return 2  # Assuming 2 represents forward in your maze environment
+    elif command == 'L':
+        return 0  # Assuming 0 represents a left turn
+    elif command == 'R':
+        return 1  # Assuming 1 represents a right turn
+    # Add more conditions if needed
+    return None
 
-#Keyboard Controls For Cozmo   
+
+# Run Cozmo with updated behaviors
 def run_with_cozmo(cli):
-    #run the blinking animation
-    blinking_thread = threading.Thread(target=continuous_blinking, args=(cli,))
-    blinking_thread.start()
+    global env, state, done
     env = maze_env.MazeEnv()
     state = env.reset()
     done = False
-    blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     print('Program is running')
-    
+
     while not done:
         command = get_keyboard_command()
         if command == 'quit':
@@ -91,31 +100,71 @@ def run_with_cozmo(cli):
         elif command == 'invalid':
             print("Invalid command. Try again.")
             continue
-         # Set the angle, distance, and speed based on the command
-        if command == 'left':
-            set_ads(90, 0, 0)  # Example: turn 90 degrees left
-            cozmo_controller.turn_angle(cli, 90)
-            front = 'left'
-        elif command == 'right':
-            set_ads(-90, 0, 0)# Example: turn 90 degrees right
-            cozmo_controller.turn_angle(cli, -90)
-            front = 'right'
-        elif command == 'forward':
-            set_ads(0, 80, 50)
-            cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
-            front = 'forward'
-        else: 
-            #default to blinking
-            display_images(cli, blinking_path)
-            continue
-        handle_interaction(cli, front) 
+        
+        # Convert command to action for the maze environment
+        action = convert_command_to_action(command)
+        
+        # Update Cozmo's state in the maze
+        state, reward, hit_wall, front, done, _ = env.step(action)
+
+        if hit_wall:
+            # Cozmo hits a wall, play "Hurt" animation
+            handle_interaction(cli, "sad")
+        elif done:
+            # Cozmo reaches the end of the maze, play "Happy" animation
+            handle_interaction(cli, "happy")
+        elif action == 2 and can_move_left_or_right():
+            # Cozmo is moving forward and there is a path to the left or right
+            if is_path_left():
+                handle_interaction(cli, "left")
+            elif is_path_right():
+                handle_interaction(cli, "right")
+            else:
+                handle_interaction(cli, front)
+        else:
+            handle_interaction(cli, front)
+            
+def can_move_left_or_right():
+    # Get Cozmo's left and right directions based on current direction
+    left_dir, right_dir = get_left_right_dirs(env.current_dir)
+    
+    # Check if left or right cell is open
+    return is_cell_open(env.current_pos + left_dir) or is_cell_open(env.current_pos + right_dir)
+
+def is_path_left():
+    # Get Cozmo's left direction based on current direction
+    left_dir = get_left_right_dirs(env.current_dir)[0]
+    
+    # Check if left cell is open
+    return is_cell_open(env.current_pos + left_dir)
+
+def is_path_right():
+    # Get Cozmo's right direction based on current direction
+    right_dir = get_left_right_dirs(env.current_dir)[1]
+    
+    # Check if right cell is open
+    return is_cell_open(env.current_pos + right_dir)
+
+def get_left_right_dirs(current_dir):
+    # Define direction vectors
+    dir_map = {(0, 1): ((-1, 0), (1, 0)),  # Facing up
+               (1, 0): ((0, 1), (0, -1)),  # Facing right
+               (0, -1): ((1, 0), (-1, 0)), # Facing down
+               (-1, 0): ((0, -1), (0, 1))} # Facing left
+    return dir_map[tuple(current_dir)]
+
+def is_cell_open(pos):
+    # Check if the cell at pos is within bounds and open
+    x, y = pos
+    return 0 <= x < env.width and 0 <= y < env.height and env.maze[x][y] == 0
 
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
-        head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians)/2.0
+        head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0
         cli.set_head_angle(head_angle)
         cli.wait_for_robot()
         run_with_cozmo(cli)
+
 
 if __name__ == '__main__':
     main()
