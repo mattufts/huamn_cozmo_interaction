@@ -13,9 +13,12 @@ import maze_env
 import threading
 #import get_voice_command
 import PycozmoFSM_Animation as cozmo_controller
-from Call_Animation import display_images   #newly added 
+from PycozmoFSM_Animation import display_images   #newly added 
 import pycozmo
-import os
+import time
+
+#initialize threading event
+animation_event = threading.Event()
 
 def set_ads(angle, distance, speed):  
     cozmo_controller.Angle = angle
@@ -31,13 +34,15 @@ done = False
 def continuous_blinking(cli):
     blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     while True:  # Loop to continuously display blinking animation
+        if animation_event.is_set():
+            #wait until the event is cleared to resume blinking
+            animation_event.wait()
         display_images(cli, blinking_path)
-        # You might need a mechanism to break out of this loop when an event occurs
 
 
 def handle_interaction (cli, interaction_type):   
-    #Map interaction types to animation folders
-    global is_event_active
+    #set the event to pause blinking
+    animation_event.set()
     animation_paths = {
     "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
     "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
@@ -48,16 +53,11 @@ def handle_interaction (cli, interaction_type):
     "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
     }
-    if interaction_type == 'forward':
-        pass
-    else:
-        base_path = animation_paths.get(interaction_type)
-        if base_path:
-            display_images (cli, base_path, repeat_duration=4)
-        else:
-            print(f"No animation for interaction type: {interaction_type}")
-        is_event_active = False #reest the flag once the animation has finished
-    
+    base_path = animation_paths.get(interaction_type)
+    if base_path:
+        display_images(cli, base_path, repeat_duration = 4)
+   #clear the event to resume blinking
+        animation_event.clear()
 
 #Defining the Keyboard Actions for Cozmo
 def get_keyboard_command():

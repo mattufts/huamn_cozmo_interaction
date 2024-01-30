@@ -3,6 +3,8 @@
 #It also defines the FSM states and the FSM execution function
 #This script is imported by the main script
 #This script is based on the pycozmo_controller.py script
+
+#For use with Static Eyes and Static Icon Graphics
  
 import sys
 import os
@@ -162,11 +164,5 @@ if __name__ == '__main__':
 #Can the robot approximately follow a curved image
 #Can we have an option that allows us to only look at the robot?
 
-#Next step is to design the maze
-#IRB Training and Consent Form
-#Design the maze
-#dynamic multi choice environment 
-    #make sure that pycozmo maze can still work with separate agents and functionalize everything
-    
 #Robot can have two choices 
-#Real world investigation for the maze and
+#Real world investigation for the maze anid

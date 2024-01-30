@@ -15,7 +15,7 @@ def display_resized_image(cli, image_path):
         img = image_inverted.convert('1')
 
         cli.display_image(img)
-        time.sleep()
+        time.sleep(0.06)
     else:
         print(f"Image file not found: {image_path}")
 
