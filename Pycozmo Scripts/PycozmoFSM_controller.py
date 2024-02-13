@@ -158,7 +158,7 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
+
 #resolving cozmo's face
 #instead of making a square maze, can we make a curved like maze so that the robot has branching?
 #Can the robot approximately follow a curved image
