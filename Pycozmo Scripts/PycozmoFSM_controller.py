@@ -4,7 +4,7 @@
 #This script is imported by the main script
 #This script is based on the pycozmo_controller.py script
 
-#For use with Static Eyes and Static Icon Graphics
+#For use with STATIC IMAGES
  
 import sys
 import os

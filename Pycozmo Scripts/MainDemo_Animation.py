@@ -3,17 +3,18 @@
 #This shows the functionality together, but the code can be broken up into
 #different sections in order to test the screen
 
-#The five scripts that this imports are:
+#The scripts that MainDemo imports are:
     #maze_env.py
-    #get_voice_command.py
-    #PycozmoFSM.py
-    #Call_Animation
+    #PycozmoFSM_Animation.py
+    #path_planner for navigation
 
 import maze_env
 import threading
 #import get_voice_command
 import PycozmoFSM_Animation as cozmo_controller
-from PycozmoFSM_Animation import display_images   #newly added 
+from PycozmoFSM_Animation import display_images  
+from Call_Animation import execute_interaction_animation
+import path_planner
 import pycozmo
 import os
 
@@ -36,26 +37,16 @@ def continuous_blinking(cli):
             animation_event.wait()
         display_images(cli, blinking_path)
 
-
-def handle_interaction(cli, interaction_type):   
+def handle_interaction (cli, interaction_type):
+    #signal the start of an interaction animation_event
     animation_event.set()
-    animation_paths = {
-    "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
-    "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
-    "angry": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Angry",
-    "surprised": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Surprised",
-    "neutral": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking",
-    "left": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left",
-    "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
-    "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
-    }
-    animation_event.clear()
-    base_path = animation_paths.get(interaction_type)
-    if base_path:
-        display_images(cli, base_path, repeat_duration = 4)
-   #clear the event to resume blinking
-        animation_event.clear()
 
+    #Request the Call_animaiton script to execute the animation for the interaction
+    execute_interaction_animation(cli, interaction_type)
+    
+    #clear the event after the animation request to resume default behavior    
+    animation_event.clear()
+        
 #Defining the Keyboard Actions for Cozmo
 def get_keyboard_command():
     command = input("Enter command (F = forward, L = left, R = right, Q = quit): ")
@@ -169,3 +160,84 @@ if __name__ == '__main__':
     main()
 #VoiceCommandScript
 #Removed temporarily 1/27/2024
+
+#below is the original MainDemo script
+# import maze_env
+# #import get_voice_command
+# import PycozmoFSM_controller as cozmo_controller
+# import pycozmo
+# import os
+
+# def set_ads(angle, distance, speed):  
+#     cozmo_controller.Angle = angle
+#     cozmo_controller.Distance = distance
+#     cozmo_controller.Speed = speed
+
+# env = maze_env.MazeEnv()
+# state = env.reset()
+# done = False
+
+# #Defining the Keyboard Actions for Cozmo
+# def get_keyboard_command():
+#     command = input("Enter command (F = forward, L = left, R = right, Q = quit): ")
+#     if command == 'F':
+#         return 'forward'
+#     elif command == 'L':
+#         return 'left'
+#     elif command == 'R':
+#         return 'right'
+#     elif command == 'Q':
+#         return 'quit'
+#     else:
+#         return 'invalid'
+
+# def show_neutral_image(cli):
+#     #neutral_image_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
+#     #for raspberry
+#     neutral_image_path = "/home/matt_e/Documents/Github_Projects/HumanCozmoInteraction/huamn_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
+#     cozmo_controller.show_image(cli, neutral_image_path)
+
+# #Keyboard Controls For Cozmo   
+# def run_with_cozmo(cli):
+#     env = maze_env.MazeEnv()
+#     state = env.reset()
+#     done = False
+#     print('Program is running')
+#     while not done:
+#         command = get_keyboard_command()
+#         if command == 'quit':
+#             break
+#         elif command == 'invalid':
+#             print("Invalid command. Try again.")
+#             continue
+#          # Set the angle, distance, and speed based on the command
+#         if command == 'left':
+#             set_ads(90, 0, 0)  # Example: turn 90 degrees left
+#             cozmo_controller.turn_angle(cli, 90)
+#             front = 'left'
+#         elif command == 'right':
+#             set_ads(-90, 0, 0)# Example: turn 90 degrees right
+#             cozmo_controller.turn_angle(cli, -90)
+#             front = 'right'
+#         elif command == 'forward':
+#             set_ads(0, 80, 50)
+#             cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
+#             front = 'forward'
+#         if command in {'left', 'right', 'forward'}:
+#             cozmo_controller.update_state_and_image(cli, command)
+#         else: 
+#             #default to blinking
+#             show_neutral_image(cli)
+#             continue
+#         cozmo_controller.update_state_and_image(cli, front) 
+
+# def main():
+#     with pycozmo.connect(enable_procedural_face=False) as cli:
+#         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians)/2.0
+#         cli.set_head_angle(head_angle) 
+#         cli.wait_for_robot()
+#         run_with_cozmo(cli)
+
+# if __name__ == '__main__':
+#     main
+

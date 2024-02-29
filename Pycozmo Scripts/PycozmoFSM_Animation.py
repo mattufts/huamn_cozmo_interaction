@@ -1,8 +1,17 @@
 #FSM script to handle animation, movement and reactions
+#This is the new Cozmo Controller script that will be used for the maze
+#It defines the robot's actions and robots expressions
+#It also defines the FSM states and the FSM execution function
+
+#This script is imported by MainDemo_Animation script
+
+#The scripts that this imports are:
+    #Call_Animation
 
 import sys
 import os
 import pycozmo
+import Call_Animation
 import time
 from pycozmo.util import Angle, Distance, Speed
 from PIL import Image, ImageOps
@@ -69,47 +78,6 @@ def display_animation(cli, state):
     animation_folder = state_to_animation.get(state, "Blinking")
     animation_path = os.path.join(base_path, animation_folder)
     display_images(cli, animation_path)
-
-def display_images(cli, base_path, fps=30, repeat_duration=3):
-    frame_duration = 1.0 / fps  # Duration of each frame in seconds
-
-    # List and count PNG files in the directory
-    image_files = [f for f in os.listdir(base_path) if f.endswith('.png')]
-    num_images = len(image_files)
-    
-    #calculate total loops needed based on repeat_duration
-    total_frames = repeat_duration * fps
-    total_loops = int(total_frames / len(image_files))
-    
-    # Display each image in sequence
-    for _ in range (total_loops):
-        for file_name in sorted(image_files):
-            image_path = os.path.join(base_path, file_name)
-            display_resized_image(cli, image_path, frame_duration)
-
-    # Repeat the last two images for an extra duration
-    extra_time = 4.0
-    repeat_frames = int(extra_time / frame_duration)
-    last_two_images = sorted(image_files)[-2:]  # Get last two images
-    for _ in range(repeat_frames):
-        for file_name in last_two_images:
-            image_path = os.path.join(base_path, file_name)
-            display_resized_image(cli, image_path, frame_duration)
-            
-def display_resized_image(cli, image_path, duration):
-    target_size = (128, 32)
-
-    if os.path.exists(image_path):
-        image_open = Image.open(image_path)
-        image_resized = image_open.resize(target_size)
-        image_rgb = image_resized.convert('RGB')
-        image_inverted = ImageOps.invert(image_rgb)
-        img = image_inverted.convert('1')
-
-        cli.display_image(img)
-        time.sleep(duration)
-    else:
-        print(f"Image file not found: {image_path}")
 
 # Define the FSM execution function
 def run_fsm(robot: pycozmo.client):

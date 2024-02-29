@@ -2,13 +2,16 @@
 #This code utilizes maze environment.py and cozmo_controller.py to test the maze environment
 #This shows the functionality together, but the code can be broken up into
 #different sections in order to test the screen
+#Code implements the pycozmo library
 
 #The five scripts that this imports are:
     #maze_env.py
-    #get_voice_command.py
     #PycozmoFSM.py
     #Pycozmo_controller.py
-    #pycozmo
+    #navigation path
+
+#other scripts that aren't incorporated here but are still considered
+#get_voice_command.py
 
 import maze_env
 #import get_voice_command
@@ -89,68 +92,7 @@ def main():
 if __name__ == '__main__':
     main()
 
-#==Pycozmo with Async Script==
-# import asyncio
-# import os
-# import maze_env
-# import PycozmoFSM_controller as cozmo_controller
-# import pycozmo
-
-# def set_ads(angle, distance, speed):  
-#     cozmo_controller.Angle = angle
-#     cozmo_controller.Distance = distance
-#     cozmo_controller.Speed = speed
-
-# env = maze_env.MazeEnv()
-# state = env.reset()
-# done = False
-
-# async def get_keyboard_command():
-#     loop = asyncio.get_running_loop()
-#     return await loop.run_in_executor(None, input, "Enter command (F = forward, L = left, R = right, Q = quit): ")
-
-# async def run_with_cozmo(cli):
-#     env = maze_env.MazeEnv()
-#     state = env.reset()
-#     done = False
-#     print('Program is running')
-
-#     while not done:
-#         command = await get_keyboard_command()  # Asynchronous input
-#         if command == 'quit':
-#             break
-#         elif command == 'invalid':
-#             print("Invalid command. Try again.")
-#             continue
-
-#         # Asynchronous execution of commands
-#         if command == 'left':
-#             set_ads(90, 0, 0)
-#             await cozmo_controller.turn_angle(cli, 90)
-#         elif command == 'right':
-#             set_ads(-90, 0, 0)
-#             await cozmo_controller.turn_angle(cli, -90)
-#         elif command == 'forward':
-#             set_ads(0, 80, 50)
-#             await cozmo_controller.move_forward(cli, 80, 50)
-
-#         # Update state and image
-#         if command in {'left', 'right', 'forward'}:
-#             await cozmo_controller.update_state_and_image(cli, command)
-#         else:
-#             # Default to blinking or neutral image
-#             await cozmo_controller.show_neutral_image(cli)
-
-# def main():
-#     with pycozmo.connect(enable_procedural_face=False) as cli:
-#         cli.set_head_angle((pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0)
-#         loop = asyncio.get_event_loop() 
-#         loop.run_until_complete(run_with_cozmo(cli))
-
-# if __name__ == '__main__':
-#     asyncio.run(main())
-
-
+#async scripts deleted 2/29/24
 
 #VoiceCommandScript
 # def run_with_cozmo(cli):
