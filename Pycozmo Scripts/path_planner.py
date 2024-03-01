@@ -5,6 +5,7 @@ import keyboard
 import threading
 
 
+
 def find_shortest_path(maze, start, end):
     width, height = len(maze), len(maze[0])
     visited = [[False for _ in range(height)] for _ in range(width)]
@@ -103,6 +104,8 @@ while True:
         print("Next action:", action)
         mark_forward(path_maze, start_point, maze.current_dir)
         print(path_maze)
+        import time
+        time.sleep(1
         #smaze.step(action)
     else:
         print("Manual mode")

@@ -51,20 +51,19 @@ def display_resized_image(cli, image_path, duration):
         print(f"Image file not found: {image_path}")
 
 # Call_Animation.py
-
 def execute_interaction_animation(cli, interaction_type):
-   animation_paths = {
-    "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
-    "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
-    "angry": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Angry",
-    "surprised": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Surprised",
-    "neutral": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking",
-    "left": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left",
-    "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
-    "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
+    animation_paths = {
+        "happy": "Happy",
+        "sad": "Hurt",
+        "angry": "Angry",
+        "surprised": "Surprised",
+        "neutral": "Blinking",
+        "left": "Left",
+        "right": "Right",
+        "finished": "Successful"
     }
     # Get the relative base path for animations
-    base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/"
+    base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/"
     
     # Determine the full path for the specified interaction type
     animation_folder = animation_paths.get(interaction_type, "Blinking")
@@ -73,7 +72,6 @@ def execute_interaction_animation(cli, interaction_type):
     if full_path:
         # Call the function that handles the display of images
         display_images(cli, full_path, repeat_duration=4)
-
 
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:

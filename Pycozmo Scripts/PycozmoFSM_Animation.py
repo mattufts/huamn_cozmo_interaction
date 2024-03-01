@@ -11,7 +11,8 @@
 import sys
 import os
 import pycozmo
-import Call_Animation
+import Call_Animation as Call_Animation
+from Call_Animation import display_images
 import time
 from pycozmo.util import Angle, Distance, Speed
 from PIL import Image, ImageOps
@@ -24,12 +25,14 @@ front = None
 
 # State-to-animation mapping (Updated to use animation folders)
 state_to_animation = {
-    "wall": "AnimImages/Hurt",
-    "nothing": "AnimImages/Blinking",
-    "goal": "AnimImages/Happy",
-    "hit": "AnimImages/Hurt",
-    "left": "AnimImages/Left",
-    "right": "AnimImages/Right"
+    "wall": "Hurt",
+    "nothing": "Blinking",
+    "goal": "Happy",
+    "hit": "Hurt",
+    "left": "Left",
+    "right": "Right",
+    "alert": "Surprse",
+    "finish": "Successful"
 }
 
 # FSM state functions
@@ -63,7 +66,6 @@ def turn_angle(robot: pycozmo.Client, angle: float):
         robot.drive_wheels(lwheel_speed=speed, rwheel_speed=-speed, duration=duration)
     elif angle < 0:
         robot.drive_wheels(lwheel_speed=-speed, rwheel_speed=speed, duration=duration)
-
 
 def move_forward(robot: pycozmo.Client, distance: float, speed: float):
     if speed > 0:

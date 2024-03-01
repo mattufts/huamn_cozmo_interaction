@@ -6,38 +6,48 @@
 import numpy as np
 import numpy as np
 import random
-maze =[]
+maze =[[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+       [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+       [1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1],
+       [1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+       [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], 
+       [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1], 
+       [1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1], 
+       [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1], 
+       [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],   
+        ]
 # Define the maze dimensions
-def gen_maze():
-    global maze
-    width = 10
-    height = 10
+# def gen_maze():
+#     global maze
+#     width = 10
+#     height = 10
 
-    # Define the maze as a 2D array of zeros
-    maze = [[0 for y in range(height)] for x in range(width)]
+#     # Define the maze as a 2D array of zeros
+#     maze = [[0 for y in range(height)] for x in range(width)]
 
-    # Add walls to the maze
-    for x in range(width):
-        maze[x][0] = 1
-        maze[x][height-1] = 1
-    for y in range(height):
-        maze[0][y] = 1
-        maze[width-1][y] = 1
+#     # Add walls to the maze
+#     for x in range(width):
+#         maze[x][0] = 1
+#         maze[x][height-1] = 1
+#     for y in range(height):
+#         maze[0][y] = 1
+#         maze[width-1][y] = 1
 
-    # Add random obstacles to the maze
-    for i in range(20):  # Add 20 obstacles
-        x = random.randint(1, width-2)  # Choose a random x-coordinate
-        y = random.randint(1, height-2)  # Choose a random y-coordinate
-        maze[x][y] = 1  # Place an obstacle at the chosen location
+#     # Add random obstacles to the maze
+#     for i in range(20):  # Add 20 obstacles
+#         x = random.randint(1, width-2)  # Choose a random x-coordinate
+#         y = random.randint(1, height-2)  # Choose a random y-coordinate
+#         maze[x][y] = 1  # Place an obstacle at the chosen location
 
-    # Print the maze
-    for y in range(height):
-        for x in range(width):
-            print(maze[x][y], end="")
-        print()
+#     # Print the maze
+#     for y in range(height):
+#         for x in range(width):
+#             print(maze[x][y], end="")
+#         print()
 class MazeEnv:
     def __init__(self):
-        gen_maze()
+        #gen_maze()
         self.maze = np.array(maze)  # 2D array representing the maze
         self.height, self.width = self.maze.shape
         self.start_pos = np.array([1, 1])  # starting position
