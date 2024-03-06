@@ -6,16 +6,16 @@
 import numpy as np
 import numpy as np
 import random
-maze =[[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-       [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-       [1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1],
-       [1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1],
-       [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], 
-       [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1], 
-       [1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1], 
-       [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1], 
-       [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],   
+maze =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
+       [0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
+       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0], 
+       [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
+       [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
+       [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
         ]
 # Define the maze dimensions
 # def gen_maze():
@@ -50,7 +50,7 @@ class MazeEnv:
         #gen_maze()
         self.maze = np.array(maze)  # 2D array representing the maze
         self.height, self.width = self.maze.shape
-        self.start_pos = np.array([1, 1])  # starting position
+        self.start_pos = np.array([1, 1])  # starting position is at 1, 1 of the grid
         self.goal_pos = np.array([self.height - 1, self.width - 1])  # goal position
         self.current_pos = self.start_pos  # current position
         self.current_dir = np.array([0, 1])  # current direction (facing right)
@@ -77,7 +77,7 @@ class MazeEnv:
         reward = 0
         self.battery -= 10 # reduce battery level
         hit_wall = False
-        if action == 0:  # turn left
+        if action == 0:  # t0rn left
             if (self.current_dir == np.array([0, 1])).all():
                 self.current_dir = np.array([-1, 0])
             elif (self.current_dir == np.array([-1, 0])).all():

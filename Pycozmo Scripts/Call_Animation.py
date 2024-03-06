@@ -9,7 +9,7 @@ import pycozmo
 from pycozmo.anim_controller import AnimationController
 
 
-def display_images(cli, base_path, fps=30, repeat_duration=3):
+def display_images(cli, base_path, fps=30, repeat_duration=3, extra_time=4):
     frame_duration = 1.0 / fps  # Duration of each frame in seconds
 
     # List and count PNG files in the directory
@@ -27,7 +27,6 @@ def display_images(cli, base_path, fps=30, repeat_duration=3):
             display_resized_image(cli, image_path, frame_duration)
 
     # Repeat the last two images for an extra duration
-    extra_time = 4.0
     repeat_frames = int(extra_time / frame_duration)
     last_two_images = sorted(image_files)[-2:]  # Get last two images
     for _ in range(repeat_frames):
