@@ -7,6 +7,7 @@
     #maze_env.py
     #PycozmoFSM_Animation.py
     #path_planner for navigation
+#script that was worked on 3/5/2024
 
 import maze_env
 import threading
@@ -50,6 +51,16 @@ def continuous_blinking(cli):
 def handle_interaction (cli, interaction_type):
     #signal the start of an interaction animation_event
     animation_event.set()
+    animation_paths = {
+        "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
+        "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
+        "angry": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Angry",
+        "surprised": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Surprised",
+        "neutral": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking",
+        "left": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left",
+        "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
+        "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
+                    }
     #Request the Call_animaiton script to execute the animation for the interaction
     execute_interaction_animation(cli, interaction_type)
         #if the above doesn't work try to use this script:
@@ -58,6 +69,8 @@ def handle_interaction (cli, interaction_type):
             #display_images(cli, base_path=
     #clear the event after the animation request to resume default behavior    
     animation_event.clear()
+    base_path = animation_paths.get(interaction_type)
+    
         
 #Defining the Keyboard Actions for Cozmo
 def get_keyboard_command():
@@ -76,13 +89,13 @@ def get_keyboard_command():
         return 'invalid'
     
 def convert_command_to_action(command):
-    if command ==   'F':
+    if command ==   'forward':
         return 2  #  2 is the action for moving forward in MazeEnv
-    elif command == 'L':
+    elif command == 'left':
         return 0  # 0 is the action for turning left
-    elif command == 'R':
+    elif command == 'right':
         return 1  #  1 is the action for turning right
-    elif command == 'S': 
+    elif command == 'stop': 
         return 3
     return None
 
@@ -106,6 +119,8 @@ def run_with_cozmo(cli):
         elif command == 'invalid':
             print("Invalid command. Try again.")
             continue
+        
+        state, hit_wall, front, done, _ = env.step(action)
  
         if command == 'left':
             set_ads(90, 0, 0)  # Example: turn 90 degrees left
@@ -123,13 +138,10 @@ def run_with_cozmo(cli):
             set_ads(0, 0, 0)
             cozmo_controller.move_forward(cli,00, 00)
             front = 'stop'
-        if command in {'left', 'right', 'forward'}:
-            cozmo_controller.update_state_and_image(cli, command)
         else: 
             #default to blinking
             continuous_blinking(cli)
             continue
-        cozmo_controller.update_state_and_image(cli, front) 
 
         if hit_wall:
             # Cozmo hits a wall, play "Hurt" animation
@@ -192,32 +204,12 @@ def main():
         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0
         cli.set_head_angle(head_angle)
         cli.wait_for_robot()
-
         # Start the blinking thread
         blinking_thread = threading.Thread(target=continuous_blinking, args=(cli,), daemon=True)
         blinking_thread.start()
         
         front = 'stop'
-        #Control Logic: 
-            ##As soon as MainDemo_Animation is started: Cozmo will start in "STOP" mode
-            ##If the user sends a keyboard command the the following will happen:
-                ##if command is 'Left' or 'Right', Cozmo will rotate until position is achieved and then stop in "STOP" mode
-                ##If command is 'Forward', cozmo will continue moving forward continuously, until
-                    ##user issues a directional command "Left" or "Right"
-                    ##user issues a 'Stop' command
-            ##If the robot is in "STOP" mode
-                ##Robot will stop moving + default animation is played + countdown timer is started
-                #after 5 seconds, TimeOut flag is raised
-                ##If cozmo is currently in STOP mode and TimeOut flag is raised:
-                    ##Cozmo will switch to  "automatic" mode and start moving according to path planner (TimeOut flag is lowered)
-                    ##Under path planner, the robot will be moving automatically towards its goal and will not stop until
-                    ##the participant has issued "Stop" command
-                    ##after which timer is restarted 
-            ##If the robot has hit a wall, then Cozmo will be put in "STOP" mode for 3 seconds, and HitWall animation will play
-                ##after 3 seconds, cozmo will start moving according to path_planner
-            ##If Cozmo has hit a hazard, then Cozmo will be put in "STOP" mode for 3 seconds, and Hazard animation will play
-                ##after 3 seconds, cozmo will start moving according to path_planner
-     
+    
         run_with_cozmo(cli)
 
 if __name__ == '__main__':
