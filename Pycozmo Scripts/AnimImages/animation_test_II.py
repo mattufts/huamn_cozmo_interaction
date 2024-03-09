@@ -15,12 +15,12 @@ def display_resized_image(cli, image_path):
         img = image_inverted.convert('1')
 
         cli.display_image(img)
-        time.sleep(0.06)
+        #time.sleep(0.01) #the time here dictates whether cozmo's face will blend into other animations
     else:
         print(f"Image file not found: {image_path}")
 
-def display_images(cli, base_path, fps=20):
-    frame_duration = 1.0 / fps
+def display_images(cli, base_path, fps=10):
+    #frame_duration = 1.0 / fps
 
     image_files = sorted([f for f in os.listdir(base_path) if f.endswith('.png')])
 
@@ -37,7 +37,7 @@ def main():
         time.sleep(2)
      
 
-        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
+        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left"
         display_images(cli, base_path)
 
 

@@ -81,7 +81,7 @@ def main():
         anim_controller.enable_animations(False)
         #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # Update with the path to your images
         base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # For use with iMac Pro
-        display_images(cli, base_path, fps=30, repeat_duration=3)
+        display_images(cli, base_path, fps=30, repeat_duration=100)
 
 if __name__ == '__main__':
     main()
