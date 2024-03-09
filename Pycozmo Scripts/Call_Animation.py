@@ -49,7 +49,7 @@ def display_images(cli, base_path, fps=30, repeat_duration=3, extra_time=4):
             image_path = os.path.join(base_path, file_name)
             display_resized_image(cli, image_path, frame_duration)
 
-def display_resized_image(cli, image_path, duration):
+def display_resized_image(cli, image_path, duration = 1):
     target_size = (128, 32)
 
     if os.path.exists(image_path):

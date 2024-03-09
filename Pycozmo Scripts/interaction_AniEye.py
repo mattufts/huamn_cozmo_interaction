@@ -137,14 +137,14 @@ def keyboard_listener():
     global mode
     global env
     while True:
-        time.sleep(0.1)
+        #time.sleep(0.1)
         if keyboard.is_pressed('p'):
             if mode == 'automatic':
                 mode = 'manual'
-                #print("Manual Mode")
+                print("Swiched to Manual Mode")
             else:
                 mode = 'automatic'
-                #print("Automatic Mode")
+                print("Swiched to Automatic Mode")
         if keyboard.is_pressed('m') and mode == 'manual':
             path_planner.mark_forward(env.nav_maze, env.current_pos, env.current_dir)
         if keyboard.is_pressed('c') and mode == 'manual':
@@ -186,7 +186,7 @@ def run_with_cozmo(cli):
             # Set up a thread to wait for input
             user_input = [None]
             start_time = time.time()
-            print("Please input your command via keyboard.")
+            print("\n\n\n\n Please input your command via keyboard.\n\n\n\n")
             while time.time() - start_time < 5:
                 if keyboard.is_pressed('f'):
                     user_input[0] = 'forward'
@@ -205,6 +205,7 @@ def run_with_cozmo(cli):
                     break
                 if keyboard.is_pressed('p'):
                     mode = 'automatic'
+                    print("Swiched to Automatic Mode")
                     break
             respond_time.append(time.time() - start_time)
 

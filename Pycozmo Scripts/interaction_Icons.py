@@ -18,12 +18,23 @@ import PycozmoFSM_controller as cozmo_controller
 #from path_planner import find_shortest_path, determine_next_action, mark_forward
 import pycozmo
 import os
-from PIL 
+import PIL
 import time
+import Call_Animation
+from gtts import gTTS
+import os
 
+text_to_say = "Hello, this is a test of Google Text-to-Speech in Python."
+language = 'en'
+
+speech = gTTS(text=text_to_say, lang=language, slow=False)
+
+speech.save("output.mp3")
+
+os.system("start output.mp3") 
 
 #initialize threading event
-display_event = threading.Event()
+
 
 def set_ads(angle, distance, speed):  
     cozmo_controller.Angle = angle
@@ -47,17 +58,19 @@ def show_neutral_image(cli):
         if display_flag:
             #display_animation(cli, blinking_path)
             #start =  time.time()
-            cozmo_controller.show_neutral_image(cli, neutral_image_path)
+            #cozmo_controller.show_neutral_image(cli, neutral_image_path)
+            Call_Animation.display_resized_image(cli, neutral_image_path)
             #print("time_cost:", time.time()-start)
             #print("display_flag: ",display_flag)
             #should be the duration of the animation + extra time
             #<--- play with this time and adjust
+            #time.sleep(1)
             time.sleep(1)
         #print("display_flag: ",display_flag)
 
 def handle_interaction (cli, interaction_type):
     #signal the start of an interaction animation_event
-    animation_event.set()
+
     # animation_paths = {
     #     "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
     #     "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
@@ -68,25 +81,28 @@ def handle_interaction (cli, interaction_type):
     #     "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
     #     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
     #                 }
+
+
+        #     "angry" : "human_cozmo_interaction/Icon Images/stopping.png",
+        # "happy" : "human_cozmo_interaction/Icon Images/check_mark.png",
+        # "sad" : "human_cozmo_interaction/Icon Images/injured.png",
+        # "surprised" : "human_cozmo_interaction/Icon Images/Alert_icon.png",
+        # "neutral" : "human_cozmo_interaction/Icon Images/blank.png",
+        # "left" : "human_cozmo_interaction/Icon Images/Notice_Left.png",
+        # "right" : "human_cozmo_interaction/Icon Images/Notice_Right.png",
+        # "finished" : "human_cozmo_interaction/Icon Images/finsih_flag"
     state_to_image = {
-        "angry" : "human_cozmo_interaction/Icon Images/stopping.png",
-        "happy" : "human_cozmo_interaction/Icon Images/check_mark.png",
-        "sad" : "human_cozmo_interaction/Icon Images/injured.png",
-        "surprised" : "human_cozmo_interaction/Icon Images/Alert_icon.png",
-        "neutral" : "human_cozmo_interaction/Icon Images/blank.png",
-        "left" : "human_cozmo_interaction/Icon Images/Notice_Left.png",
-        "right" : "human_cozmo_interaction/Icon Images/Notice_Right.png",
-        "finished" : "human_cozmo_interaction/Icon Images/finsih_flag"
+        "angry" : "Icon Images/stopping.png",
+        "happy" : "Icon Images/check_mark.png",
+        "sad" : "Icon Images/injured.png",
+        "surprised" : "Icon Images/Alert_icon.png",
+        'neutral' : "Icon Images/blank.png",
+        "left" : "Icon Images/Notice_Left.png",
+        "right" : "Icon Images/notice_Right.png",
+        "finished" : "Icon Images/finsih_flag.png"
     }
-    #Request the Call_animaiton script to execute the animation for the interaction
-    execute_interaction_animation(cli, interaction_type)
-        #if the above doesn't work try to use this script:
-        #base_path = animation_paths.get(interaction_type)
-        #if base_path:
-            #display_images(cli, base_path=
-    #clear the event after the animation request to resume default behavior    
-    animation_event.clear()
-    base_path = state_to_image.get(interaction_type)
+    Call_Animation.display_resized_image(cli, state_to_image[interaction_type])
+
     
         
 #Defining the Keyboard Actions for Cozmo
@@ -141,10 +157,10 @@ def keyboard_listener():
         if keyboard.is_pressed('p'):
             if mode == 'automatic':
                 mode = 'manual'
-                #print("Manual Mode")
+                print("Swiched to Manual Mode")
             else:
                 mode = 'automatic'
-                #print("Automatic Mode")
+                print("Swiched to Automatic Mode")
         if keyboard.is_pressed('m') and mode == 'manual':
             path_planner.mark_forward(env.nav_maze, env.current_pos, env.current_dir)
         if keyboard.is_pressed('c') and mode == 'manual':
@@ -164,7 +180,7 @@ def run_with_cozmo(cli):
     front = 'nothing'
     print('Program is running')
 
-
+    icon_display_time = 3
     user_id = "_test" # change it everytime when you have a new participant
 
 
@@ -175,7 +191,8 @@ def run_with_cozmo(cli):
     listener_thread.start()
     while not done:
         print("you can press p to swich now, current mode: ", mode)
-        time.sleep(1)
+        if mode == 'automatic':
+            time.sleep(3)
 ######################## choose action ############################
         print(mode)
         hit_wall = False
@@ -186,7 +203,7 @@ def run_with_cozmo(cli):
             # Set up a thread to wait for input
             user_input = [None]
             start_time = time.time()
-            print("Please input your command via keyboard.")
+            print("\n\n\n\n Please input your command via keyboard.\n\n\n\n")
             while time.time() - start_time < 5:
                 if keyboard.is_pressed('f'):
                     user_input[0] = 'forward'
@@ -205,6 +222,7 @@ def run_with_cozmo(cli):
                     break
                 if keyboard.is_pressed('p'):
                     mode = 'automatic'
+                    print("Swiched to Automatic Mode")
                     break
             respond_time.append(time.time() - start_time)
 
@@ -273,14 +291,14 @@ def run_with_cozmo(cli):
         if hit_wall:
             # Cozmo hits a wall, play "Hurt" animation
             display_flag = False
-            time.sleep(1)
             handle_interaction(cli, "sad")
+            time.sleep(icon_display_time)
             display_flag = True
         
         if env.health <= 0:
             display_flag = False
-            time.sleep(1)
             handle_interaction(cli, "angry")
+            time.sleep(icon_display_time)
             display_flag = True
             break
         
@@ -292,18 +310,18 @@ def run_with_cozmo(cli):
         # display animation based on the next action
         if next_action == 0:
             display_flag = False
-            time.sleep(1)
             handle_interaction(cli,"left")
+            time.sleep(icon_display_time)
             display_flag = True
         if next_action == 1:
             display_flag = False
-            time.sleep(1)
             handle_interaction(cli,"right")
+            time.sleep(icon_display_time)
             display_flag = True
         if next_action == 2:
             display_flag = False
-            time.sleep(1)
             handle_interaction(cli, "happy")
+            time.sleep(icon_display_time)
             display_flag = True
 
 
@@ -361,8 +379,10 @@ def main():
         cli.set_head_angle(head_angle)
         cli.wait_for_robot()
         # Start the blinking thread
-        neutral_thread=os.path.join(os.path.dirname(__file__), "emoticons", "blank.png")
-        blinking_thread.start()
+        #neutral_thread=os.path.join(os.path.dirname(__file__), "emoticons", "blank.png")
+        #blinking_thread.start()
+        neutral_thread = threading.Thread(target=show_neutral_image, args=(cli,))
+        neutral_thread.start()
         
         front = 'stop'
     

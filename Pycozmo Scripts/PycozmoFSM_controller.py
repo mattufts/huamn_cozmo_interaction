@@ -101,7 +101,7 @@ def show_image(cli, image_path):
             break
         cli.display_image(img)
 
-def display_image
+# def display_image
 
 
 
