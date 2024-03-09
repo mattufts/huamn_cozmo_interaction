@@ -137,6 +137,7 @@ def keyboard_listener():
     global mode
     global env
     while True:
+        time.sleep(0.1)
         if keyboard.is_pressed('p'):
             if mode == 'automatic':
                 mode = 'manual'
@@ -173,6 +174,8 @@ def run_with_cozmo(cli):
     listener_thread = threading.Thread(target=keyboard_listener, daemon=True)
     listener_thread.start()
     while not done:
+        print("you can press p to swich now")
+        time.sleep(1)
 ######################## choose action ############################
         print(mode)
         hit_wall = False
