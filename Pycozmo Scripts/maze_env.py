@@ -10,8 +10,8 @@ maze =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
        [0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0], 
+       [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0], 
+       [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], 
        [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
@@ -58,7 +58,7 @@ class MazeEnv:
         self.goal_pos = np.array([4,12]) # end point
         self.done = False  # episode termination flag
         self.battery = 100 # battery level, not sure how to use it right now 
-        self.heath = 100
+        self.health = 100
     def reset(self):
         self.current_pos = self.start_pos
         self.current_dir = np.array([0, 1])  # facing right, maybe all directions should be relative
@@ -69,12 +69,14 @@ class MazeEnv:
         new_pos = self.current_pos + self.current_dir
         if not ((new_pos >= [0, 0]).all() and (new_pos < [self.height, self.width]).all()):
             return "out_of_bounds"
-        if (self.current_pos == self.goal_pos).all():
-            return "goal"
+        # if (self.current_pos == self.goal_pos).all():
+        #     return "goal"
         if self.maze[tuple(new_pos)] == 0: 
             return "nothing"
         if self.maze[tuple(new_pos)] == 1: 
             return "wall"
+        if self.maze[tuple(new_pos)] == 2: 
+            return "fire"
         
     def step(self, action):
         # action is an integer: 0 = turn left, 1 = turn right, 2 = go forward

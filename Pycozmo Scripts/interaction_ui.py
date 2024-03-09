@@ -231,23 +231,38 @@ def run_with_cozmo(cli):
         if command == 'left':
             set_ads(90, 0, 0)  # Example: turn 90 degrees left
             cozmo_controller.turn_angle(cli, -75)
-            front = 'left'
-        elif command == 'right':
+
+        if command == 'right':
             set_ads(-90, 0, 0)# Example: turn 90 degrees right
             cozmo_controller.turn_angle(cli, 75)
-            front = 'right'
-        elif command == 'forward':
+
+        if command == 'forward' and front == "nothing":
             set_ads(0, 80, 50)
             cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
-            front = 'forward'
-        elif command == 'stop':
+        
+        if command == 'forward' and front != "nothing":
+            set_ads(0, 10, 10)
+            cozmo_controller.move_forward(cli, 10, 10)
+            set_ads(0, -10, 10)
+            cozmo_controller.move_forward(cli, -10, 10)
+            #cozmo_controller.front = front
+            handle_interaction(cli, 'sad')
+
+
+        if command == 'stop':
             set_ads(0, 0, 0)
             cozmo_controller.move_forward(cli,00, 00)
-            front = 'stop'
-        else: 
-            #default to blinking
-            continuous_blinking(cli)
-            continue
+
+
+        if front == "wall" and hit_wall == True:
+            env.health = -20
+
+        if front == "fire" and hit_wall == True:
+            env.health = -50
+
+        if env.health <= 0:
+            done = 'dead'
+
 
         # if hit_wall:
         #     # Cozmo hits a wall, play "Hurt" animation
