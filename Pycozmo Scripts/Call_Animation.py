@@ -62,7 +62,8 @@ def execute_interaction_animation(cli, interaction_type):
         "finished": "Successful"
     }
     # Get the relative base path for animations
-    base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/"
+    #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/"
+    base_path = "Pycozmo Scripts/AnimImages"
     
     # Determine the full path for the specified interaction type
     animation_folder = animation_paths.get(interaction_type, "Blinking")
@@ -80,8 +81,9 @@ def main():
         anim_controller = AnimationController(cli)
         anim_controller.enable_animations(False)
         #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # Update with the path to your images
-        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # For use with iMac Pro
-        display_images(cli, base_path, fps=30, repeat_duration=100)
+        #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # For use with iMac Pro
+        base_path = "Pycozmo Scripts/AnimImages/Blinking"
+        display_images(cli, base_path, fps=30, repeat_duration=3)
 
 if __name__ == '__main__':
     main()

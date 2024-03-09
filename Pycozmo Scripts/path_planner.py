@@ -12,19 +12,17 @@ def find_shortest_path(maze, start, end):
     move_directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]  # Right, left, down, up
     q = queue.Queue()
     q.put((start, [start]))  # (current position, path taken to reach here)
-
     while not q.empty():
         current_pos, path = q.get()
         x, y = current_pos
-
-        if current_pos == end:
+        if current_pos[0] == end[0] and current_pos[1] == end[1]:
             # Return the next move to make from the start
             return path[1] if len(path) > 1 else start
 
         for move in move_directions:
             next_x, next_y = x + move[0], y + move[1]
 
-            if 0 <= next_x < width and 0 <= next_y < height and not maze[next_x][next_y] and not visited[next_x][next_y]:
+            if 0 < next_x < width and 0 < next_y < height and maze[next_x][next_y] == 0 and not visited[next_x][next_y]:
                 visited[next_x][next_y] = True
                 new_path = list(path)
                 new_path.append((next_x, next_y))
@@ -39,22 +37,41 @@ def determine_next_action(start_point, next_move, current_direction):
         (0, -1): {"left": 1, "right": 0, "forward": 2}, # Facing left
         (-1, 0): {"left": 0, "right": 1, "forward": 2}, # Facing up
     }
-    
+    # 0 left 1 right, 2 forward
     # Calculate the required move direction to get to the next move
     move_direction = (next_move[0] - start_point[0], next_move[1] - start_point[1])
     
     # Determine the action based on the current direction and the move direction
+    print(move_direction, current_direction)
     if move_direction == current_direction:
         return direction_to_action[tuple(current_direction)]["forward"]
-    elif move_direction == (-current_direction[1], current_direction[0]):
-        return direction_to_action[tuple(current_direction)]["left"]
-    elif move_direction == (current_direction[1], -current_direction[0]):
-        return direction_to_action[tuple(current_direction)]["right"]
     else:
+        if current_direction == (0, 1) and move_direction == (1, 0):
+            return 1
+        if current_direction == (0, 1) and move_direction == (-1, 0):
+            return 0
+        
+        if current_direction == (0, -1) and move_direction == (1, 0):
+            return 0
+        if current_direction == (0, -1) and move_direction == (-1, 0):
+            return 1
+        
+
+        if current_direction == (1, 0) and move_direction == (0, 1):
+            return 0
+        if current_direction == (1, 0) and move_direction == (0, -1):
+            return 1
+        
+
+        if current_direction == (-1, 0) and move_direction == (0, 1):
+            return 1
+        if current_direction == (-1, 0) and move_direction == (0, -1):
+            return 0
+
         if random.choice([0, 1]):
-            return direction_to_action[tuple(current_direction)]["left"]
+            return 0
         else:
-            return direction_to_action[tuple(current_direction)]["right"]
+            return 1
     
 def mark_forward(maze, current_position, current_direction, marker = 2):
 
@@ -83,32 +100,32 @@ def listen_for_mode_toggle():
     keyboard.add_hotkey('s', toggle_mode)
     keyboard.wait()
 
-# Example usage:
-maze = maze_env.MazeEnv() # Generates the maze and stores it in the global 'maze' variable
-path_maze = maze .maze.copy()
-start_point = (3, 1)  # Assuming top-left corner is the start (not a wall)
-end_point = (8, 7)  # Assuming bottom-right corner is the goal (modify as needed)
-Mode = "Auto"
-listener_thread = threading.Thread(target=listen_for_mode_toggle, daemon=True)
-listener_thread.start()
+# # Example usage:
+# maze = maze_env.MazeEnv() # Generates the maze and stores it in the global 'maze' variable
+# path_maze = maze .maze.copy()
+# start_point = (3, 1)  # Assuming top-left corner is the start (not a wall)
+# end_point = (8, 7)  # Assuming bottom-right corner is the goal (modify as needed)
+# Mode = "Auto"
+# listener_thread = threading.Thread(target=listen_for_mode_toggle, daemon=True)
+# listener_thread.start()
 
-while True:
-    if Mode == "Auto":
-        print("Auto mode")
-    else:
-        print("Manual mode")
-    if Mode == "Auto":
-        next_move = find_shortest_path(path_maze, start_point, end_point)
-        print("Next move:", next_move)
-        action = determine_next_action(start_point, next_move, tuple(maze.current_dir))
-        print("Next action:", action)
-        mark_forward(path_maze, start_point, maze.current_dir)
-        print(path_maze)
-        import time
-        time.sleep(1
-        #smaze.step(action)
-    else:
-        print("Manual mode")
-        action = input("Enter action: ")
-        #maze.step(int(action))
-        break
+# while True:
+#     if Mode == "Auto":
+#         print("Auto mode")
+#     else:
+#         print("Manual mode")
+#     if Mode == "Auto":
+#         next_move = find_shortest_path(path_maze, start_point, end_point)
+#         print("Next move:", next_move)
+#         action = determine_next_action(start_point, next_move, tuple(maze.current_dir))
+#         print("Next action:", action)
+#         mark_forward(path_maze, start_point, maze.current_dir)
+#         print(path_maze)
+#         import time
+#         time.sleep(1
+#         #smaze.step(action)
+#     else:
+#         print("Manual mode")
+#         action = input("Enter action: ")
+#         #maze.step(int(action))
+#         break
