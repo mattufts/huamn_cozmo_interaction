@@ -15,7 +15,7 @@ def display_resized_image(cli, image_path):
         img = image_inverted.convert('1')
 
         cli.display_image(img)
-        #time.sleep(0.01) #the time here dictates whether cozmo's face will blend into other animations
+        time.sleep(0.01) #the time here dictates whether cozmo's face will blend into other animations
     else:
         print(f"Image file not found: {image_path}")
 
@@ -37,7 +37,8 @@ def main():
         time.sleep(2)
      
 
-        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left"
+        #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left"
+        base_path = '/home/matt_e/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Idle'
         display_images(cli, base_path)
 
 

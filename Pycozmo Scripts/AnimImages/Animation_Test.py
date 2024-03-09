@@ -178,7 +178,8 @@ def main():
         anim_controller = AnimationController(cli)
         anim_controller.enable_animations(False)
 
-        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt"
+        #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt"
+        base_path = '/home/matt_e/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt'
         images = preload_images(base_path)
         display_animation(cli, anim_controller, images)
 
