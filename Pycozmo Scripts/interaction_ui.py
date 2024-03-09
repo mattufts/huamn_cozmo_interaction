@@ -200,6 +200,9 @@ def run_with_cozmo(cli):
                 if keyboard.is_pressed('q'):
                     user_input[0] = 'quit'
                     break
+                if keyboard.is_pressed('p'):
+                    mode = 'automatic'
+                    break
             respond_time.append(time.time() - start_time)
 
                   
