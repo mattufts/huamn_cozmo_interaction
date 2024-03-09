@@ -68,10 +68,9 @@ def turn_angle(robot: pycozmo.Client, angle: float):
         robot.drive_wheels(lwheel_speed=-speed, rwheel_speed=speed, duration=duration)
 
 def move_forward(robot: pycozmo.Client, distance: float, speed: float):
-    if speed > 0:
-        duration = distance / speed
-        robot.drive_wheels(lwheel_speed=speed, rwheel_speed=speed, duration=duration)
-        print ("Driving Straight")
+    duration = abs(distance) / abs(speed)
+    robot.drive_wheels(lwheel_speed=speed, rwheel_speed=speed, duration=duration)
+    print ("Driving Straight")
 
 def display_animation(cli, state):
     #base_path = "/path/to/your/animations"

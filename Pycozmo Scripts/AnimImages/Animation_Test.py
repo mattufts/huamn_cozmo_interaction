@@ -153,8 +153,8 @@ def preload_images(base_path):
         image_path = os.path.join(base_path, file_name)
         if os.path.exists(image_path):
             image_open = Image.open(image_path)
-            image_resized = image_open.resize((128, 32))
-            image_rgb = image_resized.convert('RGB')
+            #image_resized = image_open.resize((128, 32))
+            image_rgb = image_open.convert('RGB')
             image_inverted = ImageOps.invert(image_rgb)
             img = image_inverted.convert('1')
             images.append(img)
@@ -162,7 +162,7 @@ def preload_images(base_path):
             print(f"Image file not found: {image_path}")
     return images
 
-def display_animation(cli, anim_controller, images, fps=40):
+def display_animation(cli, anim_controller, images, fps=40): #FPS is set intentionally high for animation blending
     frame_duration = 1.0 / fps
     while True:
         for img in images:
@@ -178,7 +178,7 @@ def main():
         anim_controller = AnimationController(cli)
         anim_controller.enable_animations(False)
 
-        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
+        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt"
         images = preload_images(base_path)
         display_animation(cli, anim_controller, images)
 

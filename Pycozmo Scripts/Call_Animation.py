@@ -9,6 +9,21 @@ import pycozmo
 from pycozmo.anim_controller import AnimationController
 
 
+def display_blink_eyes(cli, base_path = "Pycozmo Scripts/AnimImages/Blinking_II", fps=30, duration = 1):
+    frame_duration = 1.0 / fps  # Duration of each frame in seconds
+    total_loops = 1
+    # List and count PNG files in the directory
+    image_files = [f for f in os.listdir(base_path) if f.endswith('.png')]
+    num_images = len(image_files)
+    
+
+    # Display each image in sequence
+    for _ in range (total_loops):
+        for file_name in sorted(image_files):
+            image_path = os.path.join(base_path, file_name)
+            display_resized_image(cli, image_path, frame_duration)
+    #cli.cancel_anim()
+
 def display_images(cli, base_path, fps=30, repeat_duration=3, extra_time=4):
     frame_duration = 1.0 / fps  # Duration of each frame in seconds
 
@@ -18,7 +33,7 @@ def display_images(cli, base_path, fps=30, repeat_duration=3, extra_time=4):
     
     #calculate total loops needed based on repeat_duration
     total_frames = repeat_duration * fps
-    total_loops = int(total_frames / len(image_files))
+    total_loops = 1
     
     # Display each image in sequence
     for _ in range (total_loops):
@@ -27,7 +42,7 @@ def display_images(cli, base_path, fps=30, repeat_duration=3, extra_time=4):
             display_resized_image(cli, image_path, frame_duration)
 
     # Repeat the last two images for an extra duration
-    repeat_frames = int(extra_time / frame_duration)
+    repeat_frames = 1
     last_two_images = sorted(image_files)[-2:]  # Get last two images
     for _ in range(repeat_frames):
         for file_name in last_two_images:
@@ -45,7 +60,7 @@ def display_resized_image(cli, image_path, duration):
         img = image_inverted.convert('1')
 
         cli.display_image(img)
-        time.sleep(duration)
+        #time.sleep(duration)
     else:
         print(f"Image file not found: {image_path}")
 

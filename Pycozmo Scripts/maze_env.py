@@ -6,12 +6,26 @@
 import numpy as np
 import numpy as np
 import random
+
+# maze should know everything including hazard and hazard should be 2
 maze =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
        [0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0], 
        [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], 
+       [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
+       [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
+       [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
+        ]
+# this is a maze exclude hazard
+nav_maze =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
+       [0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
+       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0], 
        [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
@@ -49,7 +63,7 @@ class MazeEnv:
     def __init__(self):
         #gen_maze()
         self.maze = np.array(maze)  # 2D array representing the maze
-        self.nav_maze = np.array(maze)
+        self.nav_maze = np.array(nav_maze)
         self.height, self.width = self.maze.shape
         self.start_pos = np.array([1, 1])  # starting position is at 1, 1 of the grid
         #self.goal_pos = np.array([self.height - 1, self.width - 1])  # goal position
@@ -65,6 +79,7 @@ class MazeEnv:
         self.heath = 100
         self.done = False
         return self._get_state()
+    
     def what_is_front(self):
         new_pos = self.current_pos + self.current_dir
         if not ((new_pos >= [0, 0]).all() and (new_pos < [self.height, self.width]).all()):
@@ -118,8 +133,10 @@ class MazeEnv:
                 reward = -1
                 hit_wall = True
         else:
-            raise ValueError("Invalid action!")
-        
+            print("stop being pressed")
+        if self.health < 0:
+            self.done = 'dead'
+            
         return self._get_state(), reward, hit_wall, self.what_is_front(), self.done
     
     def _get_state(self):
