@@ -13,18 +13,17 @@ import maze_env
 import threading
 import copy
 #import get_voice_command
-import PycozmoFSM_Animation as cozmo_controller
-from PycozmoFSM_Animation import display_animation, display_images
-from Call_Animation import display_blink_eyes
-from Call_Animation import execute_interaction_animation
+import PycozmoFSM_controller as cozmo_controller
 #import path_planner as path_planner
 #from path_planner import find_shortest_path, determine_next_action, mark_forward
 import pycozmo
 import os
+from PIL 
 import time
 
+
 #initialize threading event
-animation_event = threading.Event()
+display_event = threading.Event()
 
 def set_ads(angle, distance, speed):  
     cozmo_controller.Angle = angle
@@ -36,10 +35,11 @@ state = env.reset()
 done = False
 display_flag = True
 
-def continuous_blinking(cli):
+def show_neutral_image(cli):
     global display_flag
-    #blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
-    blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
+    #blinking_path = "/Users/matt/D ocuments/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
+    #blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
+    neutral_image_path = "Pycozmo Scripts/emoticons/blank.png"
     print("display_flag: ",display_flag)
     while True:
         # if animation_event.is_set():
@@ -47,7 +47,7 @@ def continuous_blinking(cli):
         if display_flag:
             #display_animation(cli, blinking_path)
             #start =  time.time()
-            display_blink_eyes(cli)
+            cozmo_controller.show_neutral_image(cli, neutral_image_path)
             #print("time_cost:", time.time()-start)
             #print("display_flag: ",display_flag)
             #should be the duration of the animation + extra time
@@ -68,15 +68,15 @@ def handle_interaction (cli, interaction_type):
     #     "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
     #     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
     #                 }
-    animation_paths = {
-        "angry" : "Pycozmo Scripts/AnimImages/Angry",
-        "happy" : "Pycozmo Scripts/AnimImages/Happy",
-        "sad" : "Pycozmo Scripts/AnimImages/Hurt",
-        "surprised" : "Pycozmo Scripts/AnimImages/Surprised",
-        "neutral" : "Pycozmo Scripts/AnimImages/Blinking",
-        "left" : "Pycozmo Scripts/AnimImages/Left",
-        "right" : "Pycozmo Scripts/AnimImages/Right",
-        "finished" : "Pycozmo Scripts/AnimImages/Successful"
+    state_to_image = {
+        "angry" : "human_cozmo_interaction/Icon Images/stopping.png",
+        "happy" : "human_cozmo_interaction/Icon Images/check_mark.png",
+        "sad" : "human_cozmo_interaction/Icon Images/injured.png",
+        "surprised" : "human_cozmo_interaction/Icon Images/Alert_icon.png",
+        "neutral" : "human_cozmo_interaction/Icon Images/blank.png",
+        "left" : "human_cozmo_interaction/Icon Images/Notice_Left.png",
+        "right" : "human_cozmo_interaction/Icon Images/Notice_Right.png",
+        "finished" : "human_cozmo_interaction/Icon Images/finsih_flag"
     }
     #Request the Call_animaiton script to execute the animation for the interaction
     execute_interaction_animation(cli, interaction_type)
@@ -86,7 +86,7 @@ def handle_interaction (cli, interaction_type):
             #display_images(cli, base_path=
     #clear the event after the animation request to resume default behavior    
     animation_event.clear()
-    base_path = animation_paths.get(interaction_type)
+    base_path = state_to_image.get(interaction_type)
     
         
 #Defining the Keyboard Actions for Cozmo
@@ -361,7 +361,7 @@ def main():
         cli.set_head_angle(head_angle)
         cli.wait_for_robot()
         # Start the blinking thread
-        blinking_thread = threading.Thread(target=continuous_blinking, args=(cli,), daemon=True)
+        neutral_thread=os.path.join(os.path.dirname(__file__), "emoticons", "blank.png")
         blinking_thread.start()
         
         front = 'stop'

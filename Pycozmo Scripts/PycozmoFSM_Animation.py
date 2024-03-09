@@ -97,7 +97,7 @@ def main():
     with pycozmo.connect() as cli:
         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0
         cli.set_head_angle(head_angle)
-        time.sleep(1)
+        time.sleep(2)
         run_fsm(cli)
 
 if __name__ == '__main__':

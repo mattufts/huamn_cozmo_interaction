@@ -1,3 +1,5 @@
+#THIS IS AN OUTDATED VERSION OF PYCOZMO FSM CONTROLLER
+
 #This is the new Cozmo Controller script that will be used for the maze
 #It defines the robot's actions and robots expressions
 #It also defines the FSM states and the FSM execution function
@@ -36,8 +38,6 @@ state_to_image = {
     "right": "glancing_right-01.png"
 }
 
-
-
 # FSM state functions
 def act(robot: pycozmo.client, image_path):
     global Angle, Distance, Speed
@@ -52,11 +52,29 @@ def act(robot: pycozmo.client, image_path):
     print("Turning Angle: ", angle_to_turn)
     move_forward(robot, distance_to_move, speed_to_move)
     
+# Original Explore State Script    
+# def explore_state(robot: pycozmo.client, image_path):
+#     print("Exploring...")
+#     angle_to_turn = Angle
+#     turn_angle(angle_to_turn)
+#     show_image(robot, image_path)
+#     distance_to_move = Distance
+#     speed_to_move = Speed
+#     print("Turning Angle: ", angle_to_turn)
+#     move_forward(robot, distance_to_move, speed_to_move)
+#     return "interact"
 
 def explore_state(robot: pycozmo.client, image_path):
     print("Exploring....")
     act(robot, image_path)
     return "interact"
+
+# Original Interact State Script
+# def interact_state(robot: pycozmo.client, image_path):
+#     print("Interacting...")
+#     show_image(robot, image_path)
+#     time.sleep(3)
+#     return "explore"
 
 def interact_state(robot: pycozmo.client, image_path):
     print ("Interacting....")
@@ -75,9 +93,10 @@ def turn_angle(robot: pycozmo.Client, angle: float):
         robot.drive_wheels(lwheel_speed=-speed, rwheel_speed=speed, duration=duration)
 
 def move_forward(robot: pycozmo.Client, distance: float, speed: float):
-    duration = distance / speed
-    robot.drive_wheels(lwheel_speed=speed, rwheel_speed=speed, duration=duration)
-    print ("Driving Straight")
+    if speed > 0:
+        duration = distance / speed
+        robot.drive_wheels(lwheel_speed=speed, rwheel_speed=speed, duration=duration)
+        print ("Driving Straight")
 
 def show_image(cli, image_path):
     # Set the target size for the image
@@ -101,9 +120,14 @@ def show_image(cli, image_path):
             break
         cli.display_image(img)
 
-def display_image
-
-
+def update_state_and_image (cli, new_state):
+    base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/emoticons"
+    image_file = state_to_image.get(new_state,"neutral.png")
+    image_path = os.path.join(base_path, image_file)
+    global front
+    front = new_state
+    show_image(cli,image_path)
+    print ("updated state")
 
 # Define the FSM execution function
 def run_fsm(robot: pycozmo.client, image_path):
@@ -126,7 +150,13 @@ def main():
         cli.set_head_angle(head_angle)
         #turn off "alive" animations for cozmo
         time.sleep(1)
+        
+        image_path = os.path.join(os.path.dirname(__file__), "emoticons", "happy-01.png")
         run_fsm(cli, image_path)
+        
+        cli.wait_for_robot()
+        cli.disconnect()
+        cli.stop()
 
 if __name__ == '__main__':
     main()
