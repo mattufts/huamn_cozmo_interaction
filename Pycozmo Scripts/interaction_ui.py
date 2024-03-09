@@ -53,7 +53,7 @@ def continuous_blinking(cli):
             #should be the duration of the animation + extra time
             #<--- play with this time and adjust
             time.sleep(1)
-        print("display_flag: ",display_flag)
+        #print("display_flag: ",display_flag)
 
 def handle_interaction (cli, interaction_type):
     #signal the start of an interaction animation_event
@@ -167,7 +167,7 @@ def run_with_cozmo(cli):
     user_id = "_test" # change it everytime when you have a new participant
 
 
-    
+
     respond_time = []
     # Start the keyboard listener
     listener_thread = threading.Thread(target=keyboard_listener, daemon=True)
