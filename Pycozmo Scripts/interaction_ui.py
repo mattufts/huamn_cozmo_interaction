@@ -15,6 +15,7 @@ import copy
 #import get_voice_command
 import PycozmoFSM_Animation as cozmo_controller
 from PycozmoFSM_Animation import display_animation, display_images
+from Call_Animation import display_blink_eyes
 from Call_Animation import execute_interaction_animation
 #import path_planner as path_planner
 #from path_planner import find_shortest_path, determine_next_action, mark_forward
@@ -39,16 +40,20 @@ def continuous_blinking(cli):
     global display_flag
     #blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
+    print("display_flag: ",display_flag)
     while True:
-        if animation_event.is_set():
-            animation_event.wait()
+        # if animation_event.is_set():
+        #     animation_event.wait()
         if display_flag:
             #display_animation(cli, blinking_path)
-            display_images(cli, blinking_path, repeat_duration=0.3, extra_time=1)
+            #start =  time.time()
+            display_blink_eyes(cli)
+            #print("time_cost:", time.time()-start)
+            #print("display_flag: ",display_flag)
             #should be the duration of the animation + extra time
             #<--- play with this time and adjust
-            time.sleep(2.5)
-        #rint (display_flag)
+            time.sleep(1)
+        #print("display_flag: ",display_flag)
 
 def handle_interaction (cli, interaction_type):
     #signal the start of an interaction animation_event
@@ -132,6 +137,7 @@ def keyboard_listener():
     global mode
     global env
     while True:
+        time.sleep(0.1)
         if keyboard.is_pressed('p'):
             if mode == 'automatic':
                 mode = 'manual'
@@ -139,9 +145,9 @@ def keyboard_listener():
             else:
                 mode = 'automatic'
                 #print("Automatic Mode")
-        if keyboard.is_pressed('m'):
+        if keyboard.is_pressed('m') and mode == 'manual':
             path_planner.mark_forward(env.nav_maze, env.current_pos, env.current_dir)
-        if keyboard.is_pressed('c'):
+        if keyboard.is_pressed('c') and mode == 'manual':
             path_planner.mark_forward(env.nav_maze, env.current_pos, env.current_dir, 0)
 
 def get_input(input_list):
@@ -151,19 +157,28 @@ import path_planner
 def run_with_cozmo(cli):
     import time
     action_list = ['left', 'right', 'forward', 'stop']
-    global env, state, done,mode
+    global env, state, done, mode, display_flag
     env = maze_env.MazeEnv()
     state = env.reset()
     done = False
+    front = 'nothing'
     print('Program is running')
+
+
     user_id = "_test" # change it everytime when you have a new participant
+
+
+
     respond_time = []
     # Start the keyboard listener
     listener_thread = threading.Thread(target=keyboard_listener, daemon=True)
     listener_thread.start()
     while not done:
+        print("you can press p to swich now, current mode: ", mode)
+        time.sleep(1)
 ######################## choose action ############################
         print(mode)
+        hit_wall = False
         #time.sleep(4)
         if mode == 'manual':
             # a backup solution for waiting for user input for 5 seconds
@@ -171,6 +186,7 @@ def run_with_cozmo(cli):
             # Set up a thread to wait for input
             user_input = [None]
             start_time = time.time()
+            print("Please input your command via keyboard.")
             while time.time() - start_time < 5:
                 if keyboard.is_pressed('f'):
                     user_input[0] = 'forward'
@@ -186,6 +202,9 @@ def run_with_cozmo(cli):
                     break
                 if keyboard.is_pressed('q'):
                     user_input[0] = 'quit'
+                    break
+                if keyboard.is_pressed('p'):
+                    mode = 'automatic'
                     break
             respond_time.append(time.time() - start_time)
 
@@ -216,10 +235,7 @@ def run_with_cozmo(cli):
         
         action = convert_command_to_action(command)
         print(action)
-        if action is not None:
-            state, _, hit_wall, front , done = env.step(action)
-            print(env.current_pos, done)
-            print("-----------------------------------------")
+
 
         if command == 'quit':
             break
@@ -229,81 +245,72 @@ def run_with_cozmo(cli):
         
  
         if command == 'left':
-            set_ads(90, 0, 0)  # Example: turn 90 degrees left
             cozmo_controller.turn_angle(cli, -75)
 
         if command == 'right':
-            set_ads(-90, 0, 0)# Example: turn 90 degrees right
             cozmo_controller.turn_angle(cli, 75)
 
         if command == 'forward' and front == "nothing":
-            set_ads(0, 80, 50)
             cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
         
         if command == 'forward' and front != "nothing":
-            set_ads(0, 10, 10)
-            cozmo_controller.move_forward(cli, 10, 10)
-            set_ads(0, -10, 10)
-            cozmo_controller.move_forward(cli, -10, 10)
+            if front == "wall":
+                env.health = -20
+            if front == "fire":
+                env.health = -50
+            hit_wall = True
+            
+            cozmo_controller.move_forward(cli, 20, 10)
+            cozmo_controller.move_forward(cli, -20, -10)
             #cozmo_controller.front = front
-            handle_interaction(cli, 'sad')
+            #handle_interaction(cli, 'sad')
 
+        if action is not None:
+            state, _, _, front , done = env.step(action)
 
-        if command == 'stop':
-            set_ads(0, 0, 0)
-            cozmo_controller.move_forward(cli,00, 00)
+        
 
-
-        if front == "wall" and hit_wall == True:
-            env.health = -20
-
-        if front == "fire" and hit_wall == True:
-            env.health = -50
-
+        if hit_wall:
+            # Cozmo hits a wall, play "Hurt" animation
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli, "sad")
+            display_flag = True
+        
         if env.health <= 0:
-            done = 'dead'
-
-
-        # if hit_wall:
-        #     # Cozmo hits a wall, play "Hurt" animation
-        #     set_ads(0, 10, 10) #angle distance and speed
-        #     #cozmo_controller.act(cli)
-        #     handle_interaction(cli, "sad")
-        #     set_ads(0, -10, 10)
-        #     #cozmo_controller.act(cli)
-        #     #cozmo_controller.front = "hit"
-        # if done: 
-        #     handle_interaction(cli, "finished")
-
-        # time.sleep(2)
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli, "angry")
+            display_flag = True
+            break
         
-        # current_pos = copy.deepcopy( env.current_pos)
-        # goal_pos = copy.deepcopy(env.goal_pos)
-        # #print(goal_pos)
-        # next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
-        # action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
-        # if action == 0:
-        #     handle_interaction(cli,"left")
-        # if action == 1:
-        #     handle_interaction(cli,"right")
-        # if action == 2:
-        #     handle_interaction(cli, "happy")
-        
-        # time.sleep(2)
-        
+        current_pos = copy.deepcopy( env.current_pos)
+        goal_pos = copy.deepcopy(env.goal_pos)
+        next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
+        next_action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
 
-        # elif done:
-        #     # Cozmo reaches the end of the maze, play "Happy" animation
-        #     handle_interaction(cli, "happy")
-        # elif action == 2 and can_move_left_or_right():
-        #     # Cozmo is moving forward and there is a path to the left or right
-        #     if is_path_left():
-        #         handle_interaction(cli, "left")
-        #     if is_path_right():
-        #         handle_interaction(cli, "right")
+        # display animation based on the next action
+        if next_action == 0:
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli,"left")
+            display_flag = True
+        if next_action == 1:
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli,"right")
+            display_flag = True
+        if next_action == 2:
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli, "happy")
+            display_flag = True
 
-        # else:
-        #     handle_interaction(cli, front)
+
+
+
+
+
     file_name = "respond_time" + user_id + ".txt"
     if os.path.exists(file_name):
         print("File already exists. file name has been changed")

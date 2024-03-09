@@ -17,7 +17,10 @@ duration = 2000
 async def turn_angle(robot: cozmo.robot.Robot, angle: float):
     await robot.turn_in_place(degrees(angle)).wait_for_completed()
 async def move_forward(robot: cozmo.robot.Robot, distance: float, speed: float):
-    await robot.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()
+    if distance > 0:
+        await robot.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()
+    else:
+        await robot.drive_wheels(l_wheel_speed=-20.0, r_wheel_speed=-20.0, duration=0.5, flag = 1)
 
 async def act(robot: cozmo.robot.Robot):
     # Turn Cozmo by a specific angle (in degrees)

@@ -36,9 +36,8 @@ def main():
         cli.set_head_angle((pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0)
         time.sleep(2)
      
-
         base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right"
-        display_images(cli, base_path)
+
     
 
 if __name__ == '__main__':
