@@ -177,9 +177,9 @@ def run_with_cozmo(cli):
     listener_thread = threading.Thread(target=keyboard_listener, daemon=True)
     listener_thread.start()
     while not done:
-        cli.set_all_backpack_lights(pycozmo.lights.red_light)
+        cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
-        time.sleep(1)
+        time.sleep(2) #increased
 ######################## choose action ############################
         print(mode)
         hit_wall = False
@@ -192,7 +192,7 @@ def run_with_cozmo(cli):
             user_input = [None]
             start_time = time.time()
             print("\n\n\n\n Please input your command via keyboard.\n\n\n\n")
-            while time.time() - start_time < 5:
+            while time.time() - start_time < 10: #inclreased
                 if keyboard.is_pressed('f'):
                     user_input[0] = 'forward'
                     break
