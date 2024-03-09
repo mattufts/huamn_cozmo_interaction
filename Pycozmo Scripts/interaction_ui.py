@@ -174,7 +174,7 @@ def run_with_cozmo(cli):
     listener_thread = threading.Thread(target=keyboard_listener, daemon=True)
     listener_thread.start()
     while not done:
-        print("you can press p to swich now")
+        print("you can press p to swich now, current mode: ", mode)
         time.sleep(1)
 ######################## choose action ############################
         print(mode)
