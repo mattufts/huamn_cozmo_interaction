@@ -38,7 +38,10 @@ def main():
      
         base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right"
 
-    
+        #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left"
+        #base_path = '/home/matt_e/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Idle'
+        display_images(cli, base_path)
+
 
 if __name__ == '__main__':
     main()
