@@ -19,10 +19,10 @@ maze =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
         ]
-# this is a maze exclude hazard
+
 nav_maze=[
        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],  #vanilla maze, maze without environmental hazards
        [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
        [0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
@@ -122,8 +122,8 @@ class MazeEnv:
         self.current_dir = np.array([0, 1])  # current direction (facing right)
         self.goal_pos = np.array([4,12]) # end point
         self.done = False  # episode termination flag
-        self.battery = 140 # battery level, not sure how to use it right now 
-        self.health = 140
+        self.battery = 100 # battery level, not sure how to use it right now 
+        self.health = 100
     def reset(self):
         self.current_pos = self.start_pos
         self.current_dir = np.array([0, 1])  # facing right, maybe all directions should be relative
