@@ -19,7 +19,7 @@ def display_resized_image(cli, image_path):
     else:
         print(f"Image file not found: {image_path}")
 
-def display_images(cli, base_path, fps=24):
+def display_images(cli, base_path, fps=12):
     #frame_duration = 1.0 / fps
 
     image_files = sorted([f for f in os.listdir(base_path) if f.endswith('.png')])
@@ -36,7 +36,7 @@ def main():
         cli.set_head_angle((pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0)
         time.sleep(2)
      
-        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right"
+        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Sad"
 
         #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left"
         #base_path = '/home/matt_e/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Idle'
