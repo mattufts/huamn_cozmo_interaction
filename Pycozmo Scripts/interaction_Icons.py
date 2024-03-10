@@ -103,9 +103,9 @@ def handle_interaction (cli, interaction_type):
         "sad" : "Icon Images/injured.png",
         "surprised" : "Icon Images/Alert_icon.png",
         'neutral' : "Icon Images/blank.png",
-        "left" : "Icon Images/Notice_Left.png",
-        "right" : "Icon Images/notice_Right.png",
-        "finished" : "Icon Images/finsih_flag.png"
+        "left" : "Icon Images/notice_right.png",
+        "right" : "Icon Images/Notice_Left.png",
+        "finished" : "Icon Images/finish_flag.png"
     }
     Call_Animation.display_resized_image(cli, state_to_image[interaction_type])
 
@@ -186,8 +186,8 @@ def run_with_cozmo(cli):
     front = 'nothing'
     print('Program is running')
 
-    icon_display_time = 3
-    user_id = "_test" # change it everytime when you have a new participant
+    icon_display_time = 5
+    user_id = "DEMO" # change it everytime when you have a new participant
 
 
 
@@ -199,6 +199,7 @@ def run_with_cozmo(cli):
         cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
         time.sleep(2) #increased
+        
 ######################## choose action ############################
         print(mode)
         hit_wall = False
@@ -279,10 +280,10 @@ def run_with_cozmo(cli):
             cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
         
         if command == 'forward' and front != "nothing":
-            if front == "wall":
-                env.health = -20
+            #if front == "wall":
+                #env.health = -20
             if front == "fire":
-                env.health = -50
+                env.health = -20
             hit_wall = True
             
             cozmo_controller.move_forward(cli, 20, 10)

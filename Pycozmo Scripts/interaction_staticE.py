@@ -59,7 +59,7 @@ def show_neutral_image(cli):
             #print("display_flag: ",display_flag)
             #should be the duration of the animation + extra time
             #<--- play with this time and adjust
-            time.sleep(1)
+            time.sleep(3)                       #<--- play with this time and adjust
         #print("display_flag: ",display_flag)
 
 def handle_interaction (cli, interaction_type):
@@ -77,7 +77,7 @@ def handle_interaction (cli, interaction_type):
     #                 }
 
     state_to_image = {
-        "angry" : "Emotion_Eyes/Emoticons/Angry_Stop-01.png",
+        "crash" : "Emotion_Eyes/Emoticons/Angry_Stop-01.png",
         'happy' : 'Emotion_Eyes/Emoticons/happy-01.png',
         'sad' : 'Emotion_Eyes/Emoticons/injured_sad-01.png',
         'surprised' : 'Emotion_Eyes/Emoticons/surprise_alert-01.png',
@@ -167,8 +167,8 @@ def run_with_cozmo(cli):
     front = 'nothing'
     print('Program is running')
 
-    icon_dsiplay_time = 3
-    user_id = "_test" # change it everytime when you have a new participant
+    icon_display_time = 3
+    user_id = "DEMO" # change it everytime when you have a new participant
 
 
 
@@ -179,7 +179,7 @@ def run_with_cozmo(cli):
     while not done:
         cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
-        time.sleep(2) #increased
+        time.sleep(0.5) #increased
 ######################## choose action ############################
         print(mode)
         hit_wall = False
@@ -260,10 +260,10 @@ def run_with_cozmo(cli):
             cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
         
         if command == 'forward' and front != "nothing":
-            if front == "wall":
-                env.health = -20
+            #if front == "wall":
+             #   env.health = -20
             if front == "fire":
-                env.health = -50
+                env.health = -20
             hit_wall = True
             
             cozmo_controller.move_forward(cli, 20, 10)
@@ -280,14 +280,14 @@ def run_with_cozmo(cli):
             # Cozmo hits a wall, play "Hurt" animation
             display_flag = False
             
-            handle_interaction(cli, "sad")
-            time.sleep(icon_dsiplay_time)
+            handle_interaction(cli, "crash")
+            time.sleep(icon_display_time)
             display_flag = True
         
         if env.health <= 0:
             display_flag = False
-            handle_interaction(cli, "angry")
-            time.sleep(icon_dsiplay_time)
+            handle_interaction(cli, "sad")
+            time.sleep(icon_display_time)
             display_flag = True
             break
         
@@ -301,23 +301,19 @@ def run_with_cozmo(cli):
             display_flag = False
             
             handle_interaction(cli,"left")
-            time.sleep(icon_dsiplay_time)
+            time.sleep(icon_display_time)
             display_flag = True
         if next_action == 1:
             display_flag = False
 
             handle_interaction(cli,"right")
-            time.sleep(icon_dsiplay_time)
+            time.sleep(icon_display_time)
             display_flag = True
         if next_action == 2:
             display_flag = False
             handle_interaction(cli, "happy")
-            time.sleep(icon_dsiplay_time)
+            time.sleep(icon_display_time)
             display_flag = True
-
-
-
-
 
 
     file_name = "respond_time" + user_id + ".txt"

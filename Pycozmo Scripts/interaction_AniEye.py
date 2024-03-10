@@ -165,7 +165,7 @@ def run_with_cozmo(cli):
     print('Program is running')
 
 
-    user_id = "_test" # change it everytime when you have a new participant
+    user_id = "DEMO" # change it everytime when you have a new participant
 
 
 
@@ -176,7 +176,7 @@ def run_with_cozmo(cli):
     while not done:
         cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
-        time.sleep(2) #increased
+        time.sleep(5) #increased
 ######################## choose action ############################
         print(mode)
         hit_wall = False
@@ -257,10 +257,11 @@ def run_with_cozmo(cli):
             cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
         
         if command == 'forward' and front != "nothing":
-            if front == "wall":
-                env.health = -20
+            #if front == "wall":            
+             #env.health = 0
+
             if front == "fire":
-                env.health = -50
+                env.health = -20
             hit_wall = True
             
             cozmo_controller.move_forward(cli, 20, 10)
@@ -283,7 +284,7 @@ def run_with_cozmo(cli):
         if env.health <= 0:
             display_flag = False
             time.sleep(1)
-            handle_interaction(cli, "angry")
+            handle_interaction(cli, "sad")
             display_flag = True
             break
         
