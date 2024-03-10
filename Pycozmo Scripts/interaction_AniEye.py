@@ -174,13 +174,15 @@ def run_with_cozmo(cli):
     listener_thread = threading.Thread(target=keyboard_listener, daemon=True)
     listener_thread.start()
     while not done:
+        cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
-        time.sleep(1)
+        time.sleep(2) #increased
 ######################## choose action ############################
         print(mode)
         hit_wall = False
         #time.sleep(4)
         if mode == 'manual':
+            cli.set_all_backpack_lights(pycozmo.lights.blue_light)
             # a backup solution for waiting for user input for 5 seconds
             # wait for user input for 5 seconds, if no inputs, skip the loop
             # Set up a thread to wait for input

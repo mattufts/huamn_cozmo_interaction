@@ -19,6 +19,7 @@ import PycozmoFSM_controller as cozmo_controller
 import pycozmo
 import os
 import PIL
+from PIL import Image, ImageOps
 import time
 import Call_Animation
 from gtts import gTTS
@@ -48,25 +49,30 @@ display_flag = True
 
 def show_neutral_image(cli):
     global display_flag
-    #blinking_path = "/Users/matt/D ocuments/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
+    #blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     #blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
     neutral_image_path = "Pycozmo Scripts/emoticons/blank.png"
     print("display_flag: ",display_flag)
     while True:
         # if animation_event.is_set():
         #     animation_event.wait()
-        if display_flag:
-            #display_animation(cli, blinking_path)
-            #start =  time.time()
-            #cozmo_controller.show_neutral_image(cli, neutral_image_path)
-            Call_Animation.display_resized_image(cli, neutral_image_path)
-            #print("time_cost:", time.time()-start)
-            #print("display_flag: ",display_flag)
-            #should be the duration of the animation + extra time
-            #<--- play with this time and adjust
-            #time.sleep(1)
+      if display_flag:
+            # Open the image using PIL
+            image = Image.open(neutral_image_path)
+            # Invert the image colors
+            inverted_image = ImageOps.invert(image.convert('RGB'))
+            
+            # Depending on how Call_Animation.display_resized_image works, you might need to save the inverted image and pass the filepath
+            # Or modify the display function to accept an image object directly
+            inverted_image_path = "Pycozmo Scripts/emoticons/inverted_blank.png"
+            inverted_image.save(inverted_image_path)
+            
+            # Display the inverted image
+            Call_Animation.display_resized_image(cli, inverted_image_path)
+            
+            # Wait for a second before the next loop iteration
             time.sleep(1)
-        #print("display_flag: ",display_flag)
+
 
 def handle_interaction (cli, interaction_type):
     #signal the start of an interaction animation_event
@@ -190,14 +196,15 @@ def run_with_cozmo(cli):
     listener_thread = threading.Thread(target=keyboard_listener, daemon=True)
     listener_thread.start()
     while not done:
+        cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
-        if mode == 'automatic':
-            time.sleep(3)
+        time.sleep(2) #increased
 ######################## choose action ############################
         print(mode)
         hit_wall = False
         #time.sleep(4)
         if mode == 'manual':
+            cli.set_all_backpack_lights(pycozmo.lights.blue_light)
             # a backup solution for waiting for user input for 5 seconds
             # wait for user input for 5 seconds, if no inputs, skip the loop
             # Set up a thread to wait for input
