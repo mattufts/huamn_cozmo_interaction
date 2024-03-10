@@ -36,10 +36,10 @@ def main():
         cli.set_head_angle((pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0)
         time.sleep(2)
      
-        base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Sad"
+        #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Sad"
 
         #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left"
-        #base_path = '/home/matt_e/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Idle'
+        base_path = '/home/matt_e/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Sad'
         display_images(cli, base_path)
 
 

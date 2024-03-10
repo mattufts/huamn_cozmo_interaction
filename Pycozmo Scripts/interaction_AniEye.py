@@ -69,9 +69,9 @@ def handle_interaction (cli, interaction_type):
     #     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
     #                 }
     animation_paths = {
-        "angry" : "Pycozmo Scripts/AnimImages/Angry",
+        "sad" : "Pycozmo Scripts/AnimImages/Sad",
         "happy" : "Pycozmo Scripts/AnimImages/Happy",
-        "sad" : "Pycozmo Scripts/AnimImages/Hurt",
+        "crash" : "Pycozmo Scripts/AnimImages/hurt",
         "surprised" : "Pycozmo Scripts/AnimImages/Surprised",
         "neutral" : "Pycozmo Scripts/AnimImages/Blinking",
         "left" : "Pycozmo Scripts/AnimImages/Left",
@@ -277,7 +277,7 @@ def run_with_cozmo(cli):
             # Cozmo hits a wall, play "Hurt" animation
             display_flag = False
             time.sleep(1)
-            handle_interaction(cli, "sad")
+            handle_interaction(cli, "crash")
             display_flag = True
         
         if env.health <= 0:
