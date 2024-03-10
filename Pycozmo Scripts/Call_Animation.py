@@ -9,12 +9,12 @@ import pycozmo
 from pycozmo.anim_controller import AnimationController
 
 
-def display_blink_eyes(cli, base_path = "Pycozmo Scripts/AnimImages/Blinking_II", fps=30, duration = 1):
-    frame_duration = 1.0 / fps  # Duration of each frame in seconds
-    total_loops = 1
+def display_blink_eyes(cli, base_path = "Pycozmo Scripts/AnimImages/Blinking_II", fps=60):
+    frame_duration = 1.0 / fps  # Duration of each frame in seconds 
+    total_loops = 1 
     # List and count PNG files in the directory
     image_files = [f for f in os.listdir(base_path) if f.endswith('.png')]
-    num_images = len(image_files)
+    #num_images = len(image_files)
     
 
     # Display each image in sequence
@@ -24,15 +24,15 @@ def display_blink_eyes(cli, base_path = "Pycozmo Scripts/AnimImages/Blinking_II"
             display_resized_image(cli, image_path, frame_duration)
     #cli.cancel_anim()
 
-def display_images(cli, base_path, fps=30, repeat_duration=3, extra_time=4):
+def display_images(cli, base_path, fps=30, repeat_duration=3):
     frame_duration = 1.0 / fps  # Duration of each frame in seconds
 
     # List and count PNG files in the directory
     image_files = [f for f in os.listdir(base_path) if f.endswith('.png')]
-    num_images = len(image_files)
+    #num_images = len(image_files)
     
     #calculate total loops needed based on repeat_duration
-    total_frames = repeat_duration * fps
+    #total_frames = repeat_duration * fps
     total_loops = 1
     
     # Display each image in sequence
@@ -86,7 +86,7 @@ def execute_interaction_animation(cli, interaction_type):
     
     if full_path:
         # Call the function that handles the display of images
-        display_images(cli, full_path, repeat_duration=4)
+        display_images(cli, full_path, repeat_duration=4) 
 
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:

@@ -52,7 +52,7 @@ def continuous_blinking(cli):
             #print("display_flag: ",display_flag)
             #should be the duration of the animation + extra time
             #<--- play with this time and adjust
-            time.sleep(1)
+            time.sleep(1)     
         #print("display_flag: ",display_flag)
 
 def handle_interaction (cli, interaction_type):
@@ -86,7 +86,7 @@ def handle_interaction (cli, interaction_type):
             #display_images(cli, base_path=
     #clear the event after the animation request to resume default behavior    
     animation_event.clear()
-    base_path = animation_paths.get(interaction_type)
+    #base_path = animation_paths.get(interaction_type)
     
         
 #Defining the Keyboard Actions for Cozmo
@@ -176,7 +176,7 @@ def run_with_cozmo(cli):
     while not done:
         cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
-        time.sleep(5) #increased
+        time.sleep(2) #increased
 ######################## choose action ############################
         print(mode)
         hit_wall = False
