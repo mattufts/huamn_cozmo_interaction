@@ -283,7 +283,7 @@ def run_with_cozmo(cli):
             #if front == "wall":
                 #env.health = -20
             if front == "fire":
-                env.health = -20
+                env.health = (env.health)-30
             hit_wall = True
             
             cozmo_controller.move_forward(cli, 20, 10)
