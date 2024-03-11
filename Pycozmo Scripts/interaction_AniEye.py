@@ -36,6 +36,7 @@ state = env.reset()
 done = False
 display_flag = True
 
+
 def continuous_blinking(cli):
     global display_flag
     #blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
@@ -69,7 +70,7 @@ def handle_interaction (cli, interaction_type):
     #     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
     #                 }
     animation_paths = {
-        "sad" : "Pycozmo Scripts/AnimImages/Sad",
+        "sad" : "Pycozmo Scripts/AnimImages/Sad'",
         "happy" : "Pycozmo Scripts/AnimImages/Happy",
         "crash" : "Pycozmo Scripts/AnimImages/hurt",
         "surprised" : "Pycozmo Scripts/AnimImages/Surprised",
@@ -86,7 +87,7 @@ def handle_interaction (cli, interaction_type):
             #display_images(cli, base_path=
     #clear the event after the animation request to resume default behavior    
     animation_event.clear()
-    #base_path = animation_paths.get(interaction_type)
+    base_path = animation_paths.get(interaction_type)
     
         
 #Defining the Keyboard Actions for Cozmo
@@ -165,7 +166,7 @@ def run_with_cozmo(cli):
     print('Program is running')
 
 
-    user_id = "DEMO" # change it everytime when you have a new participant
+    user_id = "_test" # change it everytime when you have a new participant
 
 
 
@@ -176,7 +177,7 @@ def run_with_cozmo(cli):
     while not done:
         cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
-        time.sleep(2) #increased
+        time.sleep(1) #increased
 ######################## choose action ############################
         print(mode)
         hit_wall = False
@@ -262,6 +263,8 @@ def run_with_cozmo(cli):
 
             if front == "fire":
                 env.health = (env.health)-30
+                time.sleep(1)
+                handle_interaction(cli, "sad")
             hit_wall = True
             
             cozmo_controller.move_forward(cli, 20, 10)
