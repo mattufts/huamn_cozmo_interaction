@@ -35,12 +35,13 @@ env = maze_env.MazeEnv()
 state = env.reset()
 done = False
 display_flag = True
+wall = 0
 
 
 def continuous_blinking(cli):
     global display_flag
     #blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
-    blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
+    blinking_path = "/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     print("display_flag: ",display_flag)
     while True:
         # if animation_event.is_set():
@@ -70,14 +71,14 @@ def handle_interaction (cli, interaction_type):
     #     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
     #                 }
     animation_paths = {
-        "sad" : "Pycozmo Scripts/AnimImages/Sad'",
-        "happy" : "Pycozmo Scripts/AnimImages/Happy",
-        "crash" : "Pycozmo Scripts/AnimImages/hurt",
-        "surprised" : "Pycozmo Scripts/AnimImages/Surprised",
-        "neutral" : "Pycozmo Scripts/AnimImages/Blinking",
-        "left" : "Pycozmo Scripts/AnimImages/Left",
-        "right" : "Pycozmo Scripts/AnimImages/Right",
-        "finished" : "Pycozmo Scripts/AnimImages/Successful"
+        "sad": "Pycozmo Scripts/AnimImages/Sad",
+        "happy": "Pycozmo Scripts/AnimImages/Happy",
+        "crash": "Pycozmo Scripts/AnimImages/hurt",
+        "surprised": "Pycozmo Scripts/AnimImages/Surprised",
+        "neutral": "Pycozmo Scripts/AnimImages/Blinking",
+        "left": "Pycozmo Scripts/AnimImages/Left",
+        "right": "Pycozmo Scripts/AnimImages/Right",
+        "finished":  "Pycozmo Scripts/AnimImages/Successful"
     }
     #Request the Call_animaiton script to execute the animation for the interaction
     execute_interaction_animation(cli, interaction_type)
@@ -90,12 +91,13 @@ def handle_interaction (cli, interaction_type):
     base_path = animation_paths.get(interaction_type)
     
         
-#Defining the Keyboard Actions for Cozmo
+#Defining the Keyboard Actions for Cozmo  #This can be done in a swtich statement 
 def get_keyboard_command():
     command = input("Enter command (F = forward, L = left, R = right, S = stop, Q = quit): ")
     print(command)
     
-    if 'F' in command:
+    if 'F' in command:  #these could be done in a switch statement
+                        #convert everything to a lowercase
         return 'forward'
     elif 'L' in command:
         return 'left'
@@ -120,7 +122,8 @@ def clean_command(command):
         return 'quit'
     return command
     
-def convert_command_to_action(command):
+def convert_command_to_action(command):   #using enumerators could simplify this script 
+                                          #this would make sure that variables are defined and prevent incorrect keys
     if command ==   'forward':
         return 2  #  2 is the action for moving forward in MazeEnv
     elif command == 'left':
@@ -139,6 +142,7 @@ def keyboard_listener():
     global env
     while True:
         #time.sleep(0.1)
+        #if keyboard.is_pressed('p'):    #change to on release 
         if keyboard.is_pressed('p'):
             if mode == 'automatic':
                 mode = 'manual'
@@ -190,7 +194,8 @@ def run_with_cozmo(cli):
             user_input = [None]
             start_time = time.time()
             print("\n\n\n\n Please input your command via keyboard.\n\n\n\n")
-            while time.time() - start_time < 5:
+            while time.time() - start_time < 5:  #this can be put in a variable once
+                                                #put start.time under the start time
                 if keyboard.is_pressed('f'):
                     user_input[0] = 'forward'
                     break
@@ -214,7 +219,7 @@ def run_with_cozmo(cli):
 
                   
             # Wait for 5 seconds
-            if user_input[0] is None:
+            if user_input[0] is None:                   #This script here replicates the movement that the robot is going to to take its predetermined path after waiting
                 current_pos = copy.deepcopy( env.current_pos)
                 goal_pos = copy.deepcopy(env.goal_pos)
                 #print(goal_pos)
@@ -233,7 +238,7 @@ def run_with_cozmo(cli):
             next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
      
             action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
-            command = action_list[action]
+            command = action_list[action]   #enumerators would automatically adjust for this
             print("command: ", command)
 
         
@@ -260,9 +265,10 @@ def run_with_cozmo(cli):
         if command == 'forward' and front != "nothing":
             #if front == "wall":            
              #env.health = 0
+            #wall = wall+1
 
             if front == "fire":
-                env.health = (env.health)-30
+                env.health -= 20
                 time.sleep(1)
                 handle_interaction(cli, "sad")
             hit_wall = True
