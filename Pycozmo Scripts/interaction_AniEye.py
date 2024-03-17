@@ -170,7 +170,7 @@ def run_with_cozmo(cli):
     print('Program is running')
 
 
-    user_id = "lea_test_537" # change it everytime when you have a new participant
+    user_id = "Ivy_Tong" # change it everytime when you have a new participant
 
 
 
@@ -287,7 +287,7 @@ def run_with_cozmo(cli):
             # Cozmo hits a wall, play "Hurt" animation
             display_flag = False
             time.sleep(1)
-            handle_interaction(cli, "crash")
+            handle_interaction(cli, "hurt")
             display_flag = True
         
         if env.health <= 0:
