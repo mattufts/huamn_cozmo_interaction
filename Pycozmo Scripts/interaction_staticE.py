@@ -168,7 +168,7 @@ def run_with_cozmo(cli):
     print('Program is running')
 
     icon_display_time = 3
-    user_id = "DEMO" # change it everytime when you have a new participant
+    user_id = "anushka_singh_4_01" # change it everytime when you have a new participant
 
 
 

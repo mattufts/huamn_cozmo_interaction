@@ -41,7 +41,7 @@ wall = 0
 def continuous_blinking(cli):
     global display_flag
     #blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
-    blinking_path = "/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
+    blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
     print("display_flag: ",display_flag)
     while True:
         # if animation_event.is_set():
