@@ -70,6 +70,7 @@ def execute_interaction_animation(cli, interaction_type):
         "happy": "Happy",
         "sad": "Sad",
         "angry": "Angry",
+        "crash": "Crash",
         "surprised": "Surprised",
         "neutral": "Blinking",
         "left": "Left",

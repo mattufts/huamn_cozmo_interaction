@@ -73,7 +73,7 @@ def handle_interaction (cli, interaction_type):
     animation_paths = {
         "sad": "Pycozmo Scripts/AnimImages/Sad",
         "happy": "Pycozmo Scripts/AnimImages/Happy",
-        "crash": "Pycozmo Scripts/AnimImages/hurt",
+        "crash": "Pycozmo Scripts/AnimImages/Crash",
         "surprised": "Pycozmo Scripts/AnimImages/Surprised",
         "neutral": "Pycozmo Scripts/AnimImages/Blinking",
         "left": "Pycozmo Scripts/AnimImages/Left",
@@ -170,7 +170,7 @@ def run_with_cozmo(cli):
     print('Program is running')
 
 
-    user_id = "Ivy_Tong" # change it everytime when you have a new participant
+    user_id = "Demo" # change it everytime when you have a new participant
 
 
 
@@ -287,7 +287,7 @@ def run_with_cozmo(cli):
             # Cozmo hits a wall, play "Hurt" animation
             display_flag = False
             time.sleep(1)
-            handle_interaction(cli, "hurt")
+            handle_interaction(cli, "crash")
             display_flag = True
         
         if env.health <= 0:
@@ -318,9 +318,6 @@ def run_with_cozmo(cli):
             time.sleep(1)
             handle_interaction(cli, "happy")
             display_flag = True
-
-
-
 
 
 
