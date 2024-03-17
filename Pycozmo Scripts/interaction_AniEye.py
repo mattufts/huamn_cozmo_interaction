@@ -170,7 +170,7 @@ def run_with_cozmo(cli):
     print('Program is running')
 
 
-    user_id = "_test" # change it everytime when you have a new participant
+    user_id = "lea_test_537" # change it everytime when you have a new participant
 
 
 
