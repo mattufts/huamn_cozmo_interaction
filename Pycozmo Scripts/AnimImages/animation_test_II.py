@@ -39,7 +39,7 @@ def main():
         #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Sad"
 
         #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left"
-        base_path = "huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Crash"
+        base_path = "/home/matt_e/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
         display_images(cli, base_path)
 
 
