@@ -22,75 +22,59 @@ from Call_Animation import execute_interaction_animation
 import pycozmo
 import os
 import time
+import path_planner
+import threading
+import keyboard
+import random
+import string
+
+#************************************Global Variables****************************************
 
 #initialize threading event
 animation_event = threading.Event()
 
-def set_ads(angle, distance, speed):  
-    cozmo_controller.Angle = angle
-    cozmo_controller.Distance = distance
-    cozmo_controller.Speed = speed
 
 env = maze_env.MazeEnv()
 state = env.reset()
 done = False
 display_flag = True
 wall = 0
+mode = 'manual'
+
+#************************************End of Global Variables****************************************
 
 
+#************************************Display Animation****************************************
+
+
+# Display blinking eyes continuously, this is for the neutral state
 def continuous_blinking(cli):
     global display_flag
-    #blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
     print("display_flag: ",display_flag)
     while True:
-        # if animation_event.is_set():
-        #     animation_event.wait()
         if display_flag:
-            #display_animation(cli, blinking_path)
-            #start =  time.time()
-            display_blink_eyes(cli)
-            #print("time_cost:", time.time()-start)
-            #print("display_flag: ",display_flag)
-            #should be the duration of the animation + extra time
-            #<--- play with this time and adjust
+            display_blink_eyes(cli, base_path=blinking_path, fps=24, duration=1)
             time.sleep(1)     
-        #print("display_flag: ",display_flag)
+
 
 def handle_interaction (cli, interaction_type):
     #signal the start of an interaction animation_event
     animation_event.set()
-    # animation_paths = {
-    #     "happy": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Happy",
-    #     "sad": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Hurt",
-    #     "angry": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Angry",
-    #     "surprised": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Surprised",
-    #     "neutral": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking",
-    #     "left": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Left",
-    #     "right": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Right",
-    #     "finished": "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Successful",
-    #                 }
-    animation_paths = {
-        "sad": "Pycozmo Scripts/AnimImages/Sad",
-        "happy": "Pycozmo Scripts/AnimImages/Happy",
-        "crash": "Pycozmo Scripts/AnimImages/Crash",
-        "surprised": "Pycozmo Scripts/AnimImages/Surprised",
-        "neutral": "Pycozmo Scripts/AnimImages/Blinking",
-        "left": "Pycozmo Scripts/AnimImages/Left",
-        "right": "Pycozmo Scripts/AnimImages/Right",
-        "finished":  "Pycozmo Scripts/AnimImages/Successful"
-    }
+
     #Request the Call_animaiton script to execute the animation for the interaction
     execute_interaction_animation(cli, interaction_type)
-        #if the above doesn't work try to use this script:
-        #base_path = animation_paths.get(interaction_type)
-        #if base_path:
-            #display_images(cli, base_path=
+
+
     #clear the event after the animation request to resume default behavior    
     animation_event.clear()
-    base_path = animation_paths.get(interaction_type)
+#************************************End of Display Animation functions****************************************
+
+
     
-        
+
+#************************************Get Commands from Keyboard**************************************** 
+
 #Defining the Keyboard Actions for Cozmo  #This can be done in a swtich statement 
 def get_keyboard_command():
     command = input("Enter command (F = forward, L = left, R = right, S = stop, Q = quit): ")
@@ -107,8 +91,9 @@ def get_keyboard_command():
         return 'stop'
     elif 'Q' in command:
         return 'quit'
-    
     return command
+
+
 def clean_command(command):
     if 'F' in command:
         return 'forward'
@@ -134,9 +119,8 @@ def convert_command_to_action(command):   #using enumerators could simplify this
         return 3
     return command
 
-import threading
-import keyboard
-mode = 'automatic'
+
+
 def keyboard_listener():
     global mode
     global env
@@ -157,7 +141,14 @@ def keyboard_listener():
 
 def get_input(input_list):
     input_list[0] = input("Please type your command: ")
-import path_planner
+
+#************************************End of Keyboard funtions****************************************
+
+
+
+
+
+#************************************Procedure Code****************************************
 # Run Cozmo with updated behaviors
 def run_with_cozmo(cli):
     import time
@@ -171,17 +162,47 @@ def run_with_cozmo(cli):
 
 
     user_id = "Amol_Singh" # change it everytime when you have a new participant
+    # random generated a 10 character user_id without using time
+    user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+    print("User ID: ", user_id)
+    start_time = time.time()
 
+    #write basic info to a file in data folder
+    info_file = "data/" + user_id + "_info.txt"
+    with open(info_file, "w") as f:
+        f.write(user_id + "\n")
+        f.write(str(start_time) + "\n")
+        f.write("Animate Eyes\n")
+        f.close()
+    #initialize the traj file
+    traj_file = "data/" + user_id + "_traj.txt"
+    with open(traj_file, "w") as f:
+        f.close()
+    
 
+    current_step = 0
+    hit_wall_cnt = 0
+    hit_fire_cnt = 0
+    consistent_cnt = 0
+    inconsistent_cnt = 0
+    cmd_cnt = 0
 
     respond_time = []
     # Start the keyboard listener
     listener_thread = threading.Thread(target=keyboard_listener, daemon=True)
     listener_thread.start()
     while not done:
+        current_step += 1
+        with open(traj_file, "a") as f:
+            f.write("*****************************************************\n")
+            f.write("current_step: " + str(  current_step) + "\n")
+            f.write("current_pos:" + str( env.current_pos) +"\n")
+            f.write("current_dir:"+ str( env.current_dir )+ "\n") 
+            f.write("current_health:"+ str(  env.health) +"\n") 
+            f.close()
         cli.set_all_backpack_lights(pycozmo.lights.red_light) # three lines of them
         print("you can press p to swich now, current mode: ", mode)
-        time.sleep(1) #increased
+        #time.sleep(1) #increased
 ######################## choose action ############################
         print(mode)
         hit_wall = False
@@ -212,8 +233,8 @@ def run_with_cozmo(cli):
                     user_input[0] = 'quit'
                     break
                 if keyboard.is_pressed('p'):
-                    mode = 'automatic'
-                    print("Swiched to Automatic Mode")
+                    # mode = 'automatic'
+                    # print("Swiched to Automatic Mode")
                     break
             respond_time.append(time.time() - start_time)
 
@@ -229,6 +250,7 @@ def run_with_cozmo(cli):
                 command = action_list[action]
             else:
                 command = user_input[0]
+                cmd_cnt += 1
                # command = clean_command(command)
            # command = get_keyboard_command()
         else:
@@ -244,6 +266,28 @@ def run_with_cozmo(cli):
         
         action = convert_command_to_action(command)
         print(action)
+
+        current_pos = copy.deepcopy( env.current_pos)
+        goal_pos = copy.deepcopy(env.goal_pos)
+            #print(goal_pos)
+        next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
+
+        if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
+            consistent_cnt += 1
+        else:
+            inconsistent_cnt += 1
+        
+        with open(traj_file, "a") as f:
+            f.write("current_time: "+ str( time.time() )+"\n")
+            f.write("respond_time: "+ str(  respond_time[-1])+"\n")
+            f.write("action: "+ str(  action)+ "\n")
+            f.write("command: "+ str(  command)+ "\n")
+            f.write("indicated next action: "+ str(  path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)))+ "\n")
+            if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
+                f.write("consistent: "+ "Yes"+ "\n")
+            else:
+                f.write("consistent: "+ "No"+ "\n") 
+            f.close()
 
 
         if command == 'quit':
@@ -271,12 +315,29 @@ def run_with_cozmo(cli):
                 env.health -= 20
                 time.sleep(1)
                 handle_interaction(cli, "sad")
+                hit_fire_cnt += 1
+                with open(traj_file, "a") as f:
+                    f.write("hit fire: " + "Yes"+ "\n")
+                    f.write("hit wall: " + "No"+ "\n")
+                    f.close()
+            else:
+                env.health -= 10
+                hit_wall_cnt += 1
+                with open(traj_file, "a") as f:
+                    f.write("hit fire: "+ "No"+ "\n")
+                    f.write("hit wall: "+ "Yes"+ "\n")
+                    f.close()
             hit_wall = True
             
             cozmo_controller.move_forward(cli, 20, 10)
             cozmo_controller.move_forward(cli, -20, -10)
             #cozmo_controller.front = front
             #handle_interaction(cli, 'sad')
+        else:
+            with open(traj_file, "a") as f:
+                f.write("hit fire: "+ "No" + "\n")
+                f.write("hit wall: "+ "No" + "\n")
+                f.close()
 
         if action is not None:
             state, _, _, front , done = env.step(action)
@@ -297,7 +358,7 @@ def run_with_cozmo(cli):
             display_flag = True
             break
         
-        current_pos = copy.deepcopy( env.current_pos)
+        current_pos = copy.deepcopy(env.current_pos)
         goal_pos = copy.deepcopy(env.goal_pos)
         next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
         next_action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
@@ -320,17 +381,27 @@ def run_with_cozmo(cli):
             display_flag = True
 
 
+    with open(info_file, "a") as f:
+        f.write("hit_wall_cnt: "+ str( hit_wall_cnt )+"\n")
+        f.write("hit_fire_cnt: "+ str( hit_fire_cnt)+"\n")
+        f.write("consistent_cnt: "+ str( consistent_cnt)+"\n")
+        f.write("inconsistent_cnt: "+ str( inconsistent_cnt)+ "\n")
+        f.write("total_steps: "+ str( current_step)+ "\n")
+        f.write("human_commands: "+ str( cmd_cnt)+ "\n")
+        f.write("end_health: "+ str( env.health)+ "\n")
+        f.write("end_time: "+ str(  time.time())+ "\n")
+        f.close()
 
-    file_name = "respond_time" + user_id + ".txt"
-    if os.path.exists(file_name):
-        print("File already exists. file name has been changed")
-        file_name = "respond_time" + user_id + str(time.time()) + ".txt"
-    with open(file_name, "w") as f:
-        for time in respond_time:
-            f.write(str(time) + "\n")
-        f.write(str(done))
-    print("The file has been saved as: ", file_name)
-            
+
+
+
+#************************************End of Procedure Code****************************************
+
+
+
+
+
+#**************************These are helper functions****************************************************
 def can_move_left_or_right():
     # Get Cozmo's left and right directions based on current direction
     left_dir, right_dir = get_left_right_dirs(env.current_dir)
@@ -365,101 +436,22 @@ def is_cell_open(pos):
     x, y = pos
     return 0 <= x < env.width and 0 <= y < env.height and env.maze[x][y] == 0
 
+
+#****************************End of helper functions******************************************************
+
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians) / 2.0
         cli.set_head_angle(head_angle)
         cli.wait_for_robot()
+
         # Start the blinking thread
         blinking_thread = threading.Thread(target=continuous_blinking, args=(cli,), daemon=True)
         blinking_thread.start()
-        
-        front = 'stop'
-    
+
+        # Start the main thread
         run_with_cozmo(cli)
 
 if __name__ == '__main__':
     main()
-#VoiceCommandScript
-#Removed temporarily 1/27/2024
-
-#below is the original MainDemo script
-# import maze_env
-# #import get_voice_command
-# import PycozmoFSM_controller as cozmo_controller
-# import pycozmo
-# import os
-
-# def set_ads(angle, distance, speed):  
-#     cozmo_controller.Angle = angle
-#     cozmo_controller.Distance = distance
-#     cozmo_controller.Speed = speed
-
-# env = maze_env.MazeEnv()
-# state = env.reset()
-# done = False
-
-# #Defining the Keyboard Actions for Cozmo
-# def get_keyboard_command():
-#     command = input("Enter command (F = forward, L = left, R = right, Q = quit): ")
-#     if command == 'F':
-#         return 'forward'
-#     elif command == 'L':
-#         return 'left'
-#     elif command == 'R':
-#         return 'right'
-#     elif command == 'Q':
-#         return 'quit'
-#     else:
-#         return 'invalid'
-
-# def show_neutral_image(cli):
-#     #neutral_image_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
-#     #for raspberry
-#     neutral_image_path = "/home/matt_e/Documents/Github_Projects/HumanCozmoInteraction/huamn_cozmo_interaction/Pycozmo Scripts/emoticons/neutral.png"
-#     cozmo_controller.show_image(cli, neutral_image_path)
-
-# #Keyboard Controls For Cozmo   
-# def run_with_cozmo(cli):
-#     env = maze_env.MazeEnv()
-#     state = env.reset()
-#     done = False
-#     print('Program is running')
-#     while not done:
-#         command = get_keyboard_command()
-#         if command == 'quit':
-#             break
-#         elif command == 'invalid':
-#             print("Invalid command. Try again.")
-#             continue
-#          # Set the angle, distance, and speed based on the command
-#         if command == 'left':
-#             set_ads(90, 0, 0)  # Example: turn 90 degrees left
-#             cozmo_controller.turn_angle(cli, 90)
-#             front = 'left'
-#         elif command == 'right':
-#             set_ads(-90, 0, 0)# Example: turn 90 degrees right
-#             cozmo_controller.turn_angle(cli, -90)
-#             front = 'right'
-#         elif command == 'forward':
-#             set_ads(0, 80, 50)
-#             cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
-#             front = 'forward'
-#         if command in {'left', 'right', 'forward'}:
-#             cozmo_controller.update_state_and_image(cli, command)
-#         else: 
-#             #default to blinking
-#             show_neutral_image(cli)
-#             continue
-#         cozmo_controller.update_state_and_image(cli, front) 
-
-# def main():
-#     with pycozmo.connect(enable_procedural_face=False) as cli:
-#         head_angle = (pycozmo.MAX_HEAD_ANGLE.radians - pycozmo.robot.MIN_HEAD_ANGLE.radians)/2.0
-#         cli.set_head_angle(head_angle) 
-#         cli.wait_for_robot()
-#         run_with_cozmo(cli)
-
-# if __name__ == '__main__':
-#     main
 

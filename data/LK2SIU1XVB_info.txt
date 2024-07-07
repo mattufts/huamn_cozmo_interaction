@@ -1,0 +1,11 @@
+LK2SIU1XVB
+1720390782.8765872
+Animate Eyes
+hit_wall_cnt: 1
+hit_fire_cnt: 5
+consistent_cnt: 13
+inconsistent_cnt: 6
+total_steps: 19
+human_commands: 6
+end_health: 0
+end_time: 1720391008.9996715

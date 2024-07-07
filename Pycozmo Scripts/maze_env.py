@@ -127,7 +127,7 @@ class MazeEnv:
     def reset(self):
         self.current_pos = self.start_pos
         self.current_dir = np.array([0, 1])  # facing right, maybe all directions should be relative
-        self.heath = 100
+        self.health = 100
         self.done = False
         return self._get_state()
     
