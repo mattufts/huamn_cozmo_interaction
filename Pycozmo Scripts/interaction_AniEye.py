@@ -185,6 +185,7 @@ def run_with_cozmo(cli):
     hit_fire_cnt = 0
     consistent_cnt = 0
     inconsistent_cnt = 0
+    auto_cnt = 0
     cmd_cnt = 0
 
     respond_time = []
@@ -206,6 +207,29 @@ def run_with_cozmo(cli):
 ######################## choose action ############################
         print(mode)
         hit_wall = False
+        # showing an instruction before the user input
+        current_pos = copy.deepcopy(env.current_pos)
+        goal_pos = copy.deepcopy(env.goal_pos)
+        next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
+        next_action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
+
+        # display animation based on the next action
+        if next_action == 0:
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli,"left")
+            display_flag = True
+        if next_action == 1:
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli,"right")
+            display_flag = True
+        if next_action == 2:
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli, "happy")
+            display_flag = True
+
         #time.sleep(4)
         if mode == 'manual':
             cli.set_all_backpack_lights(pycozmo.lights.blue_light)
@@ -215,31 +239,32 @@ def run_with_cozmo(cli):
             user_input = [None]
             start_time = time.time()
             print("\n\n\n\n Please input your command via keyboard.\n\n\n\n")
-            while time.time() - start_time < 5:  #this can be put in a variable once
+            while time.time() - start_time < 10:  #this can be put in a variable once
                                                 #put start.time under the start time
-                if keyboard.is_pressed('f'):
+                if keyboard.is_pressed('f') or keyboard.is_pressed('w') or keyboard.is_pressed('up'):
                     user_input[0] = 'forward'
                     break
-                if keyboard.is_pressed('l'):
+                if keyboard.is_pressed('l') or keyboard.is_pressed('a') or keyboard.is_pressed('left'):
                     user_input[0] = 'left'
                     break
-                if keyboard.is_pressed('r'):
+                if keyboard.is_pressed('r') or keyboard.is_pressed('d') or keyboard.is_pressed('right'):
                     user_input[0] = 'right'
                     break
-                if keyboard.is_pressed('s'):
-                    user_input[0] = 'stop'
-                    break
+                # if keyboard.is_pressed('s'):
+                #     user_input[0] = 'stop'
+                #     break
                 if keyboard.is_pressed('q'):
                     user_input[0] = 'quit'
                     break
                 if keyboard.is_pressed('p'):
+                    auto_cnt += 1 
                     # mode = 'automatic'
                     # print("Swiched to Automatic Mode")
                     break
             respond_time.append(time.time() - start_time)
 
                   
-            # Wait for 5 seconds
+            # Wait for 20 seconds
             if user_input[0] is None:                   #This script here replicates the movement that the robot is going to to take its predetermined path after waiting
                 current_pos = copy.deepcopy( env.current_pos)
                 goal_pos = copy.deepcopy(env.goal_pos)
@@ -273,6 +298,14 @@ def run_with_cozmo(cli):
         next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
 
         if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
+            # show a aligment face, currently using happy face
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli, "happy")
+            display_flag = True
+            time.sleep(1)
+
+
             consistent_cnt += 1
         else:
             inconsistent_cnt += 1
@@ -284,6 +317,7 @@ def run_with_cozmo(cli):
             f.write("command: "+ str(  command)+ "\n")
             f.write("indicated next action: "+ str(  path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)))+ "\n")
             if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
+
                 f.write("consistent: "+ "Yes"+ "\n")
             else:
                 f.write("consistent: "+ "No"+ "\n") 
@@ -291,6 +325,18 @@ def run_with_cozmo(cli):
 
 
         if command == 'quit':
+            with open(info_file, "a") as f:
+                f.write("hit_wall_cnt: "+ str( hit_wall_cnt )+"\n")
+                f.write("hit_fire_cnt: "+ str( hit_fire_cnt)+"\n")
+                f.write("consistent_cnt: "+ str( consistent_cnt)+"\n")
+                f.write("inconsistent_cnt: "+ str( inconsistent_cnt)+ "\n")
+                f.write("auto_cnt: "+ str( auto_cnt)+ "\n")
+                f.write("total_steps: "+ str( current_step)+ "\n")
+                f.write("human_commands: "+ str( cmd_cnt)+ "\n")
+                f.write("end_health: "+ str( env.health)+ "\n")
+                f.write("end_time: "+ str(  time.time())+ "\n")
+
+                f.close()
             break
         elif command == 'invalid':
             print("Invalid command. Try again.")
@@ -334,6 +380,8 @@ def run_with_cozmo(cli):
             #cozmo_controller.front = front
             #handle_interaction(cli, 'sad')
         else:
+          # normal forward movement
+            
             with open(traj_file, "a") as f:
                 f.write("hit fire: "+ "No" + "\n")
                 f.write("hit wall: "+ "No" + "\n")
@@ -358,27 +406,7 @@ def run_with_cozmo(cli):
             display_flag = True
             break
         
-        current_pos = copy.deepcopy(env.current_pos)
-        goal_pos = copy.deepcopy(env.goal_pos)
-        next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
-        next_action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
 
-        # display animation based on the next action
-        if next_action == 0:
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli,"left")
-            display_flag = True
-        if next_action == 1:
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli,"right")
-            display_flag = True
-        if next_action == 2:
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli, "happy")
-            display_flag = True
 
 
     with open(info_file, "a") as f:
@@ -386,6 +414,7 @@ def run_with_cozmo(cli):
         f.write("hit_fire_cnt: "+ str( hit_fire_cnt)+"\n")
         f.write("consistent_cnt: "+ str( consistent_cnt)+"\n")
         f.write("inconsistent_cnt: "+ str( inconsistent_cnt)+ "\n")
+        f.write("auto_cnt: "+ str( auto_cnt)+ "\n")
         f.write("total_steps: "+ str( current_step)+ "\n")
         f.write("human_commands: "+ str( cmd_cnt)+ "\n")
         f.write("end_health: "+ str( env.health)+ "\n")
