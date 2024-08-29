@@ -51,7 +51,7 @@ def show_neutral_image(cli):
     global display_flag
     #blinking_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"
     #blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
-    neutral_image_path = "Pycozmo Scripts/emoticons/blank.png"
+    neutral_image_path = "/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/blank.png"
     print("display_flag: ",display_flag)
     while True:
         # if animation_event.is_set():
@@ -64,7 +64,7 @@ def show_neutral_image(cli):
             
             # Depending on how Call_Animation.display_resized_image works, you might need to save the inverted image and pass the filepath
             # Or modify the display function to accept an image object directly
-            inverted_image_path = "Pycozmo Scripts/emoticons/inverted_blank.png"
+            inverted_image_path = '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/blank.png'
             inverted_image.save(inverted_image_path)
             
             # Display the inverted image
@@ -98,14 +98,23 @@ def handle_interaction (cli, interaction_type):
         # "right" : "human_cozmo_interaction/Icon Images/Notice_Right.png",
         # "finished" : "human_cozmo_interaction/Icon Images/finsih_flag"
     state_to_image = {
-        "angry" : "Icon Images/stopping.png",
-        "happy" : "Icon Images/check_mark.png",
-        "sad" : "Icon Images/injured.png",
-        "surprised" : "Icon Images/Alert_icon.png",
-        'neutral' : "Icon Images/blank.png",
-        "left" : "Icon Images/notice_right.png",
-        "right" : "Icon Images/Notice_Left.png",
-        "finished" : "Icon Images/finish_flag.png"
+        # "angry" : "IconImages/stopping.png",
+        # "happy" : "IconImages/check_mark.png",
+        # "sad" : "IconImages/injured.png",
+        # "surprised" : "IconImages/Alert_icon.png",
+        # 'neutral' : "IconImages/blank.png",
+        # "left" : "IconImages/notice_right.png",
+        # "right" : "IconImages/Notice_Left.png",
+        # "finished" : "IconImages/finish_flag.png"
+
+        "angry": '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/stopping.png',
+        "happy" : '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/check_mark.png',
+        "sad" : '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/injured.png',
+        "surprised" : '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/Alert_icon.png',
+        "neutral" : '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/blank.png',
+        "left" : '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/Notice_Left.png',
+        "right" : '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/Notice_Right.png',
+        "finished" : '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/IconImages/finish_flag.png'
     }
     Call_Animation.display_resized_image(cli, state_to_image[interaction_type])
 
