@@ -1,0 +1,12 @@
+37R1TZ877M
+1724965207.227486
+Animate Eyes
+hit_wall_cnt: 0
+hit_fire_cnt: 5
+consistent_cnt: 12
+inconsistent_cnt: 1
+auto_cnt: 1
+total_steps: 13
+human_commands: 2
+end_health: 0
+end_time: 1724965491.3554652

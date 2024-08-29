@@ -30,6 +30,10 @@ def find_shortest_path(maze, start, end):
 
     return None  # Return None if no path is found
 def determine_next_action(start_point, next_move, current_direction):
+    if next_move is None:
+        print("Warning: next_move is None. Defaulting to no movement.")
+        return None  # or return some default action
+    move_direction = (next_move[0] - start_point[0], next_move[1] - start_point[1])
     # Mapping from current direction to the next required action
     direction_to_action = {
         (0, 1): {"left": 0, "right": 1, "forward": 2},  # Facing right

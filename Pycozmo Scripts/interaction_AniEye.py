@@ -11,7 +11,6 @@
 import os
 import time
 import threading
-display_lock = threading.Lock()
 import copy
 import pycozmo
 import path_planner
@@ -37,9 +36,32 @@ print("Blinking path:", blinking_path)
 print("Data path:", data_path)
 
 # Initialize threading event
-animation_event = threading.Event()  # Ensure this is initialized
+animation_event = threading.Event()
+
+env = maze_env.MazeEnv()
+state = env.reset()
+done = False
+display_flag = True
+wall = 0
+mode = 'manual'
+
 
 #************************************Global Variables****************************************
+# Get the directory where the script is located
+script_dir = os.path.dirname(os.path.realpath(__file__))
+
+# Construct the path to the Blinking directory
+blinking_path = os.path.join(script_dir, "AnimImages", "Blinking")
+
+# You can print this to verify the path
+print("Blinking path:", blinking_path)
+
+# Now, use blinking_path wherever it is needed in your script
+
+
+#initialize threading event
+animation_event = threading.Event()
+
 
 env = maze_env.MazeEnv()
 state = env.reset()
@@ -55,14 +77,16 @@ mode = 'manual'
 
 
 # Display blinking eyes continuously, this is for the neutral state
+
 def continuous_blinking(cli):
     global display_flag
+    blinking_path = os.path.join(script_dir, "AnimImages", "Blinking")
     print("display_flag: ", display_flag)
     while True:
         if display_flag:
-            with display_lock:  # Safeguard display resource
-                display_blink_eyes(cli, base_path=blinking_path, fps=24, duration=1)
-        time.sleep(1.5)  # Adjust the sleep duration to avoid overloading Cozmo
+            display_blink_eyes(cli, base_path=blinking_path, fps=24, duration=1)
+        # Adding a sleep to reduce CPU usage and prevent overwhelming Cozmo
+        time.sleep(1.5)
 
 
 
@@ -168,27 +192,26 @@ def run_with_cozmo(cli):
     front = 'nothing'
     print('Program is running')
 
-    user_id = "Amol_Singh"  # Change it every time you have a new participant
+
+    user_id = "Amol_Singh" # change it everytime when you have a new participant
+    # random generated a 10 character user_id without using time
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)
     start_time = time.time()
 
-    # Ensure the data directory exists
-    if not os.path.exists(data_path):
-        os.makedirs(data_path)
-
-    # Write basic info to a file in the data folder
-    info_file = os.path.join(data_path, f"{user_id}_info.txt")
+    #write basic info to a file in data folder
+    info_file = "data/" + user_id + "_info.txt"
     with open(info_file, "w") as f:
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
         f.write("Animate Eyes\n")
-
-    # Initialize the traj file
-    traj_file = os.path.join(data_path, f"{user_id}_traj.txt")
+        f.close()
+    #initialize the traj file
+    traj_file = "data/" + user_id + "_traj.txt"
     with open(traj_file, "w") as f:
         f.close()
     
+
     current_step = 0
     hit_wall_cnt = 0
     hit_fire_cnt = 0
