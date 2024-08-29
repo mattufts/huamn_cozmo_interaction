@@ -8,31 +8,38 @@
     #PycozmoFSM_Animation.py
     #path_planner for navigation
 #script that was worked on 3/5/2024
-
-import maze_env
-import threading
-import copy
-#import get_voice_command
-import PycozmoFSM_Animation as cozmo_controller
-from PycozmoFSM_Animation import display_animation, display_images
-from Call_Animation import display_blink_eyes
-from Call_Animation import execute_interaction_animation
-#import path_planner as path_planner
-#from path_planner import find_shortest_path, determine_next_action, mark_forward
-import pycozmo
 import os
 import time
-import path_planner
 import threading
+display_lock = threading.Lock()
+import copy
+import pycozmo
+import path_planner
 import keyboard
 import random
 import string
+import maze_env
+import PycozmoFSM_Animation as cozmo_controller
+from Call_Animation import display_blink_eyes, execute_interaction_animation
+
+# Change working directory to ensure paths are correctly resolved
+os.chdir("/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts")
+
+# Get the directory where the script is located
+script_dir = os.path.dirname(os.path.realpath(__file__))
+
+# Construct the path to the Blinking directory and other necessary directories
+blinking_path = os.path.join(script_dir, "AnimImages", "Blinking")
+data_path = os.path.join(script_dir, "data")
+
+# You can print these to verify the paths
+print("Blinking path:", blinking_path)
+print("Data path:", data_path)
+
+# Initialize threading event
+animation_event = threading.Event()  # Ensure this is initialized
 
 #************************************Global Variables****************************************
-
-#initialize threading event
-animation_event = threading.Event()
-
 
 env = maze_env.MazeEnv()
 state = env.reset()
@@ -50,12 +57,13 @@ mode = 'manual'
 # Display blinking eyes continuously, this is for the neutral state
 def continuous_blinking(cli):
     global display_flag
-    blinking_path = "Pycozmo Scripts/AnimImages/Blinking"
-    print("display_flag: ",display_flag)
+    print("display_flag: ", display_flag)
     while True:
         if display_flag:
-            display_blink_eyes(cli, base_path=blinking_path, fps=24, duration=1)
-            time.sleep(1)     
+            with display_lock:  # Safeguard display resource
+                display_blink_eyes(cli, base_path=blinking_path, fps=24, duration=1)
+        time.sleep(1.5)  # Adjust the sleep duration to avoid overloading Cozmo
+
 
 
 def handle_interaction (cli, interaction_type):
@@ -160,26 +168,27 @@ def run_with_cozmo(cli):
     front = 'nothing'
     print('Program is running')
 
-
-    user_id = "Amol_Singh" # change it everytime when you have a new participant
-    # random generated a 10 character user_id without using time
+    user_id = "Amol_Singh"  # Change it every time you have a new participant
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)
     start_time = time.time()
 
-    #write basic info to a file in data folder
-    info_file = "data/" + user_id + "_info.txt"
+    # Ensure the data directory exists
+    if not os.path.exists(data_path):
+        os.makedirs(data_path)
+
+    # Write basic info to a file in the data folder
+    info_file = os.path.join(data_path, f"{user_id}_info.txt")
     with open(info_file, "w") as f:
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
         f.write("Animate Eyes\n")
-        f.close()
-    #initialize the traj file
-    traj_file = "data/" + user_id + "_traj.txt"
+
+    # Initialize the traj file
+    traj_file = os.path.join(data_path, f"{user_id}_traj.txt")
     with open(traj_file, "w") as f:
         f.close()
     
-
     current_step = 0
     hit_wall_cnt = 0
     hit_fire_cnt = 0

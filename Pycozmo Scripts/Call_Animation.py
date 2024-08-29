@@ -8,21 +8,28 @@ from PIL import Image, ImageOps
 import pycozmo
 from pycozmo.anim_controller import AnimationController
 
+# Get the directory where the script is located
+script_dir = os.path.dirname(os.path.realpath(__file__))
 
-def display_blink_eyes(cli, base_path = "Pycozmo Scripts/AnimImages/Blinking", fps=24, duration =1):
+# Construct the path to the AnimImages directory
+base_path = os.path.join(script_dir, "AnimImages", "Blinking")
+
+
+def display_blink_eyes(cli, base_path=None, fps=24, duration=1):
+    if base_path is None:
+        base_path = os.path.join(script_dir, "AnimImages", "Blinking")
     frame_duration = 1.0 / fps  # Duration of each frame in seconds 
     total_loops = 1 
     # List and count PNG files in the directory
     image_files = [f for f in os.listdir(base_path) if f.endswith('.png')]
     num_images = len(image_files)
     
-
     # Display each image in sequence
-    for _ in range (total_loops):
+    for _ in range(total_loops):
         for file_name in sorted(image_files):
             image_path = os.path.join(base_path, file_name)
             display_resized_image(cli, image_path, frame_duration)
-    #cli.cancel_anim()
+
 
 def display_images(cli, base_path, fps=30, repeat_duration=3):
     frame_duration = 1.0 / fps  # Duration of each frame in seconds
@@ -77,17 +84,22 @@ def execute_interaction_animation(cli, interaction_type):
         "right": "Right",
         "finished": "Successful"
     }
-    # Get the relative base path for animations
-    #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/"
-    base_path = "Pycozmo Scripts/AnimImages"
+
+    # Get the directory where the script is located
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    
+    # Construct the path to the AnimImages directory
+    base_path = os.path.join(script_dir, "AnimImages")
     
     # Determine the full path for the specified interaction type
     animation_folder = animation_paths.get(interaction_type, "Blinking")
     full_path = os.path.join(base_path, animation_folder)
     
-    if full_path:
+    if os.path.exists(full_path):
         # Call the function that handles the display of images
-        display_images(cli, full_path, repeat_duration=4) 
+        display_images(cli, full_path, repeat_duration=4)
+    else:
+        print(f"Animation path does not exist: {full_path}")
 
 def main():
     with pycozmo.connect(enable_procedural_face=False) as cli:
@@ -96,9 +108,9 @@ def main():
         time.sleep(2)
         anim_controller = AnimationController(cli)
         anim_controller.enable_animations(False)
-        #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # Update with the path to your images
-        #base_path = "/Users/matt/Documents/GitHub/human_cozmo_interaction/Pycozmo Scripts/AnimImages/Blinking"  # For use with iMac Pro
-        base_path = "Pycozmo Scripts/AnimImages/Blinking"
+        
+        # Use the absolute path here
+        base_path = os.path.join(script_dir, "AnimImages", "Blinking")
         display_images(cli, base_path, fps=30, repeat_duration=3)
 
 if __name__ == '__main__':
