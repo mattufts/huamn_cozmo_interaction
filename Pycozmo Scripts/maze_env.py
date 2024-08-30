@@ -8,108 +8,34 @@ import numpy as np
 import random
 
 # maze should know everything including hazard and hazard should be 2
-maze =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0],     #Challenge Maze 1
-       [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
-       [0, 1, 1, 2, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0], 
-       [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], 
-       [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
-       [0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-       [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
-        ]
 
-nav_maze=[
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],  #vanilla maze, maze without environmental hazards.
-       [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
-       [0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0], 
-       [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
-       [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
-       [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
-        ]
+maze =  [[0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards are 2 and are included
+        [0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+        [0, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+        [0, 0, 0, 1, 0, 0, 2, 0],  # 3rd row
+        [0, 1, 0, 0, 0, 2, 0, 0],  # 4th row
+        [0, 1, 1, 0, 1, 0, 1, 0],  # 5th row
+        [0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+        [0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+ ]
 
-# maze =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0],     #Challenge Maze 2
-#        [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
-#        [0, 1, 1, 2, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
-#        [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0], 
-#        [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], 
-#        [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
-#        [0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
-#        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
-#         ]
-# # this is a maze exclude hazard
-# nav_maze=[
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
-#        [0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0], 
-#        [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
-#        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
-#        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
-#         ]
 
-# maze =[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0],     #Challenge Maze 3
-#        [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
-#        [0, 1, 1, 2, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
-#        [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0], 
-#        [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], 
-#        [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
-#        [0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
-#        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
-#         ]
-# # this is a maze exclude hazard
-# nav_maze=[
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0],
-#        [0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0],
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0], 
-#        [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0], 
-#        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], 
-#        [0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-#        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],   
-#         ]
-# Define the maze dimensions
-# def gen_maze():
-#     global maze
-#     width = 10
-#     height = 10
+nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0],  # Top border        navigation maze for Cozmo's memory
+            [0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+            [0, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+            [0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
+            [0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
+            [0, 1, 1, 0, 1, 0, 1, 0],  # 5th row
+            [0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+            [0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+ ]
 
-#     # Define the maze as a 2D array of zeros
-#     maze = [[0 for y in range(height)] for x in range(width)]
 
-#     # Add walls to the maze
-#     for x in range(width):
-#         maze[x][0] = 1
-#         maze[x][height-1] = 1
-#     for y in range(height):
-#         maze[0][y] = 1
-#         maze[width-1][y] = 1
 
-#     # Add random obstacles to the maze
-#     for i in range(20):  # Add 20 obstacles
-#         x = random.randint(1, width-2)  # Choose a random x-coordinate
-#         y = random.randint(1, height-2)  # Choose a random y-coordinate
-#         maze[x][y] = 1  # Place an obstacle at the chosen location
 
-#     # Print the maze
-#     for y in range(height):
-#         for x in range(width):
-#             print(maze[x][y], end="")
-#         print()
+
+#Note: Check maze_env_ORIG.py for more information on the maze
+#This is adapted for testing
 class MazeEnv:
     def __init__(self):
         #gen_maze()
@@ -117,10 +43,9 @@ class MazeEnv:
         self.nav_maze = np.array(nav_maze)
         self.height, self.width = self.maze.shape
         self.start_pos = np.array([1, 1])  # starting position is at 1, 1 of the grid
-        #self.goal_pos = np.array([self.height - 1, self.width - 1])  # goal position
         self.current_pos = self.start_pos  # current position
         self.current_dir = np.array([0, 1])  # current direction (facing right)
-        self.goal_pos = np.array([4,12]) # end point
+        self.goal_pos = np.array([4,6]) # end point
         self.done = False  # episode termination flag
         self.battery = 100 # battery level, not sure how to use it right now 
         self.health = 100

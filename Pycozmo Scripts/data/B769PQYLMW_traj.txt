@@ -1,0 +1,33 @@
+Start Time: 1724971734.7090328
+Step 1
+Position: [1 1]
+Direction: [0 1]
+Health: 100
+Step 2
+Position: [1 2]
+Direction: [0 1]
+Health: 100
+Step 3
+Position: [1 2]
+Direction: [1 0]
+Health: 100
+Step 4
+Position: [2 2]
+Direction: [1 0]
+Health: 100
+Step 5
+Position: [3 2]
+Direction: [1 0]
+Health: 100
+Step 6
+Position: [3 2]
+Direction: [0 1]
+Health: 100
+Step 7
+Position: [3 2]
+Direction: [1 0]
+Health: 100
+Step 8
+Position: [4 2]
+Direction: [1 0]
+Health: 100

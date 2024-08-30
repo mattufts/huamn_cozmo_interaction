@@ -1,0 +1,5 @@
+Start Time: 1724970680.402633
+Step 1
+Position: [1 1]
+Direction: [0 1]
+Health: 100
