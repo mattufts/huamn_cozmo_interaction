@@ -41,7 +41,7 @@ class MazeEnv:
         self.maze = np.array(maze)  # 2D array representing the maze
         self.nav_maze = np.array(nav_maze)
         self.height, self.width = self.maze.shape
-        self.start_pos = np.array([4, 7])  # starting position is at 1, 1 of the grid
+        self.start_pos = np.array([1,1])  # starting position is at 1, 1 of the grid
         self.current_pos = self.start_pos  # current position
         self.current_dir = np.array([0, 1])  # current direction (facing right)
         self.goal_pos = np.array([4,6]) # end point
