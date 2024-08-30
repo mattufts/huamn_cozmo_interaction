@@ -1,0 +1,41 @@
+Start Time: 1725037567.629552
+*****************************************************
+current_step: 1
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 2
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 3
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 4
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 5
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 6
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100

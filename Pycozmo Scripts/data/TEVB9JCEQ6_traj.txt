@@ -1,0 +1,70 @@
+Start Time: 1725037797.980361
+*****************************************************
+current_step: 1
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+*****************************************************
+current_step: 2
+current_pos:[1 2]
+current_dir:[0 1]
+current_health:100
+*****************************************************
+current_step: 3
+current_pos:[1 3]
+current_dir:[0 1]
+current_health:100
+*****************************************************
+current_step: 4
+current_pos:[1 4]
+current_dir:[0 1]
+current_health:100
+hit fire: No
+hit wall: Yes
+*****************************************************
+current_step: 5
+current_pos:[1 4]
+current_dir:[0 1]
+current_health:90
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 6
+current_pos:[1 4]
+current_dir:[0 1]
+current_health:90
+*****************************************************
+current_step: 7
+current_pos:[1 4]
+current_dir:[-1  0]
+current_health:90
+*****************************************************
+current_step: 8
+current_pos:[1 4]
+current_dir:[0 1]
+current_health:90
+*****************************************************
+current_step: 9
+current_pos:[1 4]
+current_dir:[-1  0]
+current_health:90
+*****************************************************
+current_step: 10
+current_pos:[1 4]
+current_dir:[-1  0]
+current_health:90
+*****************************************************
+current_step: 11
+current_pos:[1 4]
+current_dir:[-1  0]
+current_health:90
+*****************************************************
+current_step: 12
+current_pos:[1 4]
+current_dir:[ 0 -1]
+current_health:90
+*****************************************************
+current_step: 13
+current_pos:[1 3]
+current_dir:[ 0 -1]
+current_health:90

@@ -1,0 +1,19 @@
+Start Time: 1725036351.6143234
+*****************************************************
+current_step: 1
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+current_time: 1725036360.6508005
+respond_time: 5.986733913421631
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 2
+current_pos:[1 2]
+current_dir:[0 1]
+current_health:100

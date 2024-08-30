@@ -8,7 +8,6 @@
     #PycozmoFSM_Animation.py
     #path_planner for navigation
 #script that was worked on 3/5/2024
-
 import os
 import time
 import threading
@@ -25,9 +24,28 @@ from Call_Animation import display_resized_image, execute_interaction_animation
 # Get the directory where the script is located
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
+# Change the working directory to the script's directory
+os.chdir(script_dir)
+
 # Construct the paths to the necessary directories
 neutral_image_path = os.path.join(script_dir, "..", "Emotion_Eyes", "Emoticons", "neutral.png")
 data_path = os.path.join(script_dir, "data")
+emotion_image_dir = os.path.join(script_dir, "..", "Emotion_Eyes", "Emoticons")
+
+state_to_image = {
+    'up': os.path.join(emotion_image_dir, 'up.png'),    
+    'left': os.path.join(emotion_image_dir, 'glancing_left-01.png'),
+    'right': os.path.join(emotion_image_dir, 'glacing_right-01.png'),
+    'happy': os.path.join(emotion_image_dir, 'happy.png'),
+    'sad': os.path.join(emotion_image_dir, 'injured_sad-01.png'),
+    'neutral': os.path.join(emotion_image_dir, 'neutral.png'),
+    'crash': os.path.join(emotion_image_dir, 'crash.png'),
+    'finished': os.path.join(emotion_image_dir, 'wink.png')
+}
+
+print("Current working directory:", os.getcwd())
+print("Emotion image directory:", emotion_image_dir)
+
 
 # You can print these to verify the paths
 print("Neutral image path:", neutral_image_path)
@@ -41,7 +59,7 @@ state = env.reset()
 done = False
 display_flag = True
 mode = 'manual'
-#************************************Display Animation****************************************
+#************************************Display Image***************************************
 
 def show_neutral_image(cli):
     global display_flag
@@ -51,20 +69,18 @@ def show_neutral_image(cli):
             display_resized_image(cli, neutral_image_path)
             time.sleep(3)
 
-def handle_interaction (cli, interaction_type):
-    #signal the start of an interaction animation_event
+
+def handle_interaction(cli, interaction_type):
+    global state_to_image
     
-    state_to_image = {
-        "crash" : "crash.png",
-        'up' : 'happy-01.png',    #Need to change this to UP 
-        'sad' : 'injured_sad-01.png',
-        'neutral' : 'neutral.png',
-        'left' : 'glancing_left-01.png',
-        'right' : 'glacing_right-01.png',
-        'finished' : 'Emotion_Eyes/Emoticons/Successful-01.png'
-        
-    }
-    display_resized_image(cli, state_to_image[interaction_type])
+    if interaction_type in state_to_image:
+        image_path = state_to_image[interaction_type]
+        if os.path.exists(image_path):
+            display_resized_image(cli, image_path)
+        else:
+            print(f"Image file not found: {image_path}")
+    else:
+        print(f"Interaction type '{interaction_type}' not recognized.")
 
 #************************************Keyboard Commands**************************************** 
 
@@ -131,7 +147,6 @@ def get_input(input_list):
 
 
 #************************************Procedure Code****************************************
-# Run Cozmo with updated behaviors
 def run_with_cozmo(cli):
     import time
     action_list = ['left', 'right', 'forward', 'stop']
@@ -140,6 +155,7 @@ def run_with_cozmo(cli):
     state = env.reset()
     done = False
     front = 'nothing'
+    action = None  # Initialize action to ensure it's always defined
     print('Program is running')
 
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
@@ -170,47 +186,26 @@ def run_with_cozmo(cli):
 
     while not done:
         current_step += 1
+        hit_wall = False  # Initialize hit_wall at the start of each loop iteration
+
         with open(traj_file, "a") as f:
             f.write("*****************************************************\n")
-            f.write("current_step: " + str(  current_step) + "\n")
-            f.write("current_pos:" + str( env.current_pos) +"\n")
-            f.write("current_dir:"+ str( env.current_dir )+ "\n") 
-            f.write("current_health:"+ str(  env.health) +"\n") 
+            f.write("current_step: " + str(current_step) + "\n")
+            f.write("current_pos:" + str(env.current_pos) + "\n")
+            f.write("current_dir:" + str(env.current_dir) + "\n")
+            f.write("current_health:" + str(env.health) + "\n")
             f.close()
+
         cli.set_all_backpack_lights(pycozmo.lights.red_light)
         print(f"You can press 'p' to switch modes. Current mode: {mode}")
-######################## choose action ############################
-        hit_wall = False
-        # showing an instruction before the user input
-        current_pos = copy.deepcopy(env.current_pos)
-        goal_pos = copy.deepcopy(env.goal_pos)
-        next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
-        next_action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
 
-        # display animation based on the next action
-        if next_action == 0:
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli,"left")
-            display_flag = True
-        if next_action == 1:
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli,"right")
-            display_flag = True
-        if next_action == 2:
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli, "happy")
-            display_flag = True 
-        
+        # Determine the next action
         if mode == 'manual':
-            cli.set_all_backpack_lights(pycozmo.lights.blue_light)
+            # Get command from user input
             user_input = [None]
             start_time = time.time()
             print("\n\n\n\n Please input your command via keyboard.\n\n\n\n")
-            while time.time() - start_time < 10: # 10 seconds to respond
-                                                # if no response, then use the automatic mode
+            while time.time() - start_time < 10:  # 10 seconds to respond
                 if keyboard.is_pressed('f') or keyboard.is_pressed('w') or keyboard.is_pressed('up'):
                     user_input[0] = 'forward'
                     break
@@ -226,96 +221,38 @@ def run_with_cozmo(cli):
                 if keyboard.is_pressed('p'):
                     mode = 'automatic'
                     auto_cnt += 1 
-                    print("Swiched to Automatic Mode")
+                    print("Switched to Automatic Mode")
                     break
-            respond_time.append(time.time() - start_time)
-            #cli.set_all_backpack_lights(pycozmo.lights.red_light)
-
-            #wait 20 seconds for the user to respond
-            if user_input[0] is None:
-                current_pos = copy.deepcopy(env.current_pos)
-                goal_pos = copy.deepcopy(env.goal_pos)
-                next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
-                action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
-                command = action_list[action]
-            else:
-                command = user_input[0]
-                cmd_cnt += 1
+            command = user_input[0] if user_input[0] is not None else 'stop'
         else:
+            # Automatically determine the command
             current_pos = copy.deepcopy(env.current_pos)
             goal_pos = copy.deepcopy(env.goal_pos)
             next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
             action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
             command = action_list[action]
-            print("command: ", command)
 
-        action = convert_command_to_action(command)
-        print(action)
-
-        if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
-            # show a aligment face, currently using happy face
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli, "happy")
-            display_flag = True
-            time.sleep(1)
-
-
-            consistent_cnt += 1
-        else:
-            inconsistent_cnt += 1
-        
-        with open(traj_file, "a") as f:
-            f.write("current_time: "+ str( time.time() )+"\n")
-            f.write("respond_time: "+ str(  respond_time[-1])+"\n")
-            f.write("action: "+ str(  action)+ "\n")
-            f.write("command: "+ str(  command)+ "\n")
-            f.write("indicated next action: "+ str(  path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)))+ "\n")
-            if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
-
-                f.write("consistent: "+ "Yes"+ "\n")
-            else:
-                f.write("consistent: "+ "No"+ "\n") 
-            f.close()
-
-
-        if command == 'quit':
-            with open(info_file, "a") as f:
-                f.write("hit_wall_cnt: "+ str( hit_wall_cnt )+"\n")
-                f.write("hit_fire_cnt: "+ str( hit_fire_cnt)+"\n")
-                f.write("consistent_cnt: "+ str( consistent_cnt)+"\n")
-                f.write("inconsistent_cnt: "+ str( inconsistent_cnt)+ "\n")
-                f.write("auto_cnt: "+ str( auto_cnt)+ "\n")
-                f.write("total_steps: "+ str( current_step)+ "\n")
-                f.write("human_commands: "+ str( cmd_cnt)+ "\n")
-                f.write("end_health: "+ str( env.health)+ "\n")
-                f.write("end_time: "+ str(  time.time())+ "\n")
-
-                f.close()
-            break
-        elif command == 'invalid':
-            print("Invalid command. Try again.")
-            continue
-        
-
+        # Map commands to actions and display corresponding images
         if command == 'left':
             cozmo_controller.turn_angle(cli, -75)
+            handle_interaction(cli, 'left')  # Show left-turning image
+            action = 0
 
-        if command == 'right':
+        elif command == 'right':
             cozmo_controller.turn_angle(cli, 75)
+            handle_interaction(cli, 'right')  # Show right-turning image
+            action = 1
 
-        if command == 'forward' and front == "nothing":
+        elif command == 'forward' and front == "nothing":
             cozmo_controller.move_forward(cli, 80, 50)
+            handle_interaction(cli, 'up')  # Show moving forward image
+            action = 2
         
-        if command == 'forward' and front != "nothing":
-            #if front == "wall":            
-             #env.health = 0
-            #wall = wall+1
-
+        elif command == 'forward' and front != "nothing":
             if front == "fire":
                 env.health -= 20
                 time.sleep(1)
-                handle_interaction(cli, "sad")
+                handle_interaction(cli, "sad")  # Show sad image for hitting fire
                 hit_fire_cnt += 1
                 with open(traj_file, "a") as f:
                     f.write("hit fire: " + "Yes"+ "\n")
@@ -324,6 +261,7 @@ def run_with_cozmo(cli):
             else:
                 env.health -= 10
                 hit_wall_cnt += 1
+                handle_interaction(cli, "crash")  # Show crash image for hitting a wall
                 with open(traj_file, "a") as f:
                     f.write("hit fire: "+ "No"+ "\n")
                     f.write("hit wall: "+ "Yes"+ "\n")
@@ -331,34 +269,48 @@ def run_with_cozmo(cli):
             hit_wall = True
             cozmo_controller.move_forward(cli, 20, 10)
             cozmo_controller.move_forward(cli, -20, -10)
+            action = 2
         else:
-          # normal forward movement
-            
+            # normal forward movement
             with open(traj_file, "a") as f:
                 f.write("hit fire: "+ "No" + "\n")
                 f.write("hit wall: "+ "No" + "\n")
                 f.close()
+            handle_interaction(cli, 'neutral')  # Show neutral image during normal movement
+            action = 2  # Assign a default action value for normal forward movement
 
         if action is not None:
             state, _, _, front , done = env.step(action)
 
-        
-
         if hit_wall:
-            # Cozmo hits a wall, play "Hurt" animation
             display_flag = False
             time.sleep(1)
-            handle_interaction(cli, "crash")
+            handle_interaction(cli, "crash")  # Show crash image when hitting a wall
             display_flag = True
         
         if env.health <= 0:
             display_flag = False
             time.sleep(1)
-            handle_interaction(cli, "sad")
+            handle_interaction(cli, "sad")  # Show sad image when health is depleted
             display_flag = True
             break
 
-
+        if command == 'quit':
+            with open(info_file, "a") as f:
+                f.write("hit_wall_cnt: "+ str(hit_wall_cnt) +"\n")
+                f.write("hit_fire_cnt: "+ str(hit_fire_cnt) +"\n")
+                f.write("consistent_cnt: "+ str(consistent_cnt) +"\n")
+                f.write("inconsistent_cnt: "+ str(inconsistent_cnt)+ "\n")
+                f.write("auto_cnt: "+ str(auto_cnt)+ "\n")
+                f.write("total_steps: "+ str(current_step)+ "\n")
+                f.write("human_commands: "+ str(cmd_cnt)+ "\n")
+                f.write("end_health: "+ str(env.health)+ "\n")
+                f.write("end_time: "+ str( time.time())+ "\n")
+                f.close()
+            break
+        elif command == 'invalid':
+            print("Invalid command. Try again.")
+            continue
 
     with open(info_file, "a") as f:
         f.write(f"Hit Wall Count: {hit_wall_cnt}\n")
@@ -370,6 +322,7 @@ def run_with_cozmo(cli):
         f.write(f"Human Commands: {cmd_cnt}\n")
         f.write(f"End Health: {env.health}\n")
         f.write(f"End Time: {time.time()}\n")
+        f.close()
 #************************************End of Procedure Code****************************************
 
 
