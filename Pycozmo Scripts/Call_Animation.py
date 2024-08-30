@@ -74,15 +74,20 @@ def display_resized_image(cli, image_path, duration = 1):
 # Call_Animation.py
 def execute_interaction_animation(cli, interaction_type):
     animation_paths = {
-        "happy": "Happy",
-        "sad": "Sad",
-        "angry": "Angry",
-        "crash": "Crash",
-        "surprised": "Surprised",
-        "neutral": "Blinking",
+        "up": "Up",         #directional animations
         "left": "Left",
         "right": "Right",
-        "finished": "Successful"
+
+        "sad": "Sad",         #reactionary animations
+        "crash": "Crash",
+        "finished": "Winking",
+
+        "happy": "Happy",     #alignment animations
+
+
+        "neutral": "Blinking"    #default animation
+
+        
     }
 
     # Get the directory where the script is located

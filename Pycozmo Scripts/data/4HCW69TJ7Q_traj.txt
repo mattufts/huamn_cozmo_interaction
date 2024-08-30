@@ -1,0 +1,40 @@
+*****************************************************
+current_step: 1
+current_pos: [1 1]
+current_dir: [0 1]
+current_health: 100
+*****************************************************
+current_step: 2
+current_pos: [1 2]
+current_dir: [0 1]
+current_health: 100
+*****************************************************
+current_step: 3
+current_pos: [1 2]
+current_dir: [1 0]
+current_health: 100
+*****************************************************
+current_step: 4
+current_pos: [2 2]
+current_dir: [1 0]
+current_health: 100
+*****************************************************
+current_step: 5
+current_pos: [3 2]
+current_dir: [1 0]
+current_health: 100
+*****************************************************
+current_step: 6
+current_pos: [4 2]
+current_dir: [1 0]
+current_health: 100
+*****************************************************
+current_step: 7
+current_pos: [4 2]
+current_dir: [0 1]
+current_health: 100
+*****************************************************
+current_step: 8
+current_pos: [4 3]
+current_dir: [0 1]
+current_health: 100

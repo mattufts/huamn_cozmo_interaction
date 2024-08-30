@@ -1,0 +1,77 @@
+*****************************************************
+current_step: 1
+current_pos:[4 7]
+current_dir:[0 1]
+current_health:100
+current_time: 1725029330.0194716
+respond_time: 2.8935623168945312
+action: 2
+command: forward
+indicated next action: 1
+consistent: No
+*****************************************************
+current_step: 2
+current_pos:[4 7]
+current_dir:[0 1]
+current_health:100
+current_time: 1725029335.927326
+respond_time: 1.2111990451812744
+action: 2
+command: forward
+indicated next action: 1
+consistent: No
+*****************************************************
+current_step: 3
+current_pos:[4 7]
+current_dir:[0 1]
+current_health:100
+current_time: 1725029340.639678
+respond_time: 0.5136771202087402
+action: 2
+command: forward
+indicated next action: 1
+consistent: No
+*****************************************************
+current_step: 4
+current_pos:[4 7]
+current_dir:[0 1]
+current_health:100
+current_time: 1725029345.707559
+respond_time: 0.6657969951629639
+action: 2
+command: forward
+indicated next action: 0
+consistent: No
+*****************************************************
+current_step: 5
+current_pos:[4 7]
+current_dir:[0 1]
+current_health:100
+current_time: 1725029358.5856519
+respond_time: 8.309070110321045
+action: 1
+command: right
+indicated next action: 0
+consistent: No
+*****************************************************
+current_step: 6
+current_pos:[4 7]
+current_dir:[1 0]
+current_health:100
+current_time: 1725029367.1524024
+respond_time: 0.48017096519470215
+action: 1
+command: right
+indicated next action: 1
+consistent: Yes
+*****************************************************
+current_step: 7
+current_pos:[4 7]
+current_dir:[ 0 -1]
+current_health:100
+current_time: 1725029376.2244916
+respond_time: 0.48017096519470215
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes

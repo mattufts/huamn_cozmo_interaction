@@ -218,7 +218,7 @@ def main():
         anim_controller = AnimationController(cli)
         anim_controller.enable_animations(False)
 
-        base_path = '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/icon_stop'
+        base_path = '/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts/AnimImages/icon_default'
         images = preload_images(base_path)
         display_animation(cli, anim_controller, images)
 

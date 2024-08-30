@@ -1,0 +1,12 @@
+JGMJHXP1RH
+1725029443.3001664
+Animate Eyes
+hit_wall_cnt: 0
+hit_fire_cnt: 0
+consistent_cnt: 2
+inconsistent_cnt: 2
+auto_cnt: 0
+total_steps: 4
+human_commands: 4
+end_health: 100
+end_time: 1725029486.326411

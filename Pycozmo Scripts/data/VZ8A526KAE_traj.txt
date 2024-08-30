@@ -1,0 +1,6 @@
+Start Time: 1724993459.4387808
+*****************************************************
+current_step: 1
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100

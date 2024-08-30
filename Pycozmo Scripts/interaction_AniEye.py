@@ -114,7 +114,7 @@ def get_keyboard_command():
     
     if 'F' in command:  #these could be done in a switch statement
                         #convert everything to a lowercase
-        return 'forward'
+        return 'forward' 
     elif 'L' in command:
         return 'left'
     elif 'R' in command:
@@ -239,6 +239,42 @@ def run_with_cozmo(cli):
 ######################## choose action ############################
         print(mode)
         hit_wall = False
+        
+        print(f"Current Position: {env.current_pos}, Goal Position: {env.goal_pos}")  # Add this line here
+
+        if (env.current_pos == env.goal_pos).all():
+            # Play the "Winking" animation
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli, "finished")
+            display_flag = True
+
+            # Print congratulatory message
+            print("You have completed the course! Congratulations!")
+
+            # Record data to the info_file
+            with open(info_file, "a") as f:
+                f.write("hit_wall_cnt: " + str(hit_wall_cnt) + "\n")
+                f.write("hit_fire_cnt: " + str(hit_fire_cnt) + "\n")
+                f.write("consistent_cnt: " + str(consistent_cnt) + "\n")
+                f.write("inconsistent_cnt: " + str(inconsistent_cnt) + "\n")
+                f.write("auto_cnt: " + str(auto_cnt) + "\n")
+                f.write("total_steps: " + str(current_step) + "\n")
+                f.write("human_commands: " + str(cmd_cnt) + "\n")
+                f.write("end_health: " + str(env.health) + "\n")
+                f.write("end_time: " + str(time.time()) + "\n")
+                f.close()
+            
+            # Now set done to True to end the loop
+            done = True
+
+            # Prompt the user to manually hit "Q" to end the session
+            while True:
+                end_command = input("Press 'Q' to quit: ").strip().upper()
+                if end_command == 'Q':
+                    print("Session ended.")
+                    break
+            break 
         # showing an instruction before the user input
         current_pos = copy.deepcopy(env.current_pos)
         goal_pos = copy.deepcopy(env.goal_pos)
@@ -259,7 +295,7 @@ def run_with_cozmo(cli):
         if next_action == 2:
             display_flag = False
             time.sleep(1)
-            handle_interaction(cli, "happy")
+            handle_interaction(cli, "up")
             display_flag = True
 
         #time.sleep(4)
@@ -329,7 +365,7 @@ def run_with_cozmo(cli):
             #print(goal_pos)
         next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
 
-        if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
+        if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):   #Alignment Animation
             # show a aligment face, currently using happy face
             display_flag = False
             time.sleep(1)
@@ -515,4 +551,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

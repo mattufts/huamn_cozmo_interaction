@@ -55,13 +55,12 @@ def handle_interaction (cli, interaction_type):
     #signal the start of an interaction animation_event
     
     state_to_image = {
-        "crash" : "Emotion_Eyes/Emoticons/Angry_Stop-01.png",
-        'happy' : 'Emotion_Eyes/Emoticons/happy-01.png',
-        'sad' : 'Emotion_Eyes/Emoticons/injured_sad-01.png',
-        'surprised' : 'Emotion_Eyes/Emoticons/surprise_alert-01.png',
-        'neutral' : 'Emotion_Eyes/Emoticons/neutral.png',
-        'left' : 'Emotion_Eyes/Emoticons/glancing_left-01.png',
-        'right' : 'Emotion_Eyes/Emoticons/glacing_right-01.png',
+        "crash" : "crash.png",
+        'up' : 'happy-01.png',    #Need to change this to UP 
+        'sad' : 'injured_sad-01.png',
+        'neutral' : 'neutral.png',
+        'left' : 'glancing_left-01.png',
+        'right' : 'glacing_right-01.png',
         'finished' : 'Emotion_Eyes/Emoticons/Successful-01.png'
         
     }

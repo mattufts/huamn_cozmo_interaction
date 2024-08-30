@@ -9,27 +9,26 @@ import random
 
 # maze should know everything including hazard and hazard should be 2
 
-maze =  [[0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards are 2 and are included
-        [0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
-        [0, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
-        [0, 0, 0, 1, 0, 0, 2, 0],  # 3rd row
-        [0, 1, 0, 0, 0, 2, 0, 0],  # 4th row
-        [0, 1, 1, 0, 1, 0, 1, 0],  # 5th row
-        [0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
-        [0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards are 2 and are included
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+        [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+        [0, 0, 0, 0, 1, 0, 2, 0, 0],  # 3rd row
+        [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
+        [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
+        [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+        [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
  ]
 
 
-nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0],  # Top border        navigation maze for Cozmo's memory
-            [0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
-            [0, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
-            [0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
-            [0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
-            [0, 1, 1, 0, 1, 0, 1, 0],  # 5th row
-            [0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
-            [0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze1, Cozmo's Memory
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+        [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+        [0, 0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
+        [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
+        [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
+        [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+        [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
  ]
-
 
 
 
@@ -42,7 +41,7 @@ class MazeEnv:
         self.maze = np.array(maze)  # 2D array representing the maze
         self.nav_maze = np.array(nav_maze)
         self.height, self.width = self.maze.shape
-        self.start_pos = np.array([1, 1])  # starting position is at 1, 1 of the grid
+        self.start_pos = np.array([4, 7])  # starting position is at 1, 1 of the grid
         self.current_pos = self.start_pos  # current position
         self.current_dir = np.array([0, 1])  # current direction (facing right)
         self.goal_pos = np.array([4,6]) # end point
@@ -99,7 +98,7 @@ class MazeEnv:
                     self.current_pos = new_pos
                     if (self.current_pos == self.goal_pos).all():  # reached goal
                         reward = 1
-                        self.done = True
+                        #self.done = True
                     else:
                         reward = 0
                 else:  # hit a wall
