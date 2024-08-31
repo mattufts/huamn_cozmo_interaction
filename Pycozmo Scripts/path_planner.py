@@ -33,6 +33,7 @@ def determine_next_action(start_point, next_move, current_direction):
     if next_move is None:
         print("Warning: next_move is None. Defaulting to no movement.")
         return None  # or return some default action
+
     move_direction = (next_move[0] - start_point[0], next_move[1] - start_point[1])
     # Mapping from current direction to the next required action
     direction_to_action = {

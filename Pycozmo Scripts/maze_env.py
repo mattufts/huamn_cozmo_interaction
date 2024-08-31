@@ -8,8 +8,8 @@ import numpy as np
 import random
 
 # maze should know everything including hazard and hazard should be 2
-
-maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards are 2 and are included
+# ################## Maze 1 ###################
+maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A, hazards are 2 and are included
         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
         [0, 0, 0, 0, 1, 0, 2, 0, 0],  # 3rd row
@@ -20,31 +20,116 @@ maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards 
  ]
 
 
-nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze1, Cozmo's Memory
-        [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
-        [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
-        [0, 0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
-        [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
-        [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
-        [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
-        [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
- ]
+nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze A, Cozmo's Memory
+            [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+            [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+            [0, 0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
+            [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
+            [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
+            [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+            [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+]
+
+# ################### Maze 2 ###################
+# maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option B, hazards are 2 and are included
+#         [0, 0, 0, 0, 0, 0, 0, 1, 0],  # 1st row
+#         [0, 2, 1, 2, 0, 1, 2, 0, 0],  # 2nd row
+#         [0, 0, 0, 1, 0, 0, 0, 0, 0],  # 3rd row
+#         [0, 0, 0, 1, 1, 1, 0, 0, 0],  # 4th row
+#         [0, 0, 0, 0, 0, 1, 0, 1, 0],  # 5th row
+#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+#  ] #          1, 2, 3, 4, 5, 6, 7   columns
 
 
+# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze B, Cozmo's Memory
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 1st row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 2nd row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 3rd row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 4th row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 5th row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 6th row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+#  ] #          1, 2, 3, 4, 5, 6, 7   columns
 
 
+################### Maze 3 ###################
+# maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards are 2 and are included
+#         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+#         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+#         [0, 0, 0, 0, 1, 0, 2, 0, 0],  # 3rd row
+#         [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
+#         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
+#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+#  ]          1, 2, 3, 4, 5, 6, 7   columns 
+
+
+# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze1, Cozmo's Memory
+#         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+#         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+#         [0, 0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
+#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
+#         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
+#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+#  ]          1, 2, 3, 4, 5, 6, 7   columns
+
+################### Maze Template ###################
+# maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards are 2 and are included
+#         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+#         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+#         [0, 0, 0, 0, 1, 0, 2, 0, 0],  # 3rd row
+#         [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
+#         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
+#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+#  ]          1, 2, 3, 4, 5, 6, 7   columns 
+
+
+# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze1, Cozmo's Memory
+#         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+#         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+#         [0, 0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
+#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
+#         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
+#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+#  ]          1, 2, 3, 4, 5, 6, 7   columns
+
+
+##################################################
 #Note: Check maze_env_ORIG.py for more information on the maze
 #This is adapted for testing
 class MazeEnv:
     def __init__(self):
-        #gen_maze()
+
         self.maze = np.array(maze)  # 2D array representing the maze
         self.nav_maze = np.array(nav_maze)
         self.height, self.width = self.maze.shape
-        self.start_pos = np.array([1,1])  # starting position is at 1, 1 of the grid
-        self.current_pos = self.start_pos  # current position
+
+
+################### Maze A start position ###################
+        self.start_pos = np.array([1,1])  # starting position is at 1, 1 of the grid   MAZE A
+################### Maze A goal position ###################
         self.current_dir = np.array([0, 1])  # current direction (facing right)
         self.goal_pos = np.array([4,6]) # end point
+
+################### Maze B start position ###################
+        # self.start_pos = np.array([1,1])  # starting position is at 1, 1 of the grid   MAZE B
+################### Maze B goal position ###################
+        # self.current_dir = np.array([0, 1])  # current direction (facing right)       
+        # self.goal_pos = np.array([5,7]) # end point
+
+
+################### Maze C start position ###################
+        # self.start_pos = np.array([1,1])  # starting position is at 1, 1 of the grid   MAZE C
+        #self.current_pos = self.start_pos  # current position
+################### Maze C goal position ###################
+        # self.current_dir = np.array([0, 1])  # current direction (facing right)
+        # self.goal_pos = np.array([4,6]) # end point
+
+
         self.done = False  # episode termination flag
         self.battery = 100 # battery level, not sure how to use it right now 
         self.health = 100
@@ -118,6 +203,3 @@ class MazeEnv:
     
     def _get_state(self):
         return np.concatenate([self.current_pos, self.current_dir])
-
-
-

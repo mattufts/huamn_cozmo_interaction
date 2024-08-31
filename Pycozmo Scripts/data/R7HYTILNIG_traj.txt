@@ -1,0 +1,180 @@
+*****************************************************
+current_step: 1
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+current_time: 1725054359.983945
+respond_time: 2.29350209236145
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 2
+current_pos:[1 2]
+current_dir:[0 1]
+current_health:100
+current_time: 1725054375.7271686
+respond_time: 3.3224964141845703
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 3
+current_pos:[1 3]
+current_dir:[0 1]
+current_health:100
+current_time: 1725054383.9020748
+respond_time: 1.0932486057281494
+action: 2
+command: forward
+indicated next action: 1
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 4
+current_pos:[1 4]
+current_dir:[0 1]
+current_health:100
+current_time: 1725054399.916077
+respond_time: 4.7473273277282715
+action: 1
+command: right
+indicated next action: 1
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 5
+current_pos:[1 4]
+current_dir:[1 0]
+current_health:100
+current_time: 1725054413.489798
+respond_time: 1.304746150970459
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 6
+current_pos:[2 4]
+current_dir:[1 0]
+current_health:100
+current_time: 1725054430.5647614
+respond_time: 4.6517205238342285
+action: 0
+command: left
+indicated next action: 0
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 7
+current_pos:[2 4]
+current_dir:[0 1]
+current_health:100
+current_time: 1725054446.19915
+respond_time: 2.923356056213379
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 8
+current_pos:[2 5]
+current_dir:[0 1]
+current_health:100
+current_time: 1725054459.3543408
+respond_time: 5.707834482192993
+action: 2
+command: forward
+indicated next action: 1
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 9
+current_pos:[2 6]
+current_dir:[0 1]
+current_health:100
+current_time: 1725054468.6656594
+respond_time: 1.3965301513671875
+action: 2
+command: forward
+indicated next action: 1
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 10
+current_pos:[2 7]
+current_dir:[0 1]
+current_health:100
+current_time: 1725054483.3467846
+respond_time: 2.9995057582855225
+action: 1
+command: right
+indicated next action: 1
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 11
+current_pos:[2 7]
+current_dir:[1 0]
+current_health:100
+current_time: 1725054503.321899
+respond_time: 7.7169411182403564
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 12
+current_pos:[3 7]
+current_dir:[1 0]
+current_health:100
+current_time: 1725054515.375199
+respond_time: 7.7169411182403564
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 13
+current_pos:[4 7]
+current_dir:[1 0]
+current_health:100
+current_time: 1725054526.9223142
+respond_time: 7.7169411182403564
+action: 1
+command: right
+indicated next action: 1
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 14
+current_pos:[4 7]
+current_dir:[ 0 -1]
+current_health:100
+current_time: 1725054539.4723635
+respond_time: 7.7169411182403564
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
