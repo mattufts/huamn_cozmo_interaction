@@ -37,7 +37,7 @@ os.chdir("/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the path to the Blinking directory and other necessary directories
-blinking_path = os.path.join(script_dir, "AnimImages", "Blinking")
+blinking_path = os.path.join(script_dir, "AnimImages", "icon_default")
 data_path = os.path.join(script_dir, "data")
 
 # You can print these to verify the paths
@@ -58,9 +58,6 @@ mode = 'manual'
 #************************************Global Variables****************************************
 # Get the directory where the script is located
 script_dir = os.path.dirname(os.path.realpath(__file__))
-
-# Construct the path to the Blinking directory
-blinking_path = os.path.join(script_dir, "AnimImages", "Blinking")
 
 # You can print this to verify the path
 print("Blinking path:", blinking_path)

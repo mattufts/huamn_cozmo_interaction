@@ -3,23 +3,18 @@
 #This shows the functionality together, but the code can be broken up into
 #different sections in order to test the screen
 
-#The scripts that MainDemo imports are:
-    #maze_env.py
-    #PycozmoFSM_Animation.py
-    #path_planner for navigation
-#script that was worked on 3/5/2024
-import os
 import time
 import threading
 import copy
 import pycozmo
 import path_planner
+import os
 import keyboard
 import random
 import string
 import maze_env
 import PycozmoFSM_Animation as cozmo_controller
-from Call_Animation import display_blink_eyes, execute_interaction_animation
+from Call_Animation_Icons import display_blink_eyes, execute_interaction_animation
 
 # Change working directory to ensure paths are correctly resolved
 os.chdir("/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts")
@@ -51,7 +46,7 @@ mode = 'manual'
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the path to the Blinking directory
-blinking_path = os.path.join(script_dir, "AnimImages", "Blinking")
+blinking_path = os.path.join(script_dir, "AnimImages", "icon_default")
 
 # You can print this to verify the path
 print("Blinking path:", blinking_path)
@@ -80,7 +75,7 @@ mode = 'manual'
 
 def continuous_blinking(cli):
     global display_flag
-    blinking_path = os.path.join(script_dir, "AnimImages", "Blinking")
+    blinking_path = os.path.join(script_dir, "AnimImages", "icon_default")
     print("display_flag: ", display_flag)
     while True:
         if display_flag:
