@@ -6,8 +6,7 @@
 #This script is imported by MainDemo_Animation script
 
 #The scripts that this imports are:
-    #Call_Animation
-
+    #Call_Animation.py
 import sys
 import os
 import pycozmo

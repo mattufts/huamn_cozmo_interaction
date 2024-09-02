@@ -1,0 +1,11 @@
+*****************************************************
+current_step: 1
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+current_time: 1725165685.4734466
+respond_time: 1.4228684902191162
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes

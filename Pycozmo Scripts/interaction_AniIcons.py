@@ -1,14 +1,18 @@
-#main execution Code
 #This code utilizes maze environment.py and cozmo_controller.py to test the maze environment
 #This shows the functionality together, but the code can be broken up into
 #different sections in order to test the screen
 
+#The scripts that MainDemo imports are:
+    #maze_env.py
+    #PycozmoFSM_Animation.py
+    #path_planner for navigation
+#script that was worked on 3/5/2024
+import os
 import time
 import threading
 import copy
 import pycozmo
 import path_planner
-import os
 import keyboard
 import random
 import string
@@ -23,7 +27,7 @@ os.chdir("/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the path to the Blinking directory and other necessary directories
-blinking_path = os.path.join(script_dir, "AnimImages", "icon_default")
+blinking_path = os.path.join(script_dir, "AnimImages", "icon_static")
 data_path = os.path.join(script_dir, "data")
 
 # You can print these to verify the paths
@@ -46,7 +50,7 @@ mode = 'manual'
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the path to the Blinking directory
-blinking_path = os.path.join(script_dir, "AnimImages", "icon_default")
+blinking_path = os.path.join(script_dir, "AnimImages", "icon_static")
 
 # You can print this to verify the path
 print("Blinking path:", blinking_path)
@@ -73,15 +77,57 @@ mode = 'manual'
 
 # Display blinking eyes continuously, this is for the neutral state
 
+from PIL import Image, ImageOps  # Make sure this line is at the top of your script
+
+def preload_images_with_cropping(base_path):
+    images = []
+    image_files = sorted([f for f in os.listdir(base_path) if f.endswith('.png')])
+    
+    for file_name in image_files:
+        image_path = os.path.join(base_path, file_name)
+        if os.path.exists(image_path):
+            image_open = Image.open(image_path)
+            
+            # Calculate the scaling factor to fit the image width
+            scale_factor = 128 / image_open.width
+            new_height = int(image_open.height * scale_factor)
+            
+            # Resize the image with the calculated scale factor
+            image_resized = image_open.resize((128, new_height))
+            
+            # If the resized image height is greater than 32, crop it to fit
+            if new_height > 32:
+                top = (new_height - 32) // 2
+                bottom = top + 32
+                image_resized = image_resized.crop((0, top, 128, bottom))
+            else:
+                # If the resized height is less than or equal to 32, add padding
+                image_resized = ImageOps.pad(image_resized, (128, 32), color=(0, 0, 0))
+            
+            image_rgb = image_resized.convert('RGB')
+            image_inverted = ImageOps.invert(image_rgb)
+            img = image_inverted.convert('1')
+            images.append(img)
+        else:
+            print(f"Image file not found: {image_path}")
+    
+    return images
+
+# Ensure the function calls this updated preload_images_with_cropping function
 def continuous_blinking(cli):
     global display_flag
-    blinking_path = os.path.join(script_dir, "AnimImages", "icon_default")
+    blinking_path = os.path.join(script_dir, "AnimImages", "icon_static")
     print("display_flag: ", display_flag)
+    
+    # Load the images for the blinking animation
+    images = preload_images_with_cropping(blinking_path)  # Updated to include cropping
+    
     while True:
         if display_flag:
-            display_blink_eyes(cli, base_path=blinking_path, fps=24, duration=1)
-        # Adding a sleep to reduce CPU usage and prevent overwhelming Cozmo
-        time.sleep(1.5)
+            for img in images:
+                cli.display_image(img)
+                time.sleep(1.0 / 24)  # 24 fps for the blinking animation
+        time.sleep(1.5)  # Adding a sleep to reduce CPU usage and prevent overwhelming Cozmo
 
 
 
@@ -199,8 +245,8 @@ def run_with_cozmo(cli):
     with open(info_file, "w") as f:
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
-        f.write("Animate Eyes\n")
-        f.write ("MAZE NAME A")
+        f.write("Animate Icons\n")
+        f.write ("MAZE NAME A")        #CHANGE THIS TO THE MAZE NAME
         f.close()
     #initialize the traj file
     traj_file = "data/" + user_id + "_traj.txt"

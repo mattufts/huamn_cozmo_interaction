@@ -12,12 +12,12 @@ from pycozmo.anim_controller import AnimationController
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the path to the AnimImages directory
-base_path = os.path.join(script_dir, "AnimImages", "icon_default")
+base_path = os.path.join(script_dir, "AnimImages", "icon_static")
 
 
 def display_blink_eyes(cli, base_path=None, fps=24, duration=1):
     if base_path is None:
-        base_path = os.path.join(script_dir, "AnimImages", "icon_default")
+        base_path = os.path.join(script_dir, "AnimImages", "icon_static")
     frame_duration = 1.0 / fps  # Duration of each frame in seconds 
     total_loops = 1 
     # List and count PNG files in the directory
@@ -87,6 +87,8 @@ def execute_interaction_animation(cli, interaction_type):
         "neutral": "icon_default"  # default animation
     }
 
+        
+
     # Get the directory where the script is located
     script_dir = os.path.dirname(os.path.realpath(__file__))
     
@@ -94,11 +96,11 @@ def execute_interaction_animation(cli, interaction_type):
     base_path = os.path.join(script_dir, "AnimImages")
     
     # Determine the full path for the specified interaction type
-    animation_folder = animation_paths.get(interaction_type, "icon_default")
+    animation_folder = animation_paths.get(interaction_type, "icon_static")
     full_path = os.path.join(base_path, animation_folder)
     
     if os.path.exists(full_path):
-        # Call the function that handles the display of images
+        # Call the function that handles the display of imagesc
         display_images(cli, full_path, repeat_duration=4)
     else:
         print(f"Animation path does not exist: {full_path}")
@@ -112,11 +114,10 @@ def main():
         anim_controller.enable_animations(False)
         
         # Use the absolute path here
-        base_path = os.path.join(script_dir, "AnimImages", "icon_default")
+        base_path = os.path.join(script_dir, "AnimImages", "icon_static")
         display_images(cli, base_path, fps=30, repeat_duration=3)
 
 if __name__ == '__main__':
     main()
-
 
 

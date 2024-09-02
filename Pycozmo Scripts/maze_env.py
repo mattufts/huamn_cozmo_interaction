@@ -17,7 +17,7 @@ maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A, hazards 
         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
- ]
+        ]
 
 
 nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze A, Cozmo's Memory
@@ -53,48 +53,48 @@ nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze A, Cozmo's
 #  ] #          1, 2, 3, 4, 5, 6, 7   columns
 
 
-################### Maze 3 ###################
-# maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards are 2 and are included
-#         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
-#         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
-#         [0, 0, 0, 0, 1, 0, 2, 0, 0],  # 3rd row
-#         [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
-#         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
-#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+# ################# Maze 3 ###################
+# maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option c, hazards are 2 and are included``
+#         [0, 2, 0, 0, 0, 0, 2, 0, 0],  # 1st row
+#         [0, 0, 0, 1, 0, 1, 0, 0, 0],  # 2nd row
+#         [0, 0, 1, 1, 1, 0, 0, 1, 0],  # 3rd row
+#         [0, 0, 2, 1, 0, 0, 1, 1, 0],  # 4th row
+#         [0, 0, 0, 0, 0, 0, 1, 1, 0],  # 5th row
+#         [0, 0, 1, 0, 0, 0, 2, 1, 0],  # 6th row
 #         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
-#  ]          1, 2, 3, 4, 5, 6, 7   columns 
+#  ]   ###       1, 2, 3, 4, 5, 6, 7   columns 
 
+# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option c, hazards are 2 and are included``
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 1st row
+#             [0, 0, 0, 1, 0, 1, 0, 0, 0],  # 2nd row
+#             [0, 0, 1, 1, 1, 0, 0, 1, 0],  # 3rd row
+#             [0, 0, 0, 1, 0, 0, 1, 1, 0],  # 4th row
+#             [0, 0, 0, 0, 0, 0, 1, 1, 0],  # 5th row
+#             [0, 0, 1, 0, 0, 0, 0, 1, 0],  # 6th row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+#  ]   ###       1, 2, 3, 4, 5, 6, 7   columns 
 
-# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze1, Cozmo's Memory
-#         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
-#         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
-#         [0, 0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
-#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
-#         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
-#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
-#         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
-#  ]          1, 2, 3, 4, 5, 6, 7   columns
 
 ################### Maze Template ###################
-# maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option 1, hazards are 2 and are included
-#         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
-#         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
-#         [0, 0, 0, 0, 1, 0, 2, 0, 0],  # 3rd row
-#         [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
-#         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
-#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+# maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option Template
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 1st row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 2nd row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 3rd row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 4th row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 5th row
+#         [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 6th row
 #         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
 #  ]          1, 2, 3, 4, 5, 6, 7   columns 
 
 
-# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze1, Cozmo's Memory
-#         [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
-#         [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
-#         [0, 0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
-#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
-#         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
-#         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
-#         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Nav_Maze1, Template
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 1st row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 2nd row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 3rd row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 4th row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 5th row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 6th row
+#             [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
 #  ]          1, 2, 3, 4, 5, 6, 7   columns
 
 
