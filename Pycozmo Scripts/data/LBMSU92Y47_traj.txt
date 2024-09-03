@@ -1,0 +1,31 @@
+*****************************************************
+current_step: 1
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+current_time: 1725305719.1999624
+respond_time: 1.4844372272491455
+action: 1
+command: right
+indicated next action: 2
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 2
+current_pos:[1 1]
+current_dir:[1 0]
+current_health:100
+current_time: 1725305726.6958337
+respond_time: 0.784095048904419
+action: 2
+command: forward
+indicated next action: 0
+consistent: No
+hit fire: No
+hit wall: Yes
+*****************************************************
+current_step: 3
+current_pos:[1 1]
+current_dir:[1 0]
+current_health:90
