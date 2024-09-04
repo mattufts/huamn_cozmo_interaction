@@ -131,12 +131,13 @@ def continuous_blinking(cli):
 
 
 
-def handle_interaction (cli, interaction_type):
+def handle_interaction (cli, interaction_type, repeat_count = 1):
     #signal the start of an interaction animation_event
     animation_event.set()
-
+    for _  in range (repeat_count):
     #Request the Call_animaiton script to execute the animation for the interaction
-    execute_interaction_animation(cli, interaction_type)
+        execute_interaction_animation(cli, interaction_type)
+        time.sleep(1)
 
 
     #clear the event after the animation request to resume default behavior    
@@ -246,7 +247,7 @@ def run_with_cozmo(cli):
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
         f.write("Animate Icons\n")
-        f.write ("MAZE NAME A")        #CHANGE THIS TO THE MAZE NAME
+        f.write ("MAZE NAME A")            #REMEMBER TO CHANGE THIS TO THE MAZE NAME
         f.close()
     #initialize the traj file
     traj_file = "data/" + user_id + "_traj.txt"
@@ -285,10 +286,10 @@ def run_with_cozmo(cli):
         print(f"Current Position: {env.current_pos}, Goal Position: {env.goal_pos}")  # Add this line here
 
         if (env.current_pos == env.goal_pos).all():
-            # Play the "Winking" animation
+            # Play the "flag waving" animation
             display_flag = False
             time.sleep(1)
-            handle_interaction(cli, "finished")
+            handle_interaction(cli, "finished", repeat_count =2)
             display_flag = True
 
             # Print congratulatory message
@@ -384,6 +385,12 @@ def run_with_cozmo(cli):
                 action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
                 command = action_list[action]
             else:
+                for _ in range(3):
+                    cli.set_all_backpack_lights(pycozmo.lights.green_light)
+                    time.sleep(0.5)
+                    cli.set_all_backpack_lights(pycozmo.lights.white_light)
+                    time.sleep(0.5)
+                cli.set_all_backpack_lights(pycozmo.lights.red_light)
                 command = user_input[0]
                 cmd_cnt += 1
                # command = clean_command(command)
@@ -407,31 +414,32 @@ def run_with_cozmo(cli):
             #print(goal_pos)
         next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)
 
-        if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):   #Alignment Animation
-            # show a aligment face, currently using happy face
+# Assuming command comes from user input and action is determined by path planner
+        if mode == 'manual' and user_input[0] is not None and action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
+            # Show an alignment face, currently using happy face
             display_flag = False
             time.sleep(1)
             handle_interaction(cli, "happy")
             display_flag = True
             time.sleep(1)
-
-
             consistent_cnt += 1
         else:
             inconsistent_cnt += 1
-        
-        with open(traj_file, "a") as f:
-            f.write("current_time: "+ str( time.time() )+"\n")
-            f.write("respond_time: "+ str(  respond_time[-1])+"\n")
-            f.write("action: "+ str(  action)+ "\n")
-            f.write("command: "+ str(  command)+ "\n")
-            f.write("indicated next action: "+ str(  path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)))+ "\n")
-            if action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
 
-                f.write("consistent: "+ "Yes"+ "\n")
+        with open(traj_file, "a") as f:
+            f.write("current_time: " + str(time.time()) + "\n")
+            f.write("respond_time: " + str(respond_time[-1]) + "\n")
+            f.write("action: " + str(action) + "\n")
+            f.write("command: " + str(command) + "\n")
+            f.write("indicated next action: " + str(path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))) + "\n")
+            
+            if mode == 'manual' and action == path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir)):
+                f.write("consistent: " + "Yes" + "\n")
             else:
-                f.write("consistent: "+ "No"+ "\n") 
+                f.write("consistent: " + "No" + "\n")
+                inconsistent_cnt += 1
             f.close()
+
 
 
         if command == 'quit':
@@ -445,6 +453,7 @@ def run_with_cozmo(cli):
                 f.write("human_commands: "+ str( cmd_cnt)+ "\n")
                 f.write("end_health: "+ str( env.health)+ "\n")
                 f.write("end_time: "+ str(  time.time())+ "\n")
+                f.write("Status: Manually Quit by User\n")
 
                 f.close()
             break
@@ -452,7 +461,9 @@ def run_with_cozmo(cli):
             print("Invalid command. Try again.")
             continue
         
- 
+        if action is not None:
+           state, _, _, front , done = env.step(action)
+
         if command == 'left':
             cozmo_controller.turn_angle(cli, -75)
 
@@ -466,11 +477,13 @@ def run_with_cozmo(cli):
             #if front == "wall":            
              #env.health = 0
             #wall = wall+1
-
+            cozmo_controller.move_forward(cli, 20, 10)
             if front == "fire":
                 env.health -= 20
+                display_flag = False
                 time.sleep(1)
                 handle_interaction(cli, "sad")
+                display_flag = True
                 hit_fire_cnt += 1
                 with open(traj_file, "a") as f:
                     f.write("hit fire: " + "Yes"+ "\n")
@@ -479,13 +492,15 @@ def run_with_cozmo(cli):
             else:
                 env.health -= 10
                 hit_wall_cnt += 1
+                display_flag = False
+                time.sleep(1)
+                handle_interaction(cli, "crash")
+                display_flag = True
                 with open(traj_file, "a") as f:
                     f.write("hit fire: "+ "No"+ "\n")
                     f.write("hit wall: "+ "Yes"+ "\n")
                     f.close()
-            hit_wall = True
-            
-            cozmo_controller.move_forward(cli, 20, 10)
+            hit_wall = True   
             cozmo_controller.move_forward(cli, -20, -10)
             #cozmo_controller.front = front
             #handle_interaction(cli, 'sad')
@@ -496,27 +511,21 @@ def run_with_cozmo(cli):
                 f.write("hit fire: "+ "No" + "\n")
                 f.write("hit wall: "+ "No" + "\n")
                 f.close()
-
-        if action is not None:
-            state, _, _, front , done = env.step(action)
-
         
 
         if hit_wall:
-            # Cozmo hits a wall, play "Hurt" animation
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli, "crash")
-            display_flag = True
+            pass
+        
         
         if env.health <= 0:
+            with open(info_file, "a") as f:
+                f.write("Status: Robot failed (health = 0).\n")
+                f.close()
             display_flag = False
             time.sleep(1)
             handle_interaction(cli, "sad")
             display_flag = True
             break
-        
-
 
 
     with open(info_file, "a") as f:

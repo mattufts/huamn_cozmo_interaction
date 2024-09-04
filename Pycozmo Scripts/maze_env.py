@@ -11,20 +11,20 @@ import numpy as np
 # maze should know everything including hazard and hazard should be 2
 # ################## Maze 1 ###################
 maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A, hazards are 2 and are included
-        [0, 0, 2, 0, 0, 1, 0, 0, 0],  # 1st row
-        [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
+        [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
+        [0, 1, 1, 2, 0, 0, 0, 0, 0],  # 2nd row
         [0, 0, 0, 0, 1, 0, 2, 0, 0],  # 3rd row
         [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
         [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
         [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
-] #        1, 2, 3, 4, 5, 6, 7   columns
+] #         1, 2, 3, 4, 5, 6, 7   columns
 
 nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A, hazards are 2 and are included
             [0, 0, 0, 0, 0, 1, 0, 0, 0],  # 1st row
             [0, 1, 1, 0, 0, 0, 0, 0, 0],  # 2nd row
-            [0, 0, 0, 0, 1, 0, 2, 0, 0],  # 3rd row
-            [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
+            [0, 0, 0, 0, 1, 0, 0, 0, 0],  # 3rd row
+            [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
             [0, 0, 1, 1, 0, 0, 1, 0, 0],  # 5th row
             [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
             [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
@@ -66,7 +66,7 @@ nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A, haza
 
 # nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option c, hazards are 2 and are included``
 #             [0, 0, 0, 0, 0, 0, 0, 0, 0],  # 1st row
-#             [0, 0, 0, 1, 0, 1, 0, 0, 0],  # 2nd row
+#             [0, 0, 0, 1, 0, 1, 0, 0, 0],  # 2nd rowaadwdwwwwwdaawww
 #             [0, 0, 1, 1, 1, 0, 0, 1, 0],  # 3rd row
 #             [0, 0, 0, 1, 0, 0, 1, 1, 0],  # 4th row
 #             [0, 0, 0, 0, 0, 0, 1, 1, 0],  # 5th row
@@ -120,12 +120,12 @@ class MazeEnv:
 #         self.goal_pos = np.array([3,4]) # end point
 
 
-################### Maze C start position ###################
-        # self.start_pos = np.array([1,1])  # starting position is at 1, 1 of the grid   MAZE C
-        #self.current_pos = self.start_pos  # current position
-################### Maze C goal position ###################
-        # self.current_dir = np.array([0, 1])  # current direction (facing right)
-        # self.goal_pos = np.array([4,6]) # end point
+# ################## Maze C start position ###################
+#         self.start_pos = np.array([5,1])  # starting position is at 1, 1 of the grid   MAZE C
+#         self.current_pos = self.start_pos  # current position
+# ################## Maze C goal position ###################
+#         self.current_dir = np.array([-1, 0])  # current direction (facing right)
+#         self.goal_pos = np.array([1,7]) # end point
 
 
         self.done = False  # episode termination flag
@@ -153,6 +153,7 @@ class MazeEnv:
         
     def step(self, action):
         # action is an integer: 0 = turn left, 1 = turn right, 2 = go forward
+        #print("hahahahahahhahahhahahahahhaha")
         reward = 0
         self.battery -= 10 # reduce battery level
         hit_wall = False
@@ -178,6 +179,7 @@ class MazeEnv:
             new_pos = self.current_pos + self.current_dir
             if (new_pos >= [1, 1]).all() and (new_pos < [self.height-1, self.width-1]).all():  # within bounds
                 if self.maze[tuple(new_pos)] == 0:  # not a wall
+                   # print("maze new pose:", self.maze[tuple(new_pos)])
                     self.current_pos = new_pos
                     print(f"Updated Position: {self.current_pos}")  # Debug: Print the updated position
                     if (self.current_pos == self.goal_pos).all():  # reached goal

@@ -1,0 +1,21 @@
+KY06429LZ6
+1725376047.8470113
+Animate Icons
+MAZE NAME Ahit_wall_cnt: 4
+hit_fire_cnt: 1
+consistent_cnt: 12
+inconsistent_cnt: 19
+auto_cnt: 0
+total_steps: 31
+human_commands: 28
+end_health: 40
+end_time: 1725376416.9753942
+hit_wall_cnt: 4
+hit_fire_cnt: 1
+consistent_cnt: 12
+inconsistent_cnt: 19
+auto_cnt: 0
+total_steps: 31
+human_commands: 28
+end_health: 40
+end_time: 1725376416.9919665

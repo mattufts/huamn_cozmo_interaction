@@ -272,9 +272,6 @@ def run_with_cozmo(cli):
                 f.write("auto_cnt: " + str(auto_cnt) + "\n")
                 f.write("total_steps: " + str(current_step) + "\n")
                 f.write("human_commands: " + str(cmd_cnt) + "\n")
-                f.write("end_health: " + str(env.health) + "\n")
-                f.write("end_time: " + str(time.time()) + "\n")
-                # Write success message to file
                 f.write("Status: Successfully completed the goal!\n")
                 f.close()
             
@@ -355,10 +352,14 @@ def run_with_cozmo(cli):
                 action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
                 command = action_list[action]
             else:
+                for _ in range(3):
+                    cli.set_all_backpack_lights(pycozmo.lights.green_light)
+                    time.sleep(0.5)
+                    cli.set_all_backpack_lights(pycozmo.lights.white_light)
+                    time.sleep(0.5)
+                cli.set_all_backpack_lights(pycozmo.lights.red_light)
                 command = user_input[0]
                 cmd_cnt += 1
-               # command = clean_command(command)
-           # command = get_keyboard_command()
         else:
             current_pos = copy.deepcopy( env.current_pos)
             goal_pos = copy.deepcopy(env.goal_pos)
@@ -431,17 +432,20 @@ def run_with_cozmo(cli):
             cozmo_controller.turn_angle(cli, 75)
 
         if command == 'forward' and front == "nothing":
+            print("front: ", front)
             cozmo_controller.move_forward(cli, 80, 50)# Example: move forward 80 units at speed 50
         
         if command == 'forward' and front != "nothing":
             #if front == "wall":            
              #env.health = 0
             #wall = wall+1
-
+            cozmo_controller.move_forward(cli, 20, 10)
             if front == "fire":
                 env.health -= 20
+                display_flag = False
                 time.sleep(1)
                 handle_interaction(cli, "sad")
+                display_flag = True
                 hit_fire_cnt += 1
                 with open(traj_file, "a") as f:
                     f.write("hit fire: " + "Yes"+ "\n")
@@ -450,13 +454,17 @@ def run_with_cozmo(cli):
             else:
                 env.health -= 10
                 hit_wall_cnt += 1
+                display_flag = False
+                time.sleep(1)
+                handle_interaction(cli, "crash")
+                display_flag = True
                 with open(traj_file, "a") as f:
                     f.write("hit fire: "+ "No"+ "\n")
                     f.write("hit wall: "+ "Yes"+ "\n")
                     f.close()
             hit_wall = True
+            #time.sleep(1)
             
-            cozmo_controller.move_forward(cli, 20, 10)
             cozmo_controller.move_forward(cli, -20, -10)
             #cozmo_controller.front = front
             #handle_interaction(cli, 'sad')
@@ -475,10 +483,8 @@ def run_with_cozmo(cli):
 
         if hit_wall:
             # Cozmo hits a wall, play "Hurt" animation
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli, "crash")
-            display_flag = True
+            pass
+
         
         if env.health <= 0:
             with open(info_file, "a") as f:
