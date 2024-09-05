@@ -1,0 +1,6 @@
+*****************************************************
+current_step: 1
+current_pos:[7 1]
+current_dir:[ 0 -1]
+current_health:100
+current_time: 1725486914.4413784

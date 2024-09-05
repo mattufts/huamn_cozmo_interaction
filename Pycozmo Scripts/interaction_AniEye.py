@@ -203,7 +203,8 @@ def run_with_cozmo(cli):
     print('Program is running')
 
 
-    user_id = "Amol_Singh" # change it everytime when you have a new participant
+########ENTER USERNAME HERE########
+    user_id = "Participant_6:54" # change it everytime when you have a new participant
     # random generated a 10 character user_id without using time
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)
@@ -317,7 +318,7 @@ def run_with_cozmo(cli):
             user_input = [None]
             start_time = time.time()
             print("\n\n\n\n Please input your command via keyboard.\n\n\n\n")
-            while time.time() - start_time < 10:  #this can be put in a variable once
+            while time.time() - start_time < 5:  #this can be put in a variable once
                                                 #put start.time under the start time
                 if keyboard.is_pressed('f') or keyboard.is_pressed('w') or keyboard.is_pressed('up'):
                     user_input[0] = 'forward'
@@ -352,11 +353,11 @@ def run_with_cozmo(cli):
                 action = path_planner.determine_next_action(current_pos, next_move, tuple(env.current_dir))
                 command = action_list[action]
             else:
-                for _ in range(3):
+                for _ in range(2):
                     cli.set_all_backpack_lights(pycozmo.lights.green_light)
-                    time.sleep(0.5)
+                    time.sleep(0.3)
                     cli.set_all_backpack_lights(pycozmo.lights.white_light)
-                    time.sleep(0.5)
+                    time.sleep(0.3)
                 cli.set_all_backpack_lights(pycozmo.lights.red_light)
                 command = user_input[0]
                 cmd_cnt += 1
@@ -385,7 +386,7 @@ def run_with_cozmo(cli):
             time.sleep(1)
             handle_interaction(cli, "happy")
             display_flag = True
-            time.sleep(1)
+            #time.sleep(1)
             consistent_cnt += 1
         else:
             inconsistent_cnt += 1
@@ -495,6 +496,16 @@ def run_with_cozmo(cli):
             handle_interaction(cli, "sad")
             display_flag = True
             break
+        
+        elif current_step >=25:
+            with open(info_file, "a") as f:
+                f.write("Status: Robot failed (too many moves).\n")
+                f.close()
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli, "sad")
+            display_flag = True
+            break
 
 
     with open(info_file, "a") as f:
@@ -507,6 +518,7 @@ def run_with_cozmo(cli):
         f.write("human_commands: "+ str( cmd_cnt)+ "\n")
         f.write("end_health: "+ str( env.health)+ "\n")
         f.write("end_time: "+ str(  time.time())+ "\n")
+        f.write ("total time: " + start_time- time.time() + "\n")
         f.close()
 
 

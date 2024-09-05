@@ -235,7 +235,8 @@ def run_with_cozmo(cli):
     print('Program is running')
 
 
-    user_id = "Amol_Singh" # change it everytime when you have a new participant
+########ENTER USERNAME HERE########
+    user_id = "Participant_6:44" # change it everytime when you have a new participant
     # random generated a 10 character user_id without using time
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)
@@ -247,7 +248,7 @@ def run_with_cozmo(cli):
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
         f.write("Animate Icons\n")
-        f.write ("MAZE NAME A")            #REMEMBER TO CHANGE THIS TO THE MAZE NAME
+        f.write ("MAZE NAME B")            #REMEMBER TO CHANGE THIS TO THE MAZE NAME
         f.close()
     #initialize the traj file
     traj_file = "data/" + user_id + "_traj.txt"
@@ -306,6 +307,7 @@ def run_with_cozmo(cli):
                 f.write("human_commands: " + str(cmd_cnt) + "\n")
                 f.write("end_health: " + str(env.health) + "\n")
                 f.write("end_time: " + str(time.time()) + "\n")
+                f.write ("total time: " + start_time- time.time() + "\n")
                 f.close()
             
             # Now set done to True to end the loop
@@ -461,8 +463,6 @@ def run_with_cozmo(cli):
             print("Invalid command. Try again.")
             continue
         
-        if action is not None:
-           state, _, _, front , done = env.step(action)
 
         if command == 'left':
             cozmo_controller.turn_angle(cli, -75)
@@ -501,6 +501,9 @@ def run_with_cozmo(cli):
                     f.write("hit wall: "+ "Yes"+ "\n")
                     f.close()
             hit_wall = True   
+            #time.sleep(1)
+
+
             cozmo_controller.move_forward(cli, -20, -10)
             #cozmo_controller.front = front
             #handle_interaction(cli, 'sad')
@@ -511,12 +514,17 @@ def run_with_cozmo(cli):
                 f.write("hit fire: "+ "No" + "\n")
                 f.write("hit wall: "+ "No" + "\n")
                 f.close()
+
+    
+        if action is not None:
+           state, _, _, front , done = env.step(action)
         
 
         if hit_wall:
             pass
         
         
+       
         if env.health <= 0:
             with open(info_file, "a") as f:
                 f.write("Status: Robot failed (health = 0).\n")
@@ -526,7 +534,16 @@ def run_with_cozmo(cli):
             handle_interaction(cli, "sad")
             display_flag = True
             break
-
+        
+        elif current_step >=25:
+            with open(info_file, "a") as f:
+                f.write("Status: Robot failed (health = 0).\n")
+                f.close()
+            display_flag = False
+            time.sleep(1)
+            handle_interaction(cli, "sad")
+            display_flag = True
+            break
 
     with open(info_file, "a") as f:
         f.write("hit_wall_cnt: "+ str( hit_wall_cnt )+"\n")

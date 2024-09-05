@@ -1,0 +1,22 @@
+U9MW7316DE
+1725481020.4838164
+Animate Icons
+MAZE NAME Ahit_wall_cnt: 4
+hit_fire_cnt: 0
+consistent_cnt: 5
+inconsistent_cnt: 32
+auto_cnt: 0
+total_steps: 21
+human_commands: 21
+end_health: 60
+end_time: 1725481338.0201728
+Status: Manually Quit by User
+hit_wall_cnt: 4
+hit_fire_cnt: 0
+consistent_cnt: 5
+inconsistent_cnt: 32
+auto_cnt: 0
+total_steps: 21
+human_commands: 21
+end_health: 60
+end_time: 1725481338.0314865

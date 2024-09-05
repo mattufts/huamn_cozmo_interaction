@@ -1,0 +1,12 @@
+RJGPC0XL4U
+1725552384.149268
+Animate Icons
+MAZE NAME Ahit_wall_cnt: 2
+hit_fire_cnt: 1
+consistent_cnt: 24
+inconsistent_cnt: 46
+auto_cnt: 0
+total_steps: 51
+human_commands: 44
+end_health: 60
+end_time: 1725553154.7707396

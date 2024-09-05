@@ -1,0 +1,22 @@
+NIJCA67K5C
+1725576274.7046144
+Animate Icons
+MAZE NAME Bhit_wall_cnt: 8
+hit_fire_cnt: 0
+consistent_cnt: 3
+inconsistent_cnt: 36
+auto_cnt: 1
+total_steps: 22
+human_commands: 8
+end_health: 20
+end_time: 1725576576.7381575
+Status: Manually Quit by User
+hit_wall_cnt: 8
+hit_fire_cnt: 0
+consistent_cnt: 3
+inconsistent_cnt: 36
+auto_cnt: 1
+total_steps: 22
+human_commands: 8
+end_health: 20
+end_time: 1725576576.7382448

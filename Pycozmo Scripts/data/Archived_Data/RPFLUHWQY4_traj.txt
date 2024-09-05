@@ -1,0 +1,5 @@
+*****************************************************
+current_step: 1
+current_pos:[5 1]
+current_dir:[-1  0]
+current_health:100
