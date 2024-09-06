@@ -1,0 +1,12 @@
+DDQU9Y7HOZ
+1725582447.6438973
+Animate Icons
+MAZE NAME Bhit_wall_cnt: 1
+hit_fire_cnt: 0
+consistent_cnt: 11
+inconsistent_cnt: 11
+auto_cnt: 0
+total_steps: 18
+human_commands: 17
+end_health: 90
+end_time: 1725582747.7013698

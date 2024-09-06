@@ -1,0 +1,226 @@
+*****************************************************
+current_step: 1
+current_pos:[1 1]
+current_dir:[0 1]
+current_health:100
+current_time: 1725629470.8080373
+respond_time: 0.37923741340637207
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 2
+current_pos:[1 2]
+current_dir:[0 1]
+current_health:100
+current_time: 1725629486.5308914
+respond_time: 0.6067874431610107
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 3
+current_pos:[1 3]
+current_dir:[0 1]
+current_health:100
+current_time: 1725629497.214566
+respond_time: 0.4189314842224121
+action: 2
+command: forward
+indicated next action: 1
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 4
+current_pos:[1 4]
+current_dir:[0 1]
+current_health:100
+current_time: 1725629514.1775682
+respond_time: 0.9208097457885742
+action: 1
+command: right
+indicated next action: 1
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 5
+current_pos:[1 4]
+current_dir:[1 0]
+current_health:100
+current_time: 1725629530.6404846
+respond_time: 0.054512739181518555
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 6
+current_pos:[2 4]
+current_dir:[1 0]
+current_health:100
+current_time: 1725629546.8761468
+respond_time: 0.5560672283172607
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 7
+current_pos:[3 4]
+current_dir:[1 0]
+current_health:100
+current_time: 1725629562.979475
+respond_time: 0.534782886505127
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 8
+current_pos:[4 4]
+current_dir:[1 0]
+current_health:100
+current_time: 1725629573.614975
+respond_time: 0.4097166061401367
+action: 2
+command: forward
+indicated next action: 0
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 9
+current_pos:[5 4]
+current_dir:[1 0]
+current_health:100
+current_time: 1725629590.8390033
+respond_time: 2.184258222579956
+action: 0
+command: left
+indicated next action: 1
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 10
+current_pos:[5 4]
+current_dir:[0 1]
+current_health:100
+current_time: 1725629609.0190818
+respond_time: 10.000268459320068
+action: 0
+command: left
+indicated next action: 0
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 11
+current_pos:[5 4]
+current_dir:[-1  0]
+current_health:100
+current_time: 1725629624.4042256
+respond_time: 4.597579717636108
+action: 0
+command: left
+indicated next action: 2
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 12
+current_pos:[5 4]
+current_dir:[ 0 -1]
+current_health:100
+current_time: 1725629642.3149586
+respond_time: 10.000582218170166
+action: 1
+command: right
+indicated next action: 1
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 13
+current_pos:[5 4]
+current_dir:[-1  0]
+current_health:100
+current_time: 1725629654.2159164
+respond_time: 1.0948724746704102
+action: 1
+command: right
+indicated next action: 2
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 14
+current_pos:[5 4]
+current_dir:[0 1]
+current_health:100
+current_time: 1725629666.5622418
+respond_time: 1.4227519035339355
+action: 2
+command: forward
+indicated next action: 0
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 15
+current_pos:[5 5]
+current_dir:[0 1]
+current_health:100
+current_time: 1725629676.8798366
+respond_time: 0.4054076671600342
+action: 2
+command: forward
+indicated next action: 0
+consistent: No
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 16
+current_pos:[5 6]
+current_dir:[0 1]
+current_health:100
+current_time: 1725629692.0818317
+respond_time: 0.005190610885620117
+action: 0
+command: left
+indicated next action: 0
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 17
+current_pos:[5 6]
+current_dir:[-1  0]
+current_health:100
+current_time: 1725629709.268421
+respond_time: 0.31583642959594727
+action: 2
+command: forward
+indicated next action: 2
+consistent: Yes
+hit fire: No
+hit wall: No
+*****************************************************
+current_step: 18
+current_pos:[4 6]
+current_dir:[-1  0]
+current_health:100

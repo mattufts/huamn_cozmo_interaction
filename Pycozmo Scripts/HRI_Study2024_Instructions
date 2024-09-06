@@ -1,0 +1,37 @@
+
+Hello! I am Matt Ebisu, a graduate of the Tufts Human Robot Interaction grad program. Thank you so much for volunteering.
+
+You are about to embark on a joint challenge & adventure today with our helpful robot partner, Cozmo.
+
+This is a study to analyze the capability and compatibility of a human volunteer working with Cozmo to navigate & escape from a maze. We call it an escape room challenge.
+ 
+* You will not be able to see the maze grid. However, you will be able to see the live fire and hazard squares.
+ 
+* Cosmo is programmed to know the landmarks, barriers, & walls.
+
+* Your combined information is necessary to figure out how to escape from the maze. 
+ 
+* Cozmo can move one square at a time either from a command by you or, if you are stuck, on its own one time.
+ 
+* After Cozmo moves, it will display an image on its face that represents what the next move should be.
+ 
+* Use the image displayed to determine your next command.
+ 
+* Walk around the maze as necessary to insure that you can see Cozmo's screen at all times.
+
+* You can command Cozmo to move:
+
+FORWARD (F or W)
+LEFT (A or L)
+RIGHT (D or R) or TEMPORARILY STOP (S or P).
+
+*You can switch from AUTO DRIVE or MANUAL CONTROL (M)
+
+* If Cozmo inadvertently moves off the grid squares, I will adjust it for you.
+
+* Q: When can you give Cozmo commands?
+A: note the LIGHT on Cozmo's back. It flashes RED when the robot is either performing an action OR doing an automatic action. But, when it flashes BLUE, you can give it a command via the keyboard.
+ 
+* We will time your journey, but we ask that you work efficiently with Cozmo and do not rush.
+
+* Maximum number of allowed steps is 25 (Automatic End After)

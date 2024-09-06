@@ -1,0 +1,12 @@
+SBHTOE5ZRC
+1725644940.4130304
+Animate Icons
+MAZE NAME:  Bhit_wall_cnt: 1
+hit_fire_cnt: 0
+consistent_cnt: 9
+inconsistent_cnt: 10
+auto_cnt: 0
+total_steps: 16
+human_commands: 13
+end_health: 90
+end_time: 1725645193.29835

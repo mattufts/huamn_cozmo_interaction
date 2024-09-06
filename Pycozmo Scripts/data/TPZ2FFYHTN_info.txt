@@ -1,0 +1,13 @@
+TPZ2FFYHTN
+1725638670.976825
+Animate Icons
+MAZE NAME BStatus: Robot failed (health = 0).
+hit_wall_cnt: 2
+hit_fire_cnt: 4
+consistent_cnt: 3
+inconsistent_cnt: 31
+auto_cnt: 0
+total_steps: 23
+human_commands: 14
+end_health: 0
+end_time: 1725639092.3980699

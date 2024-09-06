@@ -1,0 +1,12 @@
+Z0JX2DRH06
+1725586666.9615278
+Animate Icons
+MAZE NAME Ahit_wall_cnt: 1
+hit_fire_cnt: 0
+consistent_cnt: 9
+inconsistent_cnt: 25
+auto_cnt: 0
+total_steps: 23
+human_commands: 18
+end_health: 90
+end_time: 1725586990.206155

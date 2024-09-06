@@ -9,49 +9,49 @@
 import numpy as np
 
 #maze should know everything including hazard and hazard should be 2
-# ############### Maze Option A ###################
-maze =      [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A
-             [0, 0, 0, 0, 0, 0, 0, 1, 0],  # 1st row
-             [0, 1, 1, 2, 0, 1, 0, 0, 0],  # 2nd row
-             [0, 0, 0, 0, 0, 2, 1, 0, 0],  # 3rd row
-             [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
-             [0, 0, 1, 1, 0, 0, 0, 1, 0],  # 5th row
-             [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
-             [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
- ]       #  1, 2, 3, 4, 5, 6, 7  #     columns 
-
-nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A
-            [0, 0, 0, 0, 0, 0, 0, 1, 0],  # 1st row
-            [0, 1, 1, 0, 0, 1, 0, 0, 0],  # 2nd row
-            [0, 0, 0, 0, 0, 0, 1, 0, 0],  # 3rd row
-            [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
-            [0, 0, 1, 1, 0, 0, 0, 1, 0],  # 5th row
-            [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
-            [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
-  ]          #  1, 2, 3, 4, 5, 6, 7  #     columns 
-
-# # ################# Maze Option B ###################
-# maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option B, includes hazards
-#         [0, 1, 0, 0, 0, 0, 0, 0, 0],  # 1st row
-#         [0, 0, 0, 1, 0, 2, 1, 1, 0],  # 2nd row
-#         [0, 0, 1, 1, 0, 0, 0, 0, 0],  # 3rd row
-#         [0, 0, 0, 2, 0, 0, 1, 0, 0],  # 4th row
-#         [0, 1, 0, 2, 0, 0, 1, 0, 0],  # 5th row
-#         [0, 0, 0, 0, 0, 0, 1, 0, 0],  # 6th row
-#         [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+# # ############## Maze Option A ###################
+# maze =      [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A
+#              [0, 0, 0, 0, 0, 0, 0, 1, 0],  # 1st row
+#              [0, 1, 1, 2, 0, 1, 0, 0, 0],  # 2nd row
+#              [0, 0, 0, 0, 0, 2, 1, 0, 0],  # 3rd row
+#              [0, 0, 1, 0, 0, 2, 0, 0, 0],  # 4th row
+#              [0, 0, 1, 1, 0, 0, 0, 1, 0],  # 5th row
+#              [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
+#              [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
 #  ]       #  1, 2, 3, 4, 5, 6, 7  #     columns 
 
-
-# ################# Maze Option B ###################
-# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option B
-#             [0, 1, 0, 0, 0, 0, 0, 0, 0],  # 1st row
-#             [0, 0, 0, 1, 0, 0, 1, 1, 0],  # 2nd row
-#             [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 3rd row
-#             [0, 0, 0, 0, 0, 0, 1, 0, 0],  # 4th row
-#             [0, 1, 0, 0, 0, 1, 1, 0, 0],  # 5th row
-#             [0, 0, 0, 0, 0, 0, 1, 0, 0],  # 6th row   
+# nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option A
+#             [0, 0, 0, 0, 0, 0, 0, 1, 0],  # 1st row
+#             [0, 1, 1, 0, 0, 1, 0, 0, 0],  # 2nd row
+#             [0, 0, 0, 0, 0, 0, 1, 0, 0],  # 3rd row
+#             [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 4th row
+#             [0, 0, 1, 1, 0, 0, 0, 1, 0],  # 5th row
+#             [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 6th row
 #             [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
-#  ]           #  1, 2, 3, 4, 5, 6, 7  #     columns 
+#   ]          #  1, 2, 3, 4, 5, 6, 7  #     columns 
+
+# # # ################# Maze Option B ###################
+maze =      [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option B, includes hazards
+             [0, 1, 0, 0, 0, 0, 0, 0, 0],  # 1st row
+             [0, 0, 0, 1, 0, 2, 1, 1, 0],  # 2nd row
+             [0, 0, 1, 2, 0, 0, 0, 0, 0],  # 3rd row
+             [0, 0, 0, 2, 0, 0, 1, 0, 0],  # 4th row
+             [0, 1, 0, 0, 0, 1, 1, 0, 0],  # 5th row
+             [0, 0, 0, 0, 0, 0, 1, 0, 0],  # 6th row
+             [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+ ]            #  1, 2, 3, 4, 5, 6, 7  #     columns 
+
+
+################# Maze Option B ###################
+nav_maze = [[0, 0, 0, 0, 0, 0, 0, 0, 0], # Top border        Maze Option B
+            [0, 1, 0, 0, 0, 0, 0, 0, 0],  # 1st row
+            [0, 0, 0, 1, 0, 0, 1, 1, 0],  # 2nd row
+            [0, 0, 1, 0, 0, 0, 0, 0, 0],  # 3rd row
+            [0, 0, 0, 0, 0, 0, 1, 0, 0],  # 4th row
+            [0, 1, 0, 0, 0, 1, 1, 0, 0],  # 5th row
+            [0, 0, 0, 0, 0, 0, 1, 0, 0],  # 6th row   
+            [0, 0, 0, 0, 0, 0, 0, 0, 0]   # Bottom border
+ ]           #  1, 2, 3, 4, 5, 6, 7  #     columns 
 
 
 ################## Maze Template ###################
@@ -85,18 +85,17 @@ class MazeEnv:
         self.height, self.width = self.maze.shape
 
 
-# # ################### Maze A start position ###################
-        self.start_pos = np.array([1,1])  # starting position is at 1, 1 of the grid   MAZE A
-################### Maze A goal position ###################
-        self.current_dir = np.array([0, 1])  # current direction (facing right)
-        self.goal_pos = np.array([4,6]) # end point
+# # # # # ################### Maze A start position ###################
+#         self.start_pos = np.array([1,1])  # starting position is at 1, 1 of the grid   MAZE A
+# ################### Maze A goal position ###################
+#         self.current_dir = np.array([0, 1])  # current direction (facing right)
+#         self.goal_pos = np.array([4,6]) # end point
 
 # ################# Maze B start position ###################
-#         self.start_pos = np.array([1,7])  # starting position is at 1, 1 of the grid   MAZE B 
-# ################## Maze B goal position ###################
-#         self.current_dir = np.array([0, -1])  # current direction (facing left)       
-#         self.goal_pos = np.array([4,2]) # end point
-
+        self.start_pos = np.array([1,7])  # starting position is at 1wwwwwwwwwwwwwd dddddddddddddddddddddddddd, 1 of the grid   MAZE B 
+################## Maze B goal position ###################
+        self.current_dir = np.array([0, -1])  # current direction (facing left)       
+        self.goal_pos = np.array([4,2]) # end point
 
         self.done = False  # episode termination flag
         self.battery = 100 # battery level, not sure how to use it right now 
