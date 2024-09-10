@@ -126,7 +126,7 @@ def continuous_blinking(cli):
         if display_flag:
             for img in images:
                 cli.display_image(img)
-                time.sleep(1.0 / 24)  # 24 fps for the blinking animation
+                time.sleep(1.0 / 24)  # 24 fps for;asldkfj;aklsjdf the blinking animation
         time.sleep(1.5)  # Adding a sleep to reduce CPU usage and prevent overwhelming Cozmo
 
 
@@ -236,9 +236,9 @@ def run_with_cozmo(cli):
 
 
 ########ENTER USERNAME HERE########
+    user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
     user_id = "Participant_7:24" # change it everytime when you have a new participant
     # random generated a 10 character user_id without using time
-    user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)
     start_time = time.time()
 
