@@ -1,0 +1,12 @@
+21OKU05A6S
+1725665661.9267988
+Animate Icons
+MAZE NAME:  Ahit_wall_cnt: 0
+hit_fire_cnt: 0
+consistent_cnt: 7
+inconsistent_cnt: 11
+auto_cnt: 0
+total_steps: 14
+human_commands: 12
+end_health: 100
+end_time: 1725665861.4933512

@@ -20,7 +20,7 @@ import maze_env
 import PycozmoFSM_Animation as cozmo_controller
 from Call_Animation_Icons import display_blink_eyes, execute_interaction_animation
 
-# Change working directory to ensure paths are correctly resolved
+# Change working directory to ensure paths are correctly resolved  
 os.chdir("/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts")
 
 # Get the directory where the script is located
@@ -236,7 +236,7 @@ def run_with_cozmo(cli):
 
 
 ########ENTER USERNAME HERE########
-    user_id = "Participant_1:46" # change it everytime when you have a new participant
+    user_id = "Participant_7:24" # change it everytime when you have a new participant
     # random generated a 10 character user_id without using time
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)
@@ -248,7 +248,7 @@ def run_with_cozmo(cli):
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
         f.write("Animate Icons\n")
-        f.write ("MAZE NAME:  B")            #REMEMBER TO CHANGE THIS TO THE MAZE NAME
+        f.write ("MAZE NAME:  A")            #REMEMBER TO CHANGE THIS TO THE MAZE NAME
         f.close()
     #initialize the traj file
     traj_file = "data/" + user_id + "_traj.txt"
