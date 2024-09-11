@@ -19,7 +19,7 @@ import string
 import keyboard
 import maze_env
 import PycozmoFSM_controller as cozmo_controller
-from Call_Animation import display_resized_image, execute_interaction_animation
+from Call_Animation_Icons import display_resized_image, execute_interaction_animation
 from PIL import Image, ImageOps
 
 # Get the directory where the script is located
@@ -29,31 +29,21 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_dir)
 
 #Construct the paths to the necessary directories
-neutral_image_path = os.path.join(script_dir, "..", "Emotion_Eyes", "Emoticons", "neutral.png")
+neutral_image_path = os.path.join(script_dir, "..", "Emotion_Eyes", "Emoticons", "SimpleStatic.png")
 data_path = os.path.join(script_dir, "data")
 emotion_image_dir = os.path.join(script_dir, "..", "Emotion_Eyes", "Emoticons")
 
-state_to_image = {
-    'up': os.path.join(emotion_image_dir, 'up.png'),    
-    'left': os.path.join(emotion_image_dir, 'glancing_left-01.png'),
-    'right': os.path.join(emotion_image_dir, 'glacing_right-01.png'),
-    'happy': os.path.join(emotion_image_dir, 'happy.png'),
-    'sad': os.path.join(emotion_image_dir, 'injured_sad-01.png'),
-    'neutral': os.path.join(emotion_image_dir, 'neutral.png'),
-    'crash': os.path.join(emotion_image_dir, 'crash.png'),
-    'finished': os.path.join(emotion_image_dir, 'wink.png')
-}
 
-# state_to_image = {
-#     'up': os.path.join(emotion_image_dir, 'notice_up.jpg'),    
-#     'left': os.path.join(emotion_image_dir, 'notice_left.png'),
-#     'right': os.path.join(emotion_image_dir, 'notice_right.png'),
-#     'happy': os.path.join(emotion_image_dir, 'check_mark.png'),
-#     'sad': os.path.join(emotion_image_dir, 'injured.png'),
-#     'neutral': os.path.join(emotion_image_dir, 'neutral.png'),
-#     'crash': os.path.join(emotion_image_dir, 'stopping.png'),
-#     'finished': os.path.join(emotion_image_dir, 'finish_flag.png')
-#     }
+state_to_image = {
+    'up': os.path.join(emotion_image_dir, 'notice_up.png'),    
+    'left': os.path.join(emotion_image_dir, 'notice_left.png'),
+    'right': os.path.join(emotion_image_dir, 'notice_right.png'),
+    'happy': os.path.join(emotion_image_dir, 'check_mark.png'),
+    'sad': os.path.join(emotion_image_dir, 'injured.png'),
+    'neutral': os.path.join(emotion_image_dir, 'SimpleStatic.png'),
+    'crash': os.path.join(emotion_image_dir, 'stopping.png'),
+    'finished': os.path.join(emotion_image_dir, 'finish_flag.png')
+    }
 
 
 print("Current working directory:", os.getcwd())
@@ -74,13 +64,49 @@ display_flag = True
 mode = 'manual'
 #************************************Display Image ***************************************
 
+# def show_neutral_image(cli):
+#     global display_flag
+#     print("display_flag: ", display_flag)
+#     while True:
+#         if display_flag:
+#             display_resized_image(cli, neutral_image_path)
+#             time.sleep(3)
+
+def display_resized_neutral_image(cli, image_path):
+    if os.path.exists(image_path):
+        image_open = Image.open(image_path)
+
+        # Calculate the scaling factor to fit the image width
+        scale_factor = 128 / image_open.width
+        new_height = int(image_open.height * scale_factor)
+
+        # Resize the image with the calculated scale factor
+        image_resized = image_open.resize((128, new_height))
+
+        # If the resized image height is greater than 32, crop it to fit
+        if new_height > 32:
+            top = (new_height - 32) // 2
+            bottom = top + 32
+            image_resized = image_resized.crop((0, top, 128, bottom))
+        else:
+            # If the resized height is less than or equal to 32, add padding
+            image_resized = ImageOps.pad(image_resized, (128, 32), color=(0, 0, 0))
+
+        image_rgb = image_resized.convert('RGB')
+        image_inverted = ImageOps.invert(image_rgb)
+        img = image_inverted.convert('1')
+
+        cli.display_image(img)
+    else:
+        print(f"Image file not found: {image_path}")
+
 def show_neutral_image(cli):
     global display_flag
     print("display_flag: ", display_flag)
     while True:
         if display_flag:
-            display_resized_image(cli, neutral_image_path)
-            time.sleep(3)
+            display_resized_neutral_image(cli, neutral_image_path)
+            time.sleep(3)  # Show image for 3 seconds
 
 
 def handle_interaction(cli, interaction_type):
@@ -183,7 +209,7 @@ def run_with_cozmo(cli):
     with open(info_file, "w") as f:
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
-        f.write("Static Eyes\n")
+        f.write("Static Icons\n")
         f.write("MAZE NAME: A")          ###REMEMBER TO CHANGE THIS
         f.close()
 
