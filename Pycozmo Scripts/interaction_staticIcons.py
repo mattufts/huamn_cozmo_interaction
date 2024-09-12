@@ -1,13 +1,5 @@
-#main execution Code
-#This code utilizes maze environment.py and cozmo_controller.py to test the maze environment
-#This shows the functionality together, but the code can be broken up into
-#different sections in order to test the screen
+#Final Execution Study Script for Static Icons
 
-#The scripts that MainDemo imports are:
-    #maze_env.py
-    #PycozmoFSM_Animation.py
-    #path_planner for navigation
-#script that was worked on 3/5/2024
 import os
 import time
 import threading
