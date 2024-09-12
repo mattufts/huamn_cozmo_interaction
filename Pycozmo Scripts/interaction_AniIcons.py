@@ -18,7 +18,7 @@ import random
 import string
 import maze_env
 import PycozmoFSM_Animation as cozmo_controller
-from Call_Animation_Icons import display_blink_eyes, execute_interaction_animation
+from Call_Animation_Icons import execute_interaction_animation
 
 # Change working directory to ensure paths are correctly resolved  
 os.chdir("/home/tadashi_e/Documents/GithubRepos/huamn_cozmo_interaction/Pycozmo Scripts")

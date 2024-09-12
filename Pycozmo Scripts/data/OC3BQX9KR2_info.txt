@@ -1,0 +1,21 @@
+OC3BQX9KR2
+1726111136.1749873
+Static Icons
+MAZE NAME: Ahit_wall_cnt: 0
+hit_fire_cnt: 1
+consistent_cnt: 9
+inconsistent_cnt: 16
+auto_cnt: 0
+total_steps: 19
+human_commands: 17
+end_health: 80
+end_time: 1726111400.3785124
+Hit Wall Count: 0
+Hit Fire Count: 1
+Consistent Count: 9
+Inconsistent Count: 16
+Auto Mode Count: 0
+Total Steps: 19
+Human Commands: 17
+End Health: 80
+End Time: 1726111412.6561775

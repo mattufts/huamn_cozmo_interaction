@@ -1,0 +1,1950 @@
+*****************************************************
+current_step: 1
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 2
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 3
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 4
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 5
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 6
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 7
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 8
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 9
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 10
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 11
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 12
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 13
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 14
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 15
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 16
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 17
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 18
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 19
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 20
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 21
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 22
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 23
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 24
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 25
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 26
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 27
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 28
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 29
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 30
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 31
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 32
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 33
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 34
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 35
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 36
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 37
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 38
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 39
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 40
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 41
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 42
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 43
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 44
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 45
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 46
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 47
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 48
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 49
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 50
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 51
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 52
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 53
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 54
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 55
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 56
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 57
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 58
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 59
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 60
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 61
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 62
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 63
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 64
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 65
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 66
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 67
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 68
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 69
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 70
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 71
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 72
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 73
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 74
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 75
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 76
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 77
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 78
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 79
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 80
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 81
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 82
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 83
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 84
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 85
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 86
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 87
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 88
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 89
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 90
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 91
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 92
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 93
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 94
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 95
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 96
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 97
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 98
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 99
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 100
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 101
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 102
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 103
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 104
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 105
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 106
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 107
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 108
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 109
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 110
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 111
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 112
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 113
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 114
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 115
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 116
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 117
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 118
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 119
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 120
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 121
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 122
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 123
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 124
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 125
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 126
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 127
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 128
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 129
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 130
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 131
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 132
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 133
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 134
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 135
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 136
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 137
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 138
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 139
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 140
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 141
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 142
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 143
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 144
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 145
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 146
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 147
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 148
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 149
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 150
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 151
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 152
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 153
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 154
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 155
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 156
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 157
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 158
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 159
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 160
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 161
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 162
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 163
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 164
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 165
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 166
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 167
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 168
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 169
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 170
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 171
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 172
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 173
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 174
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 175
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 176
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 177
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 178
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 179
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 180
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 181
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 182
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 183
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 184
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 185
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 186
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 187
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 188
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 189
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 190
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 191
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 192
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 193
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 194
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 195
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 196
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 197
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 198
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 199
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 200
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 201
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 202
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 203
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 204
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 205
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 206
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 207
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 208
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 209
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 210
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 211
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 212
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 213
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 214
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 215
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 216
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 217
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 218
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 219
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 220
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 221
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 222
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 223
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 224
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 225
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 226
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 227
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 228
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 229
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 230
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 231
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 232
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 233
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 234
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 235
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 236
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 237
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 238
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 239
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 240
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 241
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 242
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 243
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 244
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 245
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 246
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 247
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 248
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 249
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 250
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 251
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 252
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 253
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 254
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 255
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 256
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 257
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 258
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 259
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 260
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 261
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 262
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 263
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 264
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 265
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 266
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 267
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 268
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 269
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 270
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 271
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 272
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 273
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 274
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 275
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 276
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 277
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 278
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 279
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 280
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 281
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 282
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 283
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 284
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 285
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 286
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 287
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 288
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 289
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 290
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 291
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 292
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 293
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 294
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 295
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 296
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 297
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 298
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 299
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 300
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 301
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 302
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 303
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 304
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 305
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 306
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 307
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 308
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 309
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 310
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 311
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 312
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 313
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 314
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 315
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 316
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 317
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 318
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 319
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 320
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 321
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 322
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 323
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 324
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 325
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 326
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 327
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 328
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 329
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 330
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 331
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 332
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 333
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 334
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 335
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 336
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 337
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 338
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 339
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 340
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 341
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 342
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 343
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 344
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 345
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 346
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 347
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 348
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 349
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 350
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 351
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 352
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 353
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 354
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 355
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 356
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 357
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 358
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 359
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 360
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 361
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 362
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 363
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 364
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 365
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 366
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 367
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 368
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 369
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 370
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 371
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 372
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 373
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 374
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 375
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 376
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 377
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 378
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 379
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 380
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 381
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 382
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 383
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 384
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 385
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 386
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 387
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 388
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 389
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100
+*****************************************************
+current_step: 390
+current_pos:[1 7]
+current_dir:[ 0 -1]
+current_health:100

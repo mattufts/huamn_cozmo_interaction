@@ -204,7 +204,7 @@ def run_with_cozmo(cli):
 
 
 ########ENTER USERNAME HERE########
-    user_id = "Participant_7:38"                           # change it everytime when you have a new participant
+    user_id = "Participant_7:02"                           # change it everytime when you have a new participant
     # random generated a 10 character user_id without using time
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)

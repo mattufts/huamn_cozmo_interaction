@@ -1,0 +1,12 @@
+EU2WQBCGB9
+1726102079.5556598
+Static Icons
+MAZE NAME: Ahit_wall_cnt: 0
+hit_fire_cnt: 0
+consistent_cnt: 3
+inconsistent_cnt: 14
+auto_cnt: 0
+total_steps: 14
+human_commands: 8
+end_health: 100
+end_time: 1726102265.218285

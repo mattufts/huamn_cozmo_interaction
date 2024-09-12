@@ -1,5 +1,13 @@
-#Final Execution Study Script for Static Icons
+#main execution Code
+#This code utilizes maze environment.py and cozmo_controller.py to test the maze environment
+#This shows the functionality together, but the code can be broken up into
+#different sections in order to test the screen
 
+#The scripts that MainDemo imports are:
+    #maze_env.py
+    #PycozmoFSM_Animation.py
+    #path_planner for navigation
+#script that was worked on 3/5/2024
 import os
 import time
 import threading
@@ -192,10 +200,12 @@ def run_with_cozmo(cli):
 
 ########ENTER USERNAME HERE########
     # random generated a 10 character user_id without using time
-    user_id = "Participant_7:24" # change it everytime when you have a new participant
+    user_id = "Participant_11:14- THIS IS A PART 2 OF A PARTICIPANT THAT DID MAZE B AND STATIC EYES" # change it everytime when you have a new participant
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)   
     start_time = time.time()
+
+
 
     info_file = os.path.join(data_path, user_id + "_info.txt")
     with open(info_file, "w") as f:
@@ -241,15 +251,24 @@ def run_with_cozmo(cli):
 
         # Determine the next action
         if (env.current_pos == env.goal_pos).all():
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli, "finished", repeat_count =2)
-            time.sleep(3) 
-            display_flag = True
+            # Hardcode the display of the 'finished_flag.png' icon
+            finished_image_path = os.path.join(emotion_image_dir, 'finish_flag.png')
+        
+            # Check if the image exists before displaying
+            if os.path.exists(finished_image_path):
+                display_flag = False
+                time.sleep(1)  # Add a slight delay before displaying the final image
+                
+                # Display the final image using the display_resized_image function
+                display_resized_image(cli, finished_image_path)
+                
+                time.sleep(5)  # Keep the image displayed for 5 seconds
+                display_flag = True
+            else:
+                print(f"Finished image not found: {finished_image_path}")
 
-            #print congratulatory message 
-            print("You have completed the course!  Congratulations!")
-
+            # Print congratulatory message
+            print("You have completed the course! Congratulations!")
 
             # Record data to the info_file
             with open(info_file, "a") as f:
@@ -262,10 +281,8 @@ def run_with_cozmo(cli):
                 f.write("human_commands: " + str(cmd_cnt) + "\n")
                 f.write("end_health: " + str(env.health) + "\n")
                 f.write("end_time: " + str(time.time()) + "\n")
-                f.write ("total time: " + start_time- time.time() + "\n")
                 f.close()
 
-             # Now set done to True to end the loop
             done = True
 
             # Prompt the user to manually hit "Q" to end the session
@@ -274,9 +291,9 @@ def run_with_cozmo(cli):
                 if end_command == 'Q':
                     print("Session ended.")
                     break
-            break 
+            break
 
-                # showing an instruction before the user input
+        # showing an instruction before the user input
         current_pos = copy.deepcopy(env.current_pos)
         goal_pos = copy.deepcopy(env.goal_pos)
         next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)

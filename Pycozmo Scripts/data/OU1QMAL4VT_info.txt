@@ -1,0 +1,21 @@
+OU1QMAL4VT
+1726104793.1578374
+Static Icons
+MAZE NAME: Ahit_wall_cnt: 0
+hit_fire_cnt: 0
+consistent_cnt: 1
+inconsistent_cnt: 0
+auto_cnt: 0
+total_steps: 2
+human_commands: 1
+end_health: 100
+end_time: 1726104814.9203591
+Hit Wall Count: 0
+Hit Fire Count: 0
+Consistent Count: 1
+Inconsistent Count: 0
+Auto Mode Count: 0
+Total Steps: 2
+Human Commands: 1
+End Health: 100
+End Time: 1726104818.1638207

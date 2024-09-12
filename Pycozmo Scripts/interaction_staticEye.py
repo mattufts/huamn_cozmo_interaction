@@ -174,7 +174,7 @@ def run_with_cozmo(cli):
 
 ########ENTER USERNAME HERE########
     # random generated a 10 character user_id without using time
-    user_id = "Participant_7:24" # change it everytime when you have a new participant
+    user_id = "Participant_10:52" # change it everytime when you have a new participant
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)   
     start_time = time.time()
@@ -184,7 +184,7 @@ def run_with_cozmo(cli):
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
         f.write("Static Eyes\n")
-        f.write("MAZE NAME: A")          ###REMEMBER TO CHANGE THIS
+        f.write("MAZE NAME: B")           ###REMEMBER TO CHANGE THIS
         f.close()
 
     traj_file = os.path.join(data_path, user_id + "_traj.txt")
@@ -223,15 +223,24 @@ def run_with_cozmo(cli):
 
         # Determine the next action
         if (env.current_pos == env.goal_pos).all():
-            display_flag = False
-            time.sleep(1)
-            handle_interaction(cli, "finished", repeat_count =2)
-            time.sleep(3) 
-            display_flag = True
+            # Hardcode the display of the 'finished_flag.png' icon
+            finished_image_path = os.path.join(emotion_image_dir, 'wink.png')
+        
+            # Check if the image exists before displaying
+            if os.path.exists(finished_image_path):
+                display_flag = False
+                time.sleep(1)  # Add a slight delay before displaying the final image
+                
+                # Display the final image using the display_resized_image function
+                display_resized_image(cli, finished_image_path)
+                
+                time.sleep(5)  # Keep the image displayed for 5 seconds
+                display_flag = True
+            else:
+                print(f"Finished image not found: {finished_image_path}")
 
-            #print congratulatory message 
-            print("You have completed the course!  Congratulations!")
-
+            # Print congratulatory message
+            print("You have completed the course! Congratulations!")
 
             # Record data to the info_file
             with open(info_file, "a") as f:
@@ -244,10 +253,8 @@ def run_with_cozmo(cli):
                 f.write("human_commands: " + str(cmd_cnt) + "\n")
                 f.write("end_health: " + str(env.health) + "\n")
                 f.write("end_time: " + str(time.time()) + "\n")
-                f.write ("total time: " + start_time- time.time() + "\n")
                 f.close()
 
-             # Now set done to True to end the loop
             done = True
 
             # Prompt the user to manually hit "Q" to end the session
@@ -256,9 +263,9 @@ def run_with_cozmo(cli):
                 if end_command == 'Q':
                     print("Session ended.")
                     break
-            break 
+            break
 
-                # showing an instruction before the user input
+        # showing an instruction before the user input
         current_pos = copy.deepcopy(env.current_pos)
         goal_pos = copy.deepcopy(env.goal_pos)
         next_move = path_planner.find_shortest_path(env.nav_maze, current_pos, goal_pos)

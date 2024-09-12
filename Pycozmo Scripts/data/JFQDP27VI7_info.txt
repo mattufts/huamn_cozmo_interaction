@@ -1,0 +1,12 @@
+JFQDP27VI7
+1726101370.1643867
+Static Eyes
+MAZE NAME: Bhit_wall_cnt: 2
+hit_fire_cnt: 0
+consistent_cnt: 13
+inconsistent_cnt: 17
+auto_cnt: 0
+total_steps: 23
+human_commands: 22
+end_health: 80
+end_time: 1726101687.111198

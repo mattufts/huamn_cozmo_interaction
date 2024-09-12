@@ -1,0 +1,21 @@
+FY1I8O7OFC
+1726110308.6627278
+Static Icons
+MAZE NAME: Ahit_wall_cnt: 0
+hit_fire_cnt: 1
+consistent_cnt: 10
+inconsistent_cnt: 18
+auto_cnt: 0
+total_steps: 21
+human_commands: 18
+end_health: 80
+end_time: 1726110587.4861777
+Hit Wall Count: 0
+Hit Fire Count: 1
+Consistent Count: 10
+Inconsistent Count: 18
+Auto Mode Count: 0
+Total Steps: 21
+Human Commands: 18
+End Health: 80
+End Time: 1726110590.376087
