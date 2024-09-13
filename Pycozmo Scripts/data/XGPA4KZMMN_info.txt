@@ -1,0 +1,12 @@
+XGPA4KZMMN
+1726172601.8040807
+Static Eyes
+MAZE NAME: Bhit_wall_cnt: 1
+hit_fire_cnt: 0
+consistent_cnt: 10
+inconsistent_cnt: 9
+auto_cnt: 0
+total_steps: 16
+human_commands: 14
+end_health: 90
+end_time: 1726172831.3048735

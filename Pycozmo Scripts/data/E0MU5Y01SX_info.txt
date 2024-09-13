@@ -1,0 +1,21 @@
+E0MU5Y01SX
+1726171091.1626568
+Static Icons
+MAZE NAME: Bhit_wall_cnt: 0
+hit_fire_cnt: 1
+consistent_cnt: 9
+inconsistent_cnt: 19
+auto_cnt: 0
+total_steps: 21
+human_commands: 18
+end_health: 80
+end_time: 1726171439.8615758
+Hit Wall Count: 0
+Hit Fire Count: 1
+Consistent Count: 9
+Inconsistent Count: 19
+Auto Mode Count: 0
+Total Steps: 21
+Human Commands: 18
+End Health: 80
+End Time: 1726171492.3956594

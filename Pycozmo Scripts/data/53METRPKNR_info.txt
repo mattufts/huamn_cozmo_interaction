@@ -1,0 +1,12 @@
+53METRPKNR
+1726172037.7082877
+Static Icons
+MAZE NAME: Ahit_wall_cnt: 2
+hit_fire_cnt: 0
+consistent_cnt: 14
+inconsistent_cnt: 12
+auto_cnt: 0
+total_steps: 21
+human_commands: 20
+end_health: 80
+end_time: 1726172375.0861158
