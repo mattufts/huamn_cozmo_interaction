@@ -212,7 +212,7 @@ def run_with_cozmo(cli):
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
         f.write("Static Icons\n")
-        f.write("MAZE NAME: A")          ###REMEMBER TO CHANGE THIS
+        f.write("MAZE NAME: B")          ###REMEMBER TO CHANGE THIS
         f.close()
 
     traj_file = os.path.join(data_path, user_id + "_traj.txt")

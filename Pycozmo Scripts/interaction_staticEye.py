@@ -174,7 +174,7 @@ def run_with_cozmo(cli):
 
 ########ENTER USERNAME HERE########
     # random generated a 10 character user_id without using time
-    user_id = "Participant_10:52 " # change it everytime when you have a new participant
+    user_id = "Participant_2:15" # change it everytime when you have a new participant
     user_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     print("User ID: ", user_id)   
     start_time = time.time()
@@ -184,7 +184,7 @@ def run_with_cozmo(cli):
         f.write(user_id + "\n")
         f.write(str(start_time) + "\n")
         f.write("Static Eyes\n")
-        f.write("MAZE NAME: A")           ###REMEMBER TO CHANGE THIS
+        f.write("MAZE NAME: B")           ###REMEMBER TO CHANGE THIS
         f.close()
 
     traj_file = os.path.join(data_path, user_id + "_traj.txt")
