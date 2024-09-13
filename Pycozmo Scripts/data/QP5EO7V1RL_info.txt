@@ -1,0 +1,21 @@
+QP5EO7V1RL
+1726165288.7307022
+Static Eyes
+MAZE NAME: Ahit_wall_cnt: 2
+hit_fire_cnt: 0
+consistent_cnt: 3
+inconsistent_cnt: 36
+auto_cnt: 1
+total_steps: 23
+human_commands: 10
+end_health: 80
+end_time: 1726165539.258386
+Hit Wall Count: 2
+Hit Fire Count: 0
+Consistent Count: 3
+Inconsistent Count: 36
+Auto Mode Count: 1
+Total Steps: 23
+Human Commands: 10
+End Health: 80
+End Time: 1726165543.420595
