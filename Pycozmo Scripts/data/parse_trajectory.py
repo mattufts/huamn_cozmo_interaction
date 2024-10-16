@@ -6,21 +6,23 @@ def process_file(file_path):
         lines = file.readlines()
     
     response_times = []
-    indicated_actions = []
     
     # Loop through each line in the file
     for line in lines:
         if line.strip():  # Check if the line is not empty
             print(f"Processing line: {line.strip()}")  # Debug: Print the line being processed
             try:
-                parts = line.split(', ')  # Split the line by ", " to get parts
-                step = int(parts[0].split(": ")[1])  # Extract Step number
-                response_time = float(parts[1].split(": ")[1])  # Extract Response Time
-                indicated_action = int(parts[2].split(": ")[1])  # Extract Indicated Action
+                # Only process lines that contain the key information (e.g., "Step", "Response Time", "Indicated Action")
+                if "Step" in line and "Response Time" in line and "Indicated Action" in line:
+                    parts = line.split(', ')  # Split the line by ", " to get parts
+                    step = int(parts[0].split(": ")[1])  # Extract Step number
+                    response_time = float(parts[1].split(": ")[1])  # Extract Response Time
+                    indicated_action = int(parts[2].split(": ")[1])  # Extract Indicated Action
 
-                # Add the extracted values to the list
-                response_times.append((step, response_time, indicated_action))
-
+                    # Add the extracted values to the list
+                    response_times.append((step, response_time, indicated_action))
+                else:
+                    print(f"Skipping line without valid data: {line.strip()}")
             except IndexError:
                 # Handle any line that doesn't match the expected format
                 print(f"Skipping malformed line: {line.strip()}")
@@ -44,8 +46,11 @@ def process_file(file_path):
             'indicated_action_longest': longest_response_time[2],
         }
     else:
+        # Return None if no valid data is found
         print(f"No valid data found in file: {file_path}")
         return None
+
+
 
 def save_to_csv(data, output_file):
     with open(output_file, mode='w', newline='') as file:
@@ -62,15 +67,18 @@ def main(input_folder, output_file):
             participant_id = filename.split('_traj.txt')[0]
             file_path = os.path.join(input_folder, filename)
             processed_data = process_file(file_path)
-            data.append([
-                participant_id,
-                processed_data['average_response_time'],
-                processed_data['total_steps'],
-                processed_data['shortest_response_time'],
-                processed_data['indicated_action_shortest'],
-                processed_data['longest_response_time'],
-                processed_data['indicated_action_longest'],
-            ])
+            
+            # Only append if valid data is returned
+            if processed_data:
+                data.append([
+                    participant_id,
+                    processed_data['average_response_time'],
+                    processed_data['total_steps'],
+                    processed_data['shortest_response_time'],
+                    processed_data['indicated_action_shortest'],
+                    processed_data['longest_response_time'],
+                    processed_data['indicated_action_longest'],
+                ])
     
     save_to_csv(data, output_file)
 
