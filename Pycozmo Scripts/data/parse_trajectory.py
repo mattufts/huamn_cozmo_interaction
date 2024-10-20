@@ -4,52 +4,59 @@ import csv
 def process_file(file_path):
     with open(file_path, 'r') as file:
         lines = file.readlines()
-    
+
     response_times = []
+    step = None
+    respond_time = None
+    indicated_action = None
     
     # Loop through each line in the file
     for line in lines:
-        if line.strip():  # Check if the line is not empty
-            print(f"Processing line: {line.strip()}")  # Debug: Print the line being processed
-            try:
-                # Only process lines that contain the key information (e.g., "Step", "Response Time", "Indicated Action")
-                if "Step" in line and "Response Time" in line and "Indicated Action" in line:
-                    parts = line.split(', ')  # Split the line by ", " to get parts
-                    step = int(parts[0].split(": ")[1])  # Extract Step number
-                    response_time = float(parts[1].split(": ")[1])  # Extract Response Time
-                    indicated_action = int(parts[2].split(": ")[1])  # Extract Indicated Action
+        line = line.strip()
+        if not line:  # Skip empty lines
+            continue
+        
+        print(f"Processing line: {line}")  # Debugging statement
 
-                    # Add the extracted values to the list
-                    response_times.append((step, response_time, indicated_action))
-                else:
-                    print(f"Skipping line without valid data: {line.strip()}")
-            except IndexError:
-                # Handle any line that doesn't match the expected format
-                print(f"Skipping malformed line: {line.strip()}")
-            except ValueError:
-                # Handle cases where conversion to int or float fails
-                print(f"Skipping line with invalid data: {line.strip()}")
+        # Look for step, response time, and indicated action
+        if "current_step" in line:
+            step = int(line.split(": ")[1])  # Extract Step number
+        elif "respond_time" in line:
+            respond_time = float(line.split(": ")[1])  # Extract Response Time
+        elif "indicated next action" in line:
+            action_value = line.split(": ")[1]
+            if action_value.isdigit():
+                indicated_action = int(action_value)  # Extract Indicated Action if it's a valid number
+            else:
+                print(f"Skipping invalid action: {action_value}")  # Skip invalid action
+                indicated_action = None
 
-    # After processing all lines, calculate necessary statistics
-    if response_times:
-        longest_response_time = max(response_times, key=lambda x: x[1])
-        shortest_response_time = min(response_times, key=lambda x: x[1])
-        average_response_time = sum([x[1] for x in response_times]) / len(response_times)
-        total_steps = response_times[-1][0]  # Last step in the file
+        # When all three values are found, add them to the list
+        if step is not None and respond_time is not None and indicated_action is not None:
+            response_times.append((step, respond_time, indicated_action))
+            step = None
+            respond_time = None
+            indicated_action = None
     
-        return {
-            'average_response_time': average_response_time,
-            'total_steps': total_steps,
-            'shortest_response_time': shortest_response_time[1],
-            'indicated_action_shortest': shortest_response_time[2],
-            'longest_response_time': longest_response_time[1],
-            'indicated_action_longest': longest_response_time[2],
-        }
-    else:
-        # Return None if no valid data is found
-        print(f"No valid data found in file: {file_path}")
+    # If no valid lines were processed, log and return None
+    if not response_times:
+        print(f"No valid data found in file: {file_path}. The file might not contain the expected Step, Response Time, or Indicated Action.")
         return None
 
+    # Calculate necessary statistics
+    longest_response_time = max(response_times, key=lambda x: x[1])
+    shortest_response_time = min(response_times, key=lambda x: x[1])
+    average_response_time = sum([x[1] for x in response_times]) / len(response_times)
+    total_steps = response_times[-1][0]  # Last step in the file
+
+    return {
+        'average_response_time': average_response_time,
+        'total_steps': total_steps,
+        'shortest_response_time': shortest_response_time[1],
+        'indicated_action_shortest': shortest_response_time[2],
+        'longest_response_time': longest_response_time[1],
+        'indicated_action_longest': longest_response_time[2],
+    }
 
 
 def save_to_csv(data, output_file):
@@ -63,24 +70,29 @@ def save_to_csv(data, output_file):
 def main(input_folder, output_file):
     data = []
     for filename in os.listdir(input_folder):
-        if filename.endswith("_traj.txt"):
-            participant_id = filename.split('_traj.txt')[0]
-            file_path = os.path.join(input_folder, filename)
-            processed_data = process_file(file_path)
-            
-            # Only append if valid data is returned
-            if processed_data:
-                data.append([
-                    participant_id,
-                    processed_data['average_response_time'],
-                    processed_data['total_steps'],
-                    processed_data['shortest_response_time'],
-                    processed_data['indicated_action_shortest'],
-                    processed_data['longest_response_time'],
-                    processed_data['indicated_action_longest'],
-                ])
+        # Skip hidden files (those starting with ".")
+        if filename.startswith(".") or not filename.endswith("_traj.txt"):
+            print(f"Skipping hidden or irrelevant file: {filename}")  # Debugging statement
+            continue
+        
+        participant_id = filename.split('_traj.txt')[0]
+        file_path = os.path.join(input_folder, filename)
+        processed_data = process_file(file_path)
+        
+        # Only append if valid data is returned
+        if processed_data:
+            data.append([
+                participant_id,
+                processed_data['average_response_time'],
+                processed_data['total_steps'],
+                processed_data['shortest_response_time'],
+                processed_data['indicated_action_shortest'],
+                processed_data['longest_response_time'],
+                processed_data['indicated_action_longest'],
+            ])
     
     save_to_csv(data, output_file)
+
 
 # Example Usage:
 input_folder = '.'
